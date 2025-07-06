@@ -1,0 +1,516 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "med_RAG",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "med_RAG",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "med_RAG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fetch_content": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generalist": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "ReSpAct": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-02T02:08:09.051Z",
+  "id": "GPhqkeVpkLxW030U",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "HUY_workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1080,
+        -580
+      ],
+      "id": "a094b8a4-011c-4cef-ada4-4969d20c40f8",
+      "name": "When chat message received",
+      "webhookId": "7e867832-f114-4fd6-90f5-5eb414eefd14"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Bạn là điều phối viên của hệ thống trợ lý ảo bệnh viện đại học y Phan Châu Trinh, có khả năng trả lời câu hỏi bằng ReSpAct (Reasoning, Speak, Action)\n\nNhiệm vụ của bạn:\n- Trả lời các câu hỏi đơn giản liên quan đến đời sống và sức khỏe không liên quan đến bệnh viện.\n- Luôn luôn hiểu rằng mọi câu hỏi liên quan đến “bệnh viện” hoặc các thành phần như “dịch vụ”, “giờ làm việc”, “bác sĩ”, “khoa”, “cơ sở vật chất”, v.v. đều đang nói về Bệnh viện Đại học Y Phan Châu Trinh, trừ khi người dùng chỉ đích danh một bệnh viện khác.\n- Tuyệt đối không được tự tạo, suy đoán hoặc bịa đặt nội dung liên quan đến bệnh viện.\n- Bắt buộc phải sử dụng tool Web search để tìm kiếm và trả lời mọi thông tin liên quan đến Bệnh viện Đại học Y Phan Châu Trinh.\n- Không được trả lời trực tiếp cho người dùng về thông tin bệnh viện nếu chưa thực hiện gọi tool Web search. Bắt buộc hồi sau khi có kết quả từ tool.\n- Không được trả lời và kết luận tình trạng bệnh trực tiếp  khi người dùng cung cấp triệu chứng nếu chưa thực hiện gọi tool generalist. Bắt buộc phản hồi sau khi có kết quả từ tool.\n- Khi phản hồi người dùng sau khi tool trả kết quả, hãy xưng hô là trợ lý ảo y tế của Bệnh viện Đại học Y Phan Châu Trinh.\n- Khi tiếp nhận đầu ra từ các tools, hãy điều chỉnh kết quả và trình bày lại cho phù hợp, sử dụng đúng định dạng đầu ra JSON được yêu cầu.\n\nĐịnh dạng đầu ra trả về bắt buộc chỉ được trả về dưới dạng một plain JSON object, không được bọc trong block code markdown hay ngôn ngữ nào khác:\n{\n    \"reasoning\": \"\", // Phần bạn reasoning\n    \"speak\": \"\", // Phần bạn speak\n    \"action\": {} // Là một object\n}\n\nTrong đó, action mà bạn có thể thực hiện:\n1. Trả lời câu hỏi người dùng:\n{\n    \"type\": \"Response\",\n}\n**Nếu phản hồi người dùng sau khi tool trả về thì phần phản hồi được để vào field \"speak\"\n2. Gọi tool web search về bệnh viện:\n{\n    \"type\": \"Web search PCT\",\n    \"query\": \"Thông tin cần tim sau khi reasoning\",\n    \"max_results\" : 5 // Luôn luôn là 5\n}\n3. Gọi tool generalist khi người dùng cung cấp triệu chứng:\n{\n    \"type\": \"Generalist\",\n    \"query\": \"Thông tin triệu chứng được tổng hợp\",\n}\n**Nếu phản hồi người dùng sau khi tool trả về phần phản hồi được để vào field \"speak\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        -580
+      ],
+      "id": "55dc2547-023c-4861-b426-96a26137865e",
+      "name": "Orchestrate",
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        -80
+      ],
+      "id": "99b04789-ebf7-4e03-b646-5cf27246b081",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "l5xKpT7PQrovoB80",
+          "name": "CohereApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -780,
+        -80
+      ],
+      "id": "ad09e3cf-7310-43a9-87e0-8320ea5b0a29",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "PpcktPH83DDrHTki",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableName": "n8n_chat_histories_overalls",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -1020,
+        -260
+      ],
+      "id": "9cff64d2-1962-4dd0-ade4-adf13f221505",
+      "name": "Postgres Chat Memory1",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        -260
+      ],
+      "id": "54604b0d-deaf-49ac-aa21-128d7fceb7d9",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "=- Công cụ chuyên tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh ",
+        "tableName": "documents_pg",
+        "topK": 8,
+        "includeDocumentMetadata": false,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        -780,
+        -240
+      ],
+      "id": "b9d6c505-c2b5-4db9-9f80-8b3b8c8b032a",
+      "name": "med_RAG",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=- Công cụ chuyên tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh \n- Công cụ chuyên tìm kiếm thông tin về bệnh tổng quát",
+        "operation": "executeTool",
+        "toolName": "fetch_content",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        -240
+      ],
+      "id": "b370a5d7-0e40-46cb-add5-a2b09bc962f1",
+      "name": "fetch_content",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iopexGLoAsx2WRmY",
+          "name": "MCP Client (STDIO) account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "fDUI1Nj9SsOuE0ZB",
+          "mode": "list",
+          "cachedResultName": "Expert"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        420
+      ],
+      "name": "Call Expert",
+      "id": "d4fa0b72-8b17-4d0b-a685-3f627020672a"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE table n8n_chat_histories_overalls;\nTRUNCATE table n8n_chat_histories;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        440,
+        420
+      ],
+      "id": "1a58a469-5a81-4285-9879-fe588774c085",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Khi người dùng hỏi\nHãy xem câu hỏi đó thuộc danh mục nào để có thể gọi tool tương ứng:\n- Trường hợp 1: câu hỏi liên quan đến bệnh viện đại học y Phan Châu Trinh\n- Trường hợp 2: người dùng có những triệu chứng, bệnh lý"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        80,
+        -240
+      ],
+      "id": "530f70b6-702b-4c4a-8f28-8ed75b78e34c",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "375402fe-6a74-416d-bfdf-e6bc336458c0",
+              "name": "output",
+              "value": "={{ $json.output.speak }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -100,
+        -580
+      ],
+      "id": "a3f6d64c-8a9e-4305-b275-029b4599ccd3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        -260
+      ],
+      "id": "6d7a1641-cf04-4930-bc4d-5907550278de",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "kbv8RI26Vl0qMMJu",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Dùng khi cần thông tin về bệnh việc Phan Châu Trinh",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -240
+      ],
+      "id": "94f3a608-fd18-4f5c-aeda-e72330941274",
+      "name": "Web search",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iopexGLoAsx2WRmY",
+          "name": "MCP Client (STDIO) account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "=Gọi tool này khi người dùng cung các thông tin về  triệu chứng và cần trợ giúp của bác sĩ ",
+        "workflowId": {
+          "__rl": true,
+          "value": "An0GAD97h3EE2Prg",
+          "mode": "list",
+          "cachedResultName": "Huy_EXPERT"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "chatInput": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('chatInput', `Sử dụng feild query ở action \"Use generalist tool\" của agent`, 'string') }}",
+            "sessionId": "={{ $('When chat message received').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        -240
+      ],
+      "id": "2f022253-e544-458b-a700-34c0bb3f9d4b",
+      "name": "Generalist"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"reasoning\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"speak\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n        \"reasoning\": {\n\t\t\t\"type\": \"object\"\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        -240
+      ],
+      "id": "ac9b1fde-afa7-4631-9e50-f39973e08269",
+      "name": "ReSpAct"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-03T06:36:02.000Z",
+  "versionId": "f145be49-e98b-436e-af99-0c595d5007d4"
+}
