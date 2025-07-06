@@ -1,0 +1,821 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "General support",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "General support": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "General support",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generallist",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chat memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "General support",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generallist": {
+      "main": [
+        [
+          {
+            "node": "Extract Speak",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG PCT": {
+      "main": [
+        [
+          {
+            "node": "Generallist",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "RAG PCT tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ReSpAct structure": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "General support",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Generallist",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG PCT tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "ReSpAct structure1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Generallist",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Speak": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RAG PCT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG phan chau trinh": {
+      "ai_tool": [
+        [
+          {
+            "node": "General support",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-06-26T14:43:08.786Z",
+  "id": "hNM9Ar2eMs59XlC5",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Phuc - Demo User flow",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "authentication": "basicAuth",
+        "initialMessages": "",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -700,
+        -500
+      ],
+      "id": "abd762c8-a606-43d5-89d2-9728e9f721fe",
+      "name": "When chat message received",
+      "webhookId": "4ac4659d-1680-4116-a595-f8dc44d21455",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "8LsTPSwWlSgAxA1a",
+          "name": "phuc"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Bạn là điều phối viên của hệ thống trợ lý ảo bệnh viện đại học y Phan Châu Trinh, có khả năng trả lời câu hỏi bằng ReSpAct (Reasoning, Speak, Action)\n\nNhiệm vụ của bạn:\n- Mặc định hiểu rằng mọi câu hỏi liên quan đến “bệnh viện” hoặc các thành phần như “dịch vụ”, “giờ làm việc”, “bác sĩ”, “khoa”, v.v. đều đang nói về **Bệnh viện Đại học Y Phan Châu Trinh**, trừ khi **người dùng nhắc rõ một bệnh viện khác**.\n- Có thể trả lời các câu hỏi đơn giản\n- Luôn luôn sử dụng rag tool để trả lời các thông tin bệnh viện đại học y Phan Châu Trinh\n- Thực hiện action **Call Generalist** nếu người dùng cung cấp các thông tin về triệu chứng, bệnh của họ\n- **Khi thực hiện action Call Generalist, tổng hợp rõ ràng các triệu chứng người dùng đã cung cấp** (có thể lấy từ thông tin hiện tại hoặc từ memory), sau đó gửi dưới dạng một đoạn mô tả ngắn gọn.\n- Khi trả lời trực tiếp với người dùng, hãy xưng hô là trợ lý ảo y tế của bệnh viện đại học y Phan Châu Trinh\n- Khi tiếp nhận đầu ra từ các tools, hãy điều chỉnh cho phù hợp với định dạng đầu ra json đã được hướng dẫn\n\nĐịnh dạng đầu ra trả về  người dùng hoặc gọi các tool bắt buộc là object json, có format dưới đây:\n{\n    \"reasoning\": \"\", // Phần bạn reasoning\n    \"speak\": \"\", // Phần bạn speak\n    \"action\": {} // Là một object\n}\nKhông được trả lại bất kì định dạng nòa khác ngoài một object json\n\nTrong đó, action mà bạn có thể thực hiện:\n1. Trả lời câu hỏi người dùng:\n{\n    \"type\": \"Respone\",\n}\n**Nếu phản hồi người dùng sau khi kết quả tool trả về thì phần phản hồi được để vào field \"speak\"\n2. Gọi tool rag về bệnh viện:\n{\n    \"type\": \"RAG PCT\",\n    \"category\": \"Thông tin chung/Dịch vụ/Sự kiện/Khoa/Bác sĩ/Tuyển dụng/Chi phí & Bảo hiểm\", //Mặc định có các feild như vậy, không được thay đổi\",\n    \"query\": \"Thông tin cần tim sau khi reasoning\",\n}\n3. Hỏi bác sĩ tổng quát:\n{\n    \"type\": \"Call Generalist\",\n    \"info\": \"Thông tin triệu chứng tổng hợp từ memory\",\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        -460
+      ],
+      "id": "224af7c6-5268-4ed9-914f-c869ec09f95f",
+      "name": "General support",
+      "notesInFlow": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        -180
+      ],
+      "id": "9a77f87b-0b88-4cd0-96d7-e68b0985e2a7",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -360
+      ],
+      "id": "e3c5caa0-851d-4984-80f8-cd51d17aaaef",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "kbv8RI26Vl0qMMJu",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -260,
+        -160
+      ],
+      "id": "c5178ba1-7663-4491-b165-c00cfef60a91",
+      "name": "chat memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output.action.info }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Bạn là một generalist (bác sĩ tổng quát) của hệ thống trợ lý ảo bệnh viện đại học y Phan Châu Trinh, có khả năng trả lời câu hỏi bằng ReSpAct (Reasoning, Speak, Action)\n\nĐịnh dạng câu trả lời luôn luôn đưa về theo dạng json, có format dưới đây:\n{\n    \"reasoning\": \"\", // Phần bạn reasoning\n    \"speak\": \"\", // Phần bạn speak\n    \"action\": {} // Là một object\n}\n\nNhiệm vụ của bạn:\n- Làm rõ triệu chứng được cung cấp theo quy trình hỏi 7 bước như sau:\n  1. Hoàn cảnh: hoạt động, tư thế hay tình huống khởi phát triệu chứng.\n  2. Hướng lan: triệu chứng có lan sang vị trí nào không.\n  3. Cường độ đau: mô tả theo thang 0–10 (0 không đau, 10 đau dữ dội nhất).\n  4. Triệu chứng đi kèm: buồn nôn, sốt, khó thở…\n  5. Tính chất đau: liên tục hay từng cơn, nhói, âm ỉ…\n  6. Chu kỳ đau: kéo dài bao lâu, có tái phát theo chu kỳ không.\n  7. Yếu tố giảm: nghỉ ngơi, dùng thuốc hoặc thay đổi tư thế có đỡ không.\n- Sau khi hỏi đủ 7 bước hoặc thu thập đủ thông tin theo 7 bước, hãy hỏi về tiền sử, bệnh sử dựa như triệu chứng đã được làm rõ\n- Mỗi trả lời trả lại người dùng chỉ được hỏi 1 câu duy nhất\n\nCác action mà bạn có thể thực hiện:\n1. Hỏi thêm triệu chứng\n{\n    \"type\": \"Hỏi thêm triệu chứng\"\n    \"step\": \"1/2/3/4/5/6/7\",\n}\n2. Hỏi về tiền sử\n{\"type\": \"Hỏi về tiền sử\"}\n3. Hỏi về bệnh sử\n{\"type\": \"Hỏi về bệnh sử\"}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        -640
+      ],
+      "id": "e25fef08-407a-4977-b79a-8ac7e334403d",
+      "name": "Generallist"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ddaba134-7586-48cf-9a27-a918063d5d43",
+                    "leftValue": "={{ $json.output.action.type }}",
+                    "rightValue": "Call Generalist",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Call Generalist"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "29d27d6e-7b7e-4935-8d46-3b65cb4f68b7",
+                    "leftValue": "={{ $json.output.action.type }}",
+                    "rightValue": "RAG PCT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "RAG PCT"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        880,
+        -400
+      ],
+      "id": "431bf075-f98d-42c7-b706-d55604da9eea",
+      "name": "RAG PCT"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Cho tôi thông tin về  bệnh viện đại học y Phan Châu Trinh:\n1. Loại câu hỏi: {{ $json.output.action.category }}\n2. Hỏi về: {{ $json.output.action.query }}",
+        "options": {
+          "systemMessage": "=Bạn chuyên truy xuất thông tin về Bệnh viện \"Đại học Y Phan Châu Trinh\".\n\n# Quy tắc quan trọng:\n- **Luôn luôn truy vấn dữ liệu trước khi trả lời**, bất kể câu hỏi có đơn giản đến đâu.\n- **Luôn luôn phản hồi bằng thông tin được trích xuất từ dữ liệu hệ thống.**\n- **Không được bịa ra thông tin** nếu không tồn tại trong dữ liệu.\n\n## Nhiệm vụ của bạn:\n- Dựa trên phân thông tin đã trích xuất và câu hỏi người dùng, trả lời câu hỏi\n- Đối với các câu hỏi mang tính chất liệt kê, hãy liệt kê ngắn gọn và đầy đủ dựa trên thông tin đã trích xuất\n- Nếu **không tìm thấy thông tin**, hãy trả lời rằng **\"Tôi không tìm thấy thông tin liên quan trong hệ thống.\"**\n- Nếu **câu hỏi mơ hồ hoặc chưa đủ rõ**, hãy yêu cầu người dùng làm rõ.\n\n## Định dạng phản hồi:\n- Ngôn ngữ: **Tiếng Việt**\n- Trình bày dễ đọc, có xuống dòng cần thiết."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        260
+      ],
+      "id": "56d9b151-c959-45a9-95b2-bfd288f88fdc",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1920,
+        680
+      ],
+      "id": "2cb1b1db-261b-4684-92e8-df0b60791056",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "PpcktPH83DDrHTki",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "loader": "csvLoader",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        2460,
+        580
+      ],
+      "id": "3b6f8c10-1514-4f3c-8dfe-294346b33e36",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/duckq1u/Downloads/output.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        280
+      ],
+      "id": "0d51bcfa-1020-4331-a286-847fde3b138d",
+      "name": "Read/Write Files from Disk",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        2280,
+        380
+      ],
+      "id": "bd4329ea-e420-496a-a6bb-aba1bcbe7942",
+      "name": "PCT vector"
+    },
+    {
+      "parameters": {
+        "chunkSize": 1500,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        700
+      ],
+      "id": "6d029068-619c-48fb-a8b2-f9dd4d3d2da1",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {
+          "maxTokensToSample": 4096,
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        480
+      ],
+      "id": "5c6ddcaf-9c1d-4ae9-ac3c-ef976f40781b",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "kbv8RI26Vl0qMMJu",
+          "name": "Groq account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {
+          "maxOutputTokens": 10024,
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        480
+      ],
+      "id": "27a5c665-de27-4e30-90f2-cc637d645791",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"reasoning\":\"\",\n    \"speak\":\"\",\n    \"action\": \"\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        140,
+        -140
+      ],
+      "id": "4bc7c4b1-4ae3-477c-bce7-43aea733922a",
+      "name": "ReSpAct structure"
+    },
+    {
+      "parameters": {
+        "description": "Bác là một generalist chuyên hỏi về triệu chứng từ người bệnh\nHãy suy luận và dựa trên dữ kiện của người dùng cung cấp, xem thử đã thiếu hay thừa gì để có thể hỏi thêm về triệu chứng theo quy trình 7 bước"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        -360
+      ],
+      "id": "246e11ee-b2c8-480c-a344-31a218be84d9",
+      "name": "Think",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Gọi tool này để trích xuát các thông tin liên quan về bệnh viện đại học y Phan Châu Trinh",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        },
+        "topK": 10,
+        "includeDocumentMetadata": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        1680,
+        480
+      ],
+      "id": "debeee06-4852-4e13-81ae-62247795b9ef",
+      "name": "RAG PCT tool"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"reasoning\":\"\",\n    \"speak\":\"\",\n    \"action\": \"\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1760,
+        -360
+      ],
+      "id": "33a09274-e067-4a90-ad94-83b2e9f0f1ae",
+      "name": "ReSpAct structure1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc72372c-af22-458d-aa71-44456fdbcb74",
+              "name": "chatInput",
+              "value": "={{ $json.output.speak }}",
+              "type": "string"
+            },
+            {
+              "id": "e93609fa-2600-4e8e-bebf-c0fb7ecd7d1e",
+              "name": "output.action",
+              "value": "={{ $json.output.action }}",
+              "type": "object"
+            },
+            {
+              "id": "6d52feed-10f9-4892-8b3f-f6f1935926db",
+              "name": "type",
+              "value": "Generalist response",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1880,
+        -640
+      ],
+      "id": "a105ac98-3f84-4178-93e7-36418d0c20a6",
+      "name": "Extract Speak",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f646d40e-5909-43e7-8701-3b056c8b07d2",
+              "leftValue": "={{ $json.output.action.type }}",
+              "rightValue": "respone",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        -460
+      ],
+      "id": "c780f9dc-1419-458e-8350-80f502f230b2",
+      "name": "If",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        740,
+        -780
+      ],
+      "id": "a532cfce-d5f3-4b43-9893-7a7aa2f0c9f5",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "description": "Luôn luôn sử dụng khi cần trả lời thông tin về bệnh viện đại học y Phan Châu Trinh",
+        "workflowId": {
+          "__rl": true,
+          "value": "4OuNK8NKsEDzgQ0f",
+          "mode": "list",
+          "cachedResultName": "RAG_PCT"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "category": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('category', ``, 'string') }}",
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -60,
+        -140
+      ],
+      "id": "c0fd6a10-2b74-45c8-8538-a8b0ecc3aa75",
+      "name": "RAG phan chau trinh"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d53e8b5d-2418-4a5e-8d5d-8bca7e48bf3e",
+              "name": "output",
+              "value": "={{ $json.output.speak }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -460
+      ],
+      "id": "b328e6a7-f62c-4ca0-87c0-83fbd42402d1",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {
+    "If": [
+      {
+        "json": {
+          "output": {
+            "action": {
+              "category": "Thông tin chung",
+              "type": "RAG PCT",
+              "query": "địa chỉ bệnh viện"
+            },
+            "reasoning": "Người dùng hỏi về địa chỉ bệnh viện. Tôi cần sử dụng công cụ RAG để truy xuất thông tin về địa chỉ của Bệnh viện Đại học Y Phan Châu Trinh.",
+            "speak": "Vui lòng đợi trong giây lát, tôi đang tra cứu thông tin về địa chỉ của Bệnh viện Đại học Y Phan Châu Trinh."
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-04T03:42:20.000Z",
+  "versionId": "514891fe-94fd-45d1-8d03-ee2ac95ee3ab"
+}
