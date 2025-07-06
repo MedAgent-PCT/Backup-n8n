@@ -1,0 +1,390 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "med_RAG",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "med_RAG",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med_RAG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fetch_content": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Doctor": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "web_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrate",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-02T10:48:59.005Z",
+  "id": "6tQp9lzLcG5MQ4t8",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 11",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -860,
+        60
+      ],
+      "id": "68b6afef-9982-4a21-a01a-d903e924b615",
+      "name": "When chat message received",
+      "webhookId": "7e867832-f114-4fd6-90f5-5eb414eefd14"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Bạn là trợ lý y tế thông minh của Bệnh viện Y Phan Châu Trinh. Tuân thủ nghiêm ngặt quy trình sau:\n\n<QUY TRÌNH XỬ LÝ NÂNG CAO>\n  1. **KIỂM TRA BỆNH LÝ CÁ NHÂN**: (ƯU TIÊN)\n    a/ Nếu phát hiện đại từ ngôi thứ nhất (\"tôi\", \"em\", \"mình\") + từ khóa bệnh lý (\"đau\", \"bị\", \"triệu chứng\"):  \n    -> sử dụng tool \n    {\n      \"tool_sequence\": [\n        {\n          \"tool\": \"doctor\",\n          \"input\": {\n            \"[Bệnh lý hiện tại]\", \n          }\n        },\n        {\n          \"tool\": \"think\",\n          \"url\": \"Suy luận câu hỏi của tool có phù hợp với ngữ cảnh hay không\"\n        }\n      ]\n    }\n\n  2. **THÔNG TIN BỆNH VIỆN**:\n    a/ Sử dụng `think` trước khi quyết định truy vấn:\n    {\n     \"tool\": \"think\",\n     \"thought\": \"Tối ưu hóa truy vấn cho med_RAG dựa trên ngữ cảnh\",\n     \"parameters\": {\n       \"original_query\": \"[Truy vấn gốc]\",\n       \"optimized_query\": \"Truy vấn đã tối ưu\"\n     }\n    }\n    b/  dùng med_RAG song song với web_search: \n    {\n      \"tool_sequence\": [\n        {\n          \"tool\": \"med_RAG\",\n          \"input\": \"[Truy vấn] Bệnh viện Y Phan Châu Trinh\"\n        },\n        {\n          \"tool\": \"web_search\",\n          \"query\": \"[Truy vấn] Bệnh viện Y Phan Châu Trinh\",\n          \"filter\": \"url contains 'pctuhealthcare'\"\n        }\n      ]\n    }\n\n  3. **FALLBACK SYSTEM VỚI PHÂN TÍCH URL**:\n    a/ Code Python để miêu tả quy trình:\n     def process_fallback(query):\n        # Bước 1: Web search để lấy danh sách URL\n        web_results = web_search(query)\n    \n    \n        # Bước 2: Phân tích và chọn URL uy tín\n        trusted_urls = []\n        for result in web_results:\n            if is_trusted_source(result.url):\n                trusted_urls.append(result.url)\n    \n        # Sử dụng think để đánh giá độ tin cậy\n        trusted_urls = []\n        for result in results:\n            analysis = think(\n                thought=\"Đánh giá mức độ uy tín của URL\",\n                parameters={\n                    \"url\": result.url,\n                    \"trust_indicators\": [\"pcthealthcare\", \".gov.vn\", \"edu.vn\"]\n                }\n            )\n            if analysis[\"is_trusted\"]: \n                trusted_urls.append(result.url)\n    \n        # Bước 3: Ưu tiên URL chính thức\n        if trusted_urls:\n            main_url = trusted_urls[0]\n        else:\n            main_url = \"https://pctuhealthcare.com/\"\n    \n        # Bước 4: Fetch content từ URL uy tín\n        return fetch_content(main_url)\n     \n     def is_trusted_source(url):\n        trusted_domains = [\n            \"pcthealthcare.vn\",\n        ]\n        return any(domain in url for domain in trusted_domains)\n\n  4. **FALLBACK SYSTEM VỚI PHÂN TÍCH URL**:\n    a/ think trước khi trả lời \n    {\n      \"tool\": \"think\",\n      \"thought\": \"Kiểm tra tính nhất quán thông tin giữa các nguồn\",\n      \"consistency_check\": {\n        \"med_RAG vs fetch_content\": \"match/mismatch\",\n        \"action\": \"Ưu tiên nguồn chính thức nếu có mâu thuẫn\"\n      }\n    }\n\n## Lưu ý:\n> - Nếu lỗi schema → Kích hoạt cơ chế fallback\n> - Ưu tiên sử dụng med_RAG kết hợp với web_search \n> - Hãy phân tích câu trả lời của bạn trước khi trả về cho người dùng\n> - Khi sử dụng tool \"doctor\" và câu hỏi trả ngược lại phải có ngôi hỏi phù hợp với giới tính đầu vào\n> - Chỉnh sửa đầu vào của tool \"doctor\" trước khi gọi tool \"doctor\"\n</QUY TRÌNH XỬ LÝ NÂNG CAO>\n\n---\n\n<QUY TẮC PHÂN TÍCH NGUỒN>\n  1. **ƯU TIÊN THỨ TỰ NGUỒN**:\n     ```mermaid\n     graph LR\n       A[pcuhospital.com] -->|Cao nhất| B[Trang chủ]\n       C[pcthealthcare.vn] -->|Cao| D[Trang thông tin]\n       E[.gov.vn] -->|Trung bình| F[Nguồn nhà nước]\n       G[.edu.vn] -->|Trung bình| H[Trường y]\n       I[Other] -->|Thấp| J[Nguồn khác]\n     ```\n  \n  2. **TIÊU CHÍ CHỌN URL**:\n     - Luôn ưu tiên các URL chứa: \n       - ưu tiên `pcthealthcare` trong domain\n       - Đường dẫn có từ khóa liên quan truy vấn\n       - TLD .com/.vn (ưu tiên hơn .info/.blog)\n     - Loại bỏ URL: \n       - Quảng cáo, diễn đàn\n       - Trang không có HTTPS\n       - Nội dung không liên quan\n  \n  3. **KẾT HỢP DỮ LIỆU THÔNG MINH**:\n     Code Python để miêu tả quy trình:\n       if trusted_urls:\n           # Fetch content từ 1-3 URL uy tín nhất\n           contents = [fetch_content(url) for url in trusted_urls[:3]]\n           combined = combine_contents(contents)\n       else:\n           # Fallback về web_search thông thường\n           combined = web_search(query).top_results\n</QUY TẮC PHÂN TÍCH NGUỒN>\n\n<ĐỊNH DẠNG TRẢ LỜI>\n  Case 1: [Nếu tool \"doctor\" trả về có chứa tag \"[semi_clinical_pred]\" thì giữ nguyên định dạng trả về từ tool \"doctor\" và dừng suy luận]\n  \n  Case 2: [nếu là câu hỏi thì đánh giá xem có phù hợp không, Nếu không hợp thì gọi lại tool \"doctor\" cho đến khi hợp và nếu giá trị trả ra chứa chuỗi \"[semi_clinical_pred]\" thì trả ra kết quả cho người dùng không sửa đổi ]\n  \n  Case 3:\n  [THÔNG TIN CHÍNH THỨC]\n  {content từ nguồn uy tín}\n  [CẬP NHẬT MỚI NHẤT]\n  {web_search summary}\n  [KHUYẾN NGHỊ]\n  - Truy cập: {link trực tiếp}\n  - Liên hệ: 1900.9099\n\n</ĐỊNH DẠNG TRẢ LỜI>\n\n<VÍ DỤ THỰC TẾ>\n  1. **Scenario: Tìm thông tin khám da liễu**\n    User: \"Khoa da liễu có khám thứ 7 không?\"\n    → med_RAG: lỗi schema\n    → Web search: \"Khoa da liễu Bệnh viện Y Phan Châu Trinh\"\n    → Phân tích URL:\n       - pcthealthcare.vn/dich-vu/da-lieu → TRUSTED\n       - danangsuckhoe.vn → NOT TRUSTED\n    → Fetch content từ:\n       \"https://pcthealthcare.vn/dich-vu/da-lieu.html\"\n    → Tổng hợp:\n    [THÔNG TIN CHÍNH THỨC]\n    Theo website chính thức: Khám thứ 2 - thứ 7 (7h-19h)\n    \n    [CẬP NHẬT MỚI NHẤT]\n    Fanpage cập nhật: Thứ 7 có BS. Nguyễn Văn A trực\n    \n    [KHUYẾN NGHỊ]\n    - Xem lịch chi tiết: https://pctuhealthcare.com/\n    - Đặt lịch: 1900.9099\n  \n  2. **Scenario: Không tìm thấy nguồn uy tín**\n    User: \"Chi phí phẫu thuật mắt\"\n    → med_RAG: lỗi\n    → Web search: \"Chi phí phẫu thuật mắt Bệnh viện Y Phan Châu Trinh site:pcuhospital.com\"\n    → Không có kết quả trong trusted domains\n    → Sử dụng:\n       web_search(\"Chi phí phẫu thuật mắt Bệnh viện Y Phan Châu Trinh 2025\")\n       fetch_content(\"https://pctuhealthcare.com/bang-gia.html\")\n    → Trả lời:\n    [THÔNG TIN THAM KHẢO]\n    Theo báo Sức khỏe Đời sống: 15-30 triệu tùy phương pháp\n    \n    [THÔNG TIN CHÍNH THỨC]\n    Website: Liên hệ khoa Mắt để được tư vấn cụ thể\n    \n    [KHUYẾN NGHỊ]\n    - Đến trực tiếp: 86 Nguyễn Lương Bằng, Đà Nẵng\n    - Hotline khoa Mắt: 0236.123456\n  \n  3. **Scenario: Hỏi về bệnh lý**\n    User: \"Tôi bị đau đầu\"\n    → doctor: \"Cơn đau bắt đầu khi nào và trong hoàn cảnh nào?\"\n    → Trả lời:\n    Cơn đau bắt đầu khi nào và trong hoàn cảnh nào?\n</VÍ DỤ THỰC TẾ>\n\n<LƯU Ý QUAN TRỌNG>\n> - Dữ vững form JSON input và form output.\n> - Số lần tối đa khi gọi tool là 2.\n> - Khi không có trusted URL → sử dụng trang chủ + web_search tổng hợp.\n> - Không được tự ý hỏi người dùng.\n> - Ngôi hỏi sẽ được xác định qua giá trị trả về từ công cụ \"doctor\".\n</LƯU Ý QUAN TRỌNG>\n\n---\n<Thông tin từ med_RAG>\n{context}\n</Thông tin từ med_RAG>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -420,
+        60
+      ],
+      "id": "dcc6885d-e5e6-4943-aed6-6492c8b54aff",
+      "name": "Orchestrate",
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        480
+      ],
+      "id": "7cf60e2f-c34a-4c8a-811f-ab77f60386b6",
+      "name": "Reranker Cohere"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -600,
+        480
+      ],
+      "id": "8d317e2f-ae82-4822-a447-d3201d613f94",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "tableName": "n8n_chat_histories_overalls",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -740,
+        280
+      ],
+      "id": "38d2ab1d-8bec-457b-8d21-02156317e088",
+      "name": "Postgres Chat Memory1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        280
+      ],
+      "id": "14c74351-45d2-40ca-bac6-37205c825338",
+      "name": "Google Gemini Chat Model1"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "=- Công cụ chuyên tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh ",
+        "tableName": "documents_pg",
+        "topK": 8,
+        "includeDocumentMetadata": false,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        -620,
+        280
+      ],
+      "id": "d5186a63-80f6-4160-8860-f4f402791f69",
+      "name": "med_RAG",
+      "alwaysOutputData": false,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=- Công cụ để tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh và tóm tắt thành dạng structured data\n- Công cụ để tìm kiếm thông tin về bệnh tổng quát\n-Tự động nhận diện: Hướng dẫn điều trị, Bảng phân loại bệnh, Tương tác thuốc\n-Loại bỏ quảng cáo/footer/header, chỉ giữ nội dung chuyên môn",
+        "operation": "executeTool",
+        "toolName": "fetch_content",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `đầu vào cho công cụ này phải có định dạng JSON như sau\n{\n  \"url\": <đường link>\n}`, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        280
+      ],
+      "id": "cd398e0a-ecf5-4319-8b80-48aca2b46c9c",
+      "name": "fetch_content"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "fDUI1Nj9SsOuE0ZB",
+          "mode": "list",
+          "cachedResultName": "Expert"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -1380,
+        560
+      ],
+      "name": "Call Expert",
+      "id": "1ae04551-5d6e-4bae-9f45-45f6c3f7a4a2"
+    },
+    {
+      "parameters": {
+        "description": "=- công cụ 'doctor' để đưa ra tư vấn tổng quát cho chịu chứng của người dùng",
+        "workflowId": {
+          "__rl": true,
+          "value": "fDUI1Nj9SsOuE0ZB",
+          "mode": "list",
+          "cachedResultName": "Expert"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "chatInput": "={{ $json.chatInput }}",
+            "sessionId": "={{ $json.sessionId }}",
+            "bệnh sử": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('b_nh_s_', `đầu vào tool này có dạng JSON như sau: \n{\n \"bệnh sử\": <thông tin về bệnh sử cần tra cứu>\n}\n`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "bệnh sử",
+              "displayName": "bệnh sử",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -220,
+        280
+      ],
+      "id": "260865dd-6c84-4e92-97b4-f2e1a0391be6",
+      "name": "Doctor"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE table n8n_chat_histories_overalls;\nTRUNCATE table n8n_chat_histories;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1380,
+        340
+      ],
+      "id": "66d35691-39bf-4fb9-add4-431eaff1d229",
+      "name": "Execute a SQL query"
+    },
+    {
+      "parameters": {
+        "description": "=**Tên tool**: `think`  \n**Mục đích**: Đóng vai trò \"bộ não phân tích\" trong quy trình xử lý, giúp đưa ra quyết định thông minh thông qua:  \n- **Đánh giá ngữ cảnh**  \n- **Phân tích rủi ro**  \n- **Tối ưu hóa hành động**  \n- **Kiểm tra tính nhất quán dữ liệu**\n\n---\n\n### CƠ CHẾ HOẠT ĐỘNG\n```mermaid\ngraph TB\n  A[Kích hoạt think] --> B{Phân loại nhiệm vụ}\n  B -->|Kiểm tra triệu chứng| C[Định danh đại từ + từ khóa bệnh lý]\n  B -->|Đánh giá nguồn| D[Tính điểm uy tín domain]\n  B -->|Xử lý mâu thuẫn| E[So sánh med_RAG vs web_search]\n  B -->|Tối ưu truy vấn| F[Chuyển hóa ngôn ngữ tự nhiên → truy vấn chuẩn]\n  C --> G[Ra quyết định]\n```\n\n---\n\n### THÔNG SỐ KỸ THUẬT\n1. **Đầu vào (Input)**:\n   ```json\n   {\n     \"thought\": \"Mô tả rõ ràng nhiệm vụ phân tích\",\n     \"parameters\": {\n       \"data_type\": \"text/url/data_array\",\n       \"evaluation_metrics\": [\"trust_score\", \"relevance\", \"consistency\"],\n       \"decision_criteria\": {\"priority_rules\": \"Ưu tiên pcthealthcare > .gov.vn\"}\n     }\n   }\n   ```\n\n2. **Đầu ra (Output)**:\n   ```json\n   {\n     \"insight\": \"Kết luận phân tích\",\n     \"confidence\": 0-100,\n     \"next_action\": \"Gợi ý hành động tiếp theo\",\n     \"risk_flags\": [\"Mâu thuẫn dữ liệu\", \"Nguồn không xác định\"]\n   }\n   ```\n\n---\n\n### ỨNG DỤNG THỰC TẾ\n#### 1. Phát hiện bệnh lý cá nhân\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Phân tích cảnh báo khẩn cấp trong câu: 'Tôi tức ngực khó thở 30 phút'\",\n  \"parameters\": {\n    \"red_flags\": [\"tức ngực\", \"khó thở\"],\n    \"time_critical\": true\n  }\n}\n→ Output: \n{\n  \"insight\": \"CẢNH BÁO: Triệu chứng tim mạch cấp tính\",\n  \"confidence\": 99,\n  \"next_action\": \"Trả ngay kết quả ER và gọi cấp cứu\"\n}\n```\n\n#### 2. Đánh giá độ tin cậy URL\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Xếp hạng độ ưu tiên các nguồn tìm được\",\n  \"parameters\": {\n    \"urls\": [\n      \"https://pcthealthcare.vn/benh-da-lieu\",\n      \"https://suckhoe.danang.gov.vn\",\n      \"https://benhvienblog.wordpress.com\"\n    ]\n  }\n}\n→ Output:\n{\n  \"insight\": \"Ưu tiên #1: pcthealthcare.vn (trust_score=100)\",\n  \"risk_flags\": [\"Nguồn wordpress.com: trust_score=15\"]\n}\n```\n\n#### 3. Giải quyết xung đột thông tin\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Giải quyết mâu thuẫn: med_RAG nói 'Khám cả CN' vs web_search nói 'Chỉ T2-T6'\",\n  \"parameters\": {\n    \"sources\": {\n      \"med_RAG\": {\"content\": \"Khám cả chủ nhật\", \"timestamp\": \"2024-01-01\"},\n      \"web_search\": {\"content\": \"Chỉ T2-T6\", \"source\": \"pcthealthcare.vn\"}\n    }\n  }\n}\n→ Output:\n{\n  \"insight\": \"Ưu tiên thông tin từ pcthealthcare.vn (mới nhất)\",\n  \"next_action\": \"Sử dụng dữ liệu web_search + kiểm tra fanpage\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        280
+      ],
+      "id": "54819e4f-f486-49c2-bfa2-9b1d4984e2d1",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=- Công cụ để tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh và tóm tắt thành dạng structured data\n- Công cụ để tìm kiếm thông tin về bệnh tổng quát\n-Tự động nhận diện: Hướng dẫn điều trị, Bảng phân loại bệnh, Tương tác thuốc",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `đầu vào cho công cụ này phải có định dạng JSON như sau\n{\n  \"query\": <thông tin cần tra cứu>\n}`, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        40,
+        280
+      ],
+      "id": "0bfab3a4-43ba-4deb-866f-8c516b28eb82",
+      "name": "web_search"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-02T14:26:46.000Z",
+  "versionId": "4e00e5f0-5101-471c-999d-5213b443cec3"
+}
