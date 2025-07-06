@@ -1,0 +1,306 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrator Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info Agent (RAG)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-07-01T03:10:25.723Z",
+  "id": "R3fsvqaxqn5q3bkZ",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "cuong_agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        -60
+      ],
+      "id": "2bcf4ce0-a4ae-4d39-91ce-ae6e140fd8ea",
+      "name": "When chat message received",
+      "webhookId": "dcf42218-fea4-4cf7-b54e-582673b1c51b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "68e06fc2-b450-4930-988a-721053699ad5",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        760,
+        20
+      ],
+      "id": "12da1019-0d23-4611-8425-adca7c141748",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        220,
+        180
+      ],
+      "id": "d39165a3-e8a1-4da7-91a1-21cda434792f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Bạn là một Agent Điều Phối trong hệ thống AI Agent y tế của **Bệnh viện Y khoa Phan Châu Trinh** chuyên gọi Tool để hỗ trợ người dùng, output khi gọi Tool sẽ có dạng: {Tool: []}\n- Nếu có output từ Tool có chứa trường \"expert\": <phản hồi từ tool> thì lấy giá trị của \"exper\" trả cho người dùng và không nói gì thêm.\n- Nếu không có Tool thì sẽ trả lời bình thường\n",
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        340,
+        -20
+      ],
+      "id": "d8e42731-f6b1-4a3c-88a4-7d6395a9f93a",
+      "name": "Orchestrator Agent"
+    },
+    {
+      "parameters": {
+        "description": "Tool agent bác sĩ tổng quát để thăm khám.",
+        "workflowId": {
+          "__rl": true,
+          "value": "yZnuXEMy09udMpUQ",
+          "mode": "list",
+          "cachedResultName": "My Sub-Workflow 1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{$json.sessionId}}",
+            "chatInput": "={{$json.chatInput}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        760,
+        300
+      ],
+      "id": "fafe6608-e941-4f94-b80c-785b22db006c",
+      "name": "Expert Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "description": "Tool agent trả lời thông tin về bệnh viện Đại học Y khoa Phan Châu Trinh như: địa chỉ, nhân sự, dịch vụ ,sự kiện, v.v ",
+        "workflowId": {
+          "__rl": true,
+          "value": "cRMQtJ4iYttnw7lH",
+          "mode": "list",
+          "cachedResultName": "MedAgent-RAG"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        620,
+        320
+      ],
+      "id": "ebf22b84-d57b-4640-9db3-e0c4933acd49",
+      "name": "Info Agent (RAG)",
+      "alwaysOutputData": false,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "description": "suy nghĩ cuộc hội thoại để gọi tool hợp lý, nếu đang trong luồng hỏi đáp thì gọi agent bác sĩ"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        520,
+        220
+      ],
+      "id": "29d9b71f-6056-465c-92eb-7f2ea1acb309",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        360,
+        220
+      ],
+      "id": "bcc8887e-25ec-481d-898b-e910274b52ce",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-02T02:04:49.000Z",
+  "versionId": "88066564-334a-43bb-b076-4f40b26ba908"
+}
