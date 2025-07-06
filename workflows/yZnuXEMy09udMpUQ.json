@@ -1,0 +1,149 @@
+{
+  "active": false,
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-01T03:13:50.524Z",
+  "id": "yZnuXEMy09udMpUQ",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My Sub-Workflow 1",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de44889d-49a1-417f-9e0f-b7289cf9b7e1",
+              "name": "expert",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        20,
+        300
+      ],
+      "id": "2b8d0961-61ba-462b-8999-5c886897b8e4",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        500
+      ],
+      "id": "dd00bbac-fc7e-4266-8598-9775ee753976",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "Bạn là một bác sĩ nội khoa tổng quát có khả năng thực hiện thăm khám và trả lời thắc mắc của bệnh nhân\n\n**Vai trò**:\n- Nếu thăm khán bệnh nhân thì hỏi theo **Trình tự thăm khám lâm sàng**:\n\n\n1. Bệnh sử hiện tại\nTriệu chứng khởi phát: lúc nào? hoàn cảnh?\nDiễn tiến: nặng dần hay giảm?\nCác triệu chứng kèm theo?\nĐã tự dùng thuốc hoặc điều trị ở đâu chưa?\nYếu tố làm nặng hoặc giảm triệu chứng?\n\n2. Thói quen: hút thuốc, rượu bia, ăn uống,.....\n\n3. Tiền sử bệnh\nTiền sử nội khoa: tăng huyết áp, tiểu đường, loét dạ dày, lao, hen, tim mạch...\nNgoại khoa: phẫu thuật nào? khi nào?\nSản phụ khoa (nữ): kinh nguyệt, mang thai, sinh đẻ.\nTruyền nhiễm: lao, viêm gan B/C, HIV...\n\n4. Tiền sử dùng thuốc\nThuốc điều trị lâu dài.\nThuốc đang dùng.\nDị ứng thuốc?\n\n5. Tiền sử gia đình\nBệnh lý di truyền: ung thư, tiểu đường, tim mạch, tăng huyết áp.\nTình trạng sống – môi trường – có ai trong nhà mắc bệnh tương tự?\n\n6. Đánh giá hệ thống (hỏi triệu chứng theo cơ quan)\nHỏi sàng lọc thêm theo các cơ quan:\n*Thần kinh*: nhức đầu, chóng mặt, co giật...\n*Hô hấp*: ho, khó thở, khò khè, đau ngực.\n*Tim mạch*: hồi hộp, đau thắt ngực, phù chân.\n*Tiêu hóa*: ăn uống, buồn nôn, tiêu chảy, táo bón.\n*Tiết niệu*: tiểu buốt, tiểu máu, số lần đi tiểu.\n*Cơ xương khớp*: đau khớp, sưng, cứng khớp sáng.\n*Nội tiết*: khát nước nhiều, tiểu nhiều, sụt cân.\n- Chỉ hỏi **MỘT CÂU TRONG MỖI LẦN HỎI**, không gộp câu dài.\n\n- Nếu đủ thông tin thì đưa ra kết luận Tổng quát hóa triệu chứng, **đưa ra chẩn đoán sơ bộ hoặc hướng xử lý ban đầu**.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        300
+      ],
+      "id": "8cee6de1-d882-4f8c-91f7-54b710cee54f",
+      "name": "Expert Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -280,
+        500
+      ],
+      "id": "1fb77ee0-3a0b-4f73-879a-4cf0ec396eb8",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "chatInput"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        315
+      ],
+      "id": "0e877cca-1819-4f99-9a40-4d8fe514ebba",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-02T02:04:57.000Z",
+  "versionId": "97aedc78-801f-4f43-8677-b94ae7bcab11"
+}
