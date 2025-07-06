@@ -1,0 +1,215 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T09:42:23.244Z",
+  "id": "NPV27QEKPYDLoTQn",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 15",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Tóm tắt chat",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Id",
+              "placeholder": "điền id se",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -100,
+        0
+      ],
+      "id": "3b4d0da5-8e73-4b28-a6dd-35cbd098e7ba",
+      "name": "On form submission",
+      "webhookId": "b61d007b-fcea-425e-b954-492b63251f99"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    session_id = '{{ $json.Id }}'\nGROUP BY \n    session_id;\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        160,
+        0
+      ],
+      "id": "49a41d01-bda7-469a-a9c6-712162738233",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "6iHsrxijv8bMwpA3",
+          "name": "Postgres account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.combined_messages }}",
+        "options": {
+          "systemMessage": "=Bạn là một trợ lý AI có nhiệm vụ trích xuất và tổng hợp thông tin quan trọng từ một đoạn hội thoại y tế giữa người dùng và hệ thống.\nHãy đọc đoạn hội thoại sau và thực hiện các yêu cầu sau:\n1.Tóm tắt nội dung chính của cuộc hội thoại (ngắn gọn và rõ ràng).\n2.Trích xuất các thông tin quan trọng theo định dạng sau (mỗi định dạng là 1 đoạn ngắn gọn):\n- Lý do khám bệnh\n- Tiền sử\n- Bệnh sử\n- Chuẩn đoán sơ bộ"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "8468d301-b1b1-499e-bafc-cb9faecbe270",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        340,
+        220
+      ],
+      "id": "d7571448-3b04-4138-ac53-5f3887178a72",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7fhytiSkpwvm2Ghp",
+          "name": "Google Gemini(PaLM) Api account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.session_id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        540,
+        220
+      ],
+      "id": "317f3baa-2018-4037-b998-6a165af8ca20",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "30c70ab7-dee6-4d57-a423-241231564404",
+              "name": "combined_messages",
+              "value": "={{ \n  $json.combined_messages\n    .split('||')\n    .map(e => {\n      try {\n        const obj = JSON.parse(e.trim());\n        if (obj.type === 'human') return `Human: ${obj.content}`;\n        if (obj.type === 'ai') return `AI: ${obj.content}`;\n        return '';\n      } catch (err) {\n        return '';\n      }\n    })\n    .filter(e => e)\n    .join('\\n')\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        -140
+      ],
+      "id": "d1cba8de-04cf-4d7b-a0f8-abc23f73af7b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>This is an H1 heading</h1>\n    <h2>This is an H2 heading</h2>\n    <p>{{ $json.combined_messages }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        620,
+        -140
+      ],
+      "id": "322c0a6e-2685-450e-a312-677a46277dc1",
+      "name": "HTML"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-06T09:57:50.000Z",
+  "versionId": "6c7e17a5-b921-48d6-988a-dde46987eb09"
+}
