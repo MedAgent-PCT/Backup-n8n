@@ -1,0 +1,246 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fetch content": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "MCP Client1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-28T06:03:33.685Z",
+  "id": "me0VkHIcflvaGCqb",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Web search tutorial",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -60
+      ],
+      "id": "c9d70687-9f84-436a-82c9-7e0e14cfbe78",
+      "name": "When chat message received",
+      "webhookId": "6145e270-2073-4cc8-8358-dac3638c48cb"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=bạn là một agent chuyên search web và lấy thông tin từ đó  \n\n## tuân thủ \n-khi sử dụng tool search web thì phải có form như sau: \n{\n  \"query\": <thông tin cần search>\n}\n  -không thêm bớt hay sửa đối giá trị form\n  ## ví dụ: \n  {\n    \"query\": \"pcthealthcare.com\"\n  }\n\n-khi sử dụng tool fetch content web thì phải có form như sau: \n{\n  \"url\": <website cần lấy thông tin (phải chuẩn dạng http://...)> \n}\n  -không thêm bớt hay sửa đối giá trị form\n  ## ví dụ: \n  {\n    \"url\": \"https://pctuhealthcare.com/\"\n  }\n\n## các bước thực hiện \nthought 1: tôi muốn phân tích câu hỏi của người dùng\nobservation 1: làm rõ người dùng đang muốn đề cập dùng tool fetch content hay tool search web \naction 1: chọn tool thích hợp để thực hiện yêu cầu\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -80
+      ],
+      "id": "ce3ff2d8-1e85-4bdf-8503-bb18e3e90902",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        100
+      ],
+      "id": "8f23160a-5dd4-4d35-a6be-3390707c2c0b",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "qNZe6TNrpoeu9Iwp",
+          "name": "Groq account 3"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        520,
+        -100
+      ],
+      "id": "829dc0c4-3d7f-40de-a6a2-8102c5f2c0c6",
+      "name": "MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Đây là tool để tìm kiếm những thông tin liên quan đến yêu cầu",
+        "operation": "executeTool",
+        "toolName": "fetch_content",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        240,
+        160
+      ],
+      "id": "da6d2eb9-0ba4-4c3e-8f4a-4151c4bcb25b",
+      "name": "fetch content",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Đây là tool để tìm kiếm những thông tin liên quan đến yêu cầu",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        380,
+        140
+      ],
+      "id": "5e1521f2-8991-49fa-8253-84875716c2ed",
+      "name": "Web search",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        640,
+        60
+      ],
+      "id": "5bd13f3e-7640-404d-bfa6-03f70ef02fda",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "crawl_webpages",
+        "toolParameters": "{\n  \"url\": \"https://pctuhealthcare.com/\",\n  \"outputFormat\": [\"markdown\"], \n  \"followLinks\": true\n}"
+      },
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        880,
+        60
+      ],
+      "id": "2b8deb9e-3259-4ee4-a743-01b7644b803c",
+      "name": "MCP Client1",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "8EF28TJA5cTT19aS",
+          "name": "HyperBrowser"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1100,
+        60
+      ],
+      "id": "489b78bc-1776-4572-a2fc-bec083561fbb",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-29T12:09:23.000Z",
+  "versionId": "1abbf8ce-7ca0-4cee-afbd-abf53bec0558"
+}
