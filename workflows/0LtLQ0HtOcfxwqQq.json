@@ -1,20 +1,15 @@
 {
   "active": false,
   "connections": {
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
+    "AI Agent": {
+      "main": [
         [
           {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
+            "node": "Code",
+            "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        []
       ]
     },
     "On form submission": {
@@ -23,6 +18,93 @@
           {
             "node": "AI Agent",
             "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Filter md",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter md": {
+      "main": [
+        [
+          {
+            "node": "Parse JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse JSON": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        []
+      ]
+    },
+    "2.5-flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2.5-flash1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -40,19 +122,154 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Hãy cho tôi ",
+        "text": "=Hãy cho tôi {{ $json['Số lượng'] }} sample mỗi bệnh",
+        "hasOutputParser": true,
         "options": {
-          "systemMessage": "Bạn là chuyên gia sinh dữ liệu"
+          "systemMessage": "=Bạn là chuyên gia sinh dữ liệu\n\nHãy sinh hồ sơ bệnh án tương ứng với các bệnh sau \"{{ $json['Bệnh'] }}\"\nSố lượng theo yêu cầu người dùng\n\n<Định dạng trả về>\n**Plain text array json**, không được trả về ở bất cứ định dạng khác\n</Định dạng trả về>\n\nMẫu hồ sơ bệnh án có ví dụ như sau:\n{\n  \"id\": \"28038\",\n  \"hành chính\": {\n    \"Họ tên\": \"Ngô Doãn Hải\",\n    \"Ngày sinh\": \"02/04/1988\",\n    \"Giới tính\": \"nam\",\n    \"Địa chỉ\": \"Thọ xuân-Thanh Hoá\",\n    \"Ngày giờ vào viện\": \"05/01/2025 08:00\",\n    \"Ngày giờ vào khoa\": \"05/01/2025 12:00\"\n  },\n  \"lý do vào viện\": {\n    \"Ngày nhập liệu\": \"05/01/2025 12:00\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Đau thượng vị, đi cầu phân đen\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"tiền sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung\": \"Nội khoa: \\n Xuất huyết tiêu hoá trên da do loét dạ dày-tá tràng vào tháng 11 năm 2024 đã điều trị (chưa test vi khuẩn Hp)\\n Ngoài ra chưa ghi nhận tiền sử nội khoa liên quan khác\\n Ngoại khoa: chưa ghi nhận tiền sử ngoại khoa\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung\": \"Chưa phát hiện tiền sử tác nhân dị ứng trước đây\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung\": \"Lối sống\\n Hút thuốc lá 9.5 gói, năm\\n uống rượu thường xuyên: 200ml\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"B. Tiền sử gia đình\",\n        \"Nội dung\": \"Gia đình\\n Chưa ghi nhận bệnh lý liên quan\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Cách nhập viện 2 ngày bệnh nhân dạng uống rượu thì xuất hiện cơn đau bụng âm vùng thượng vị, đau liên tục, không lan, không có tư thế giảm đau, không nôn ói. Bệnh nhân không ăn tiết canh, lòng heo hoặc thực ổn màu đỏ. Sau đó về nhà bệnh nhân có đi cầu phân đen 4 lần mùi khắm, sệt không thành khuôn, bệnh nhân ăn uống kém. Tiểu tiện bình thường. Trước đó bệnh nhân không sử dụng sắt than hoạt, không táo bón.\\n Cách nhập viện 1 ngày tình trạng bệnh nhân không thuyên giảm, tiếp tục đã cầu phân đen nên vào viện\\n Trong quá trình bệnh, bệnh nhân không buồn nôn, không chóng một, không sốt, không vã mồ hôi, không đau ngực và không khó thở\\n Ghi nhận tại cấp cứu\\n Bệnh tỉnh tiếp xúc được\\n Da niêm nhợt nhạt\\n Đau thượng vị\\n Không có đầu xuất huyết dưới da\\n Tuyến giáp không to, hạch ngoại vì không sờ chạm\\n Mạch:72 lần/phút\\n Nhiệt: 37 độ C\\n Huyết áp: 119/69\\n Nhịp thở: 16 lần/phút\\n Spo2: 98%\\n Cân nặng: 57 kg\\n Chiều cao 1m72\\n Bmi: 18.8\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"khám lâm sàng\": {\n    \"Ngày nhập liệu\": \"17/01/2018 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Khám toàn thân\",\n        \"Nội dung\": \"- Tình trạng:\\n  - Bệnh tỉnh, tiếp xúc tốt\\n  - Da, niêm mạc hồng hào\\n  - Huyết áp tư thế: không thay đổi\\n  - Không có dấu xuất huyết dưới da\\n  - Tuyến giáp không to, hạch ngoại vi không sờ chạm\\n  - Mạch: 65 lần/phút\\n  - Nhiệt: 37 độ C\\n  - Huyết áp: 100/60 mmHg\\n  - Nhịp thở: 20 lần/phút\\n  - SpO2: 98%\\n  - Cân nặng: 57 kg\\n  - Chiều cao: 1m72\\n  - BMI: 18.8 kg/m2\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tuần hoàn\",\n        \"Nội dung\": \"- Lồng ngực không dị dạng, không sẹo, di động đều theo nhịp thở\\n- Tĩnh mạch cổ nổi (-)\\n- Không có âm rung miu, dấu Harzer (-)\\n- Mỏm tim: liên sườn IV đường trung đòn trái, điện đập bình thường\\n- Tiếng T1 T2 rõ, đều, không có âm bất thường.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám hô hấp\",\n        \"Nội dung\": \"- Lồng ngực cân đối, di động theo nhịp thở, không co kéo, không rút lõm\\n- Rung thanh đều 2 bên\\n- Rì rào phế nang đều, 2 phổi rõ\\n- Không rale ẩm, rale nổ\\n- Không nghe tiếng tim bệnh lý\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tiêu hóa\",\n        \"Nội dung\": \"- Bụng di động theo nhịp thở, không co cứng, không đề kháng, không có dấu hiệu xuất huyết dưới da\\n- Không có dấu hiệu rắn bò\\n- Phản ứng thành bụng (-), không có điểm đau, ấn đau Murphy (-), McBurney (-)\\n- Bụng mềm, không chướng, không có khối bất thường\\n- Nhu động ruột: 2 lần/phút\",\n        \"Nhận xét\": \"Thăm trực tràng: (-)\"\n      },\n      {\n        \"Tên\": \"Khám thận - tiết niệu\",\n        \"Nội dung\": \"- Không chạm thận, đau hông ranh thân âm tính\\n- Ấn đau điểm niệu quản (-)\\n- Tiểu không ra máu, không tiểu đục\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám thần kinh\",\n        \"Nội dung\": \"- Cảm giác, vận động, cơ đều bình thường\\n- Dáng vẻ tỉnh táo\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám cơ xương khớp\",\n        \"Nội dung\": \"- Không biến dạng xương, vận động tốt\\n- Cơ lực: 5/5\\n- Cảm giác: bình thường\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám các cơ quan khác\",\n        \"Nội dung\": \"- Chưa ghi nhận bất thường\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"chẩn đoán sơ bộ và phân biệt\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Chẩn đoán sơ bộ\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên mức độ nhẹ, nghĩ do loét dạ dày - tá tràng. Hiện tại ổn chưa có biến chứng\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Chẩn đoán phân biệt\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên do giãn tĩnh mạch thực quản\\n- Viêm loét dạ dày\\n- Viêm thực quản\\n- Rối loạn đông máu\\n- U dạ dày\\n- Các phân nhóm\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"đề nghị cận lâm sàng và kết quả\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Công thức máu\\n- Sinh hóa máu: ure creatinin, AST, ALT, GGT\\n- GLUCOSE\\n- Điện giải đồ\\n- Nhóm máu\\n- Sinh hóa nước tiểu: creatinin, AST, ALT, GGT\\n- GLUCOSE máu\\n- Điện giải đồ\\n- H.P test\\n- Nội soi dạ dày thực quản tá tràng\\n- X-quang, đoạn tiêu\",\n        \"Nhận xét\": \"Tìm máu ẩn trong phân\"\n      }\n    ]\n  },\n  \"biện luận và chẩn đoán cuối cùng\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Bệnh nhân có xuất huyết tiêu hóa trên và tiêu phân đen do máu nhiều nên nghĩ nhiều đến loét dạ dày - tá tràng. Có thể là xuất huyết tiêu hóa do nguyên nhân thường gặp, trước đó bệnh nhân không sử dụng thuốc NSAID và không có sang chấn thực thể. Đã được chỉ định làm thêm các xét nghiệm cận lâm sàng và nội soi để khẳng định nguyên nhân gây xuất huyết.\\n- Tư vấn bệnh nhân nên tạm thời nhịn ăn trước khi thực hiện xét nghiệm nội soi dạ dày thực quản tá tràng để chẩn đoán phân biệt.\\n- Có thể loại trừ một số nguyên nhân ít gặp như giãn tĩnh mạch thực quản, u dạ dày...\\n- Bệnh nhân vào viện trong tình trạng ổn định, không dấu hiệu mất bù hô hấp, tuần hoàn.\\n- Đã chỉ định xuất huyết tiêu hóa do các ổ loét, phù hợp triệu chứng lâm sàng, cần nội soi để xác định tổn thương.\\n- Nguyễn nhân xuất huyết tiêu hóa: viêm loét dạ dày tá tràng, loét dạ dày, viêm loét ruột nhiễm trùng\",\n        \"Nhận xét\": \"Sao không thấy test máu ẩn trong phân? Nếu nghi ngờ xuất huyết tiêu hóa sao không làm xét nghiệm tìm máu ẩn trong phân từ đầu? Nếu thiếu 8.0 g/dl có phù hợp với lâm sàng là XHTH trên không? Hay có thiếu máu mạn tính?\"\n      }\n    ]\n  }\n}\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        360,
-        0
+        400,
+        140
       ],
       "id": "d4c97703-cd01-440b-aa4a-5a78d4a9260c",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "formTitle": "Nhập liệu",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Bệnh",
+              "placeholder": "Nhập bệnh, cách nhau bởi dấu phẩy",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Số lượng",
+              "placeholder": "số lượng sample yêu cầu cho mỗi loại bệnh"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -60,
+        -320
+      ],
+      "id": "b21f71de-ce95-4a80-9b2d-d301d655fa70",
+      "name": "On form submission",
+      "webhookId": "f3aba981-5249-49e1-93d3-6e7bb89e8538"
+    },
+    {
+      "parameters": {
+        "jsCode": "let output = $input.first().json.output; // Adjust based on your LLM output structure\n\n// Remove Markdown code block wrappers\noutput = output.replace(/^```(?:json|markdown)?\\n?/, \"\").replace(/\\n?```$/, \"\");\n\n// Remove common LLM text prefixes\noutput = output.replace(/^(Here is the JSON:|Here is your Markdown document:)\\s*/, \"\");\n\nreturn [{ cleanedOutput: output }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        140
+      ],
+      "id": "5665791c-8bd7-4684-9eb4-7fb67c480d2c",
+      "name": "Code",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        140
+      ],
+      "id": "b7500cba-2983-43bb-81f8-45a95624719b",
+      "name": "Code1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Hãy cho tôi {{ $json['Số lượng'] }} sample mỗi bệnh",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Bạn là chuyên gia sinh dữ liệu\n\nHãy sinh hồ sơ bệnh án tương ứng với các bệnh sau \"{{ $json['Bệnh'] }}\"\nSố lượng theo yêu cầu người dùng\n\n<Định dạng trả về>\n**Plain text array json**, không được trả về ở bất cứ định dạng khác\n</Định dạng trả về>\n\nMẫu hồ sơ bệnh án có ví dụ như sau:\n{\n  \"id\": \"28038\",\n  \"hành chính\": {\n    \"Họ tên\": \"Ngô Doãn Hải\",\n    \"Ngày sinh\": \"02/04/1988\",\n    \"Giới tính\": \"nam\",\n    \"Địa chỉ\": \"Thọ xuân-Thanh Hoá\",\n    \"Ngày giờ vào viện\": \"05/01/2025 08:00\",\n    \"Ngày giờ vào khoa\": \"05/01/2025 12:00\"\n  },\n  \"lý do vào viện\": {\n    \"Ngày nhập liệu\": \"05/01/2025 12:00\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Đau thượng vị, đi cầu phân đen\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"tiền sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung\": \"Nội khoa: \\n Xuất huyết tiêu hoá trên da do loét dạ dày-tá tràng vào tháng 11 năm 2024 đã điều trị (chưa test vi khuẩn Hp)\\n Ngoài ra chưa ghi nhận tiền sử nội khoa liên quan khác\\n Ngoại khoa: chưa ghi nhận tiền sử ngoại khoa\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung\": \"Chưa phát hiện tiền sử tác nhân dị ứng trước đây\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung\": \"Lối sống\\n Hút thuốc lá 9.5 gói, năm\\n uống rượu thường xuyên: 200ml\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"B. Tiền sử gia đình\",\n        \"Nội dung\": \"Gia đình\\n Chưa ghi nhận bệnh lý liên quan\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Cách nhập viện 2 ngày bệnh nhân dạng uống rượu thì xuất hiện cơn đau bụng âm vùng thượng vị, đau liên tục, không lan, không có tư thế giảm đau, không nôn ói. Bệnh nhân không ăn tiết canh, lòng heo hoặc thực ổn màu đỏ. Sau đó về nhà bệnh nhân có đi cầu phân đen 4 lần mùi khắm, sệt không thành khuôn, bệnh nhân ăn uống kém. Tiểu tiện bình thường. Trước đó bệnh nhân không sử dụng sắt than hoạt, không táo bón.\\n Cách nhập viện 1 ngày tình trạng bệnh nhân không thuyên giảm, tiếp tục đã cầu phân đen nên vào viện\\n Trong quá trình bệnh, bệnh nhân không buồn nôn, không chóng một, không sốt, không vã mồ hôi, không đau ngực và không khó thở\\n Ghi nhận tại cấp cứu\\n Bệnh tỉnh tiếp xúc được\\n Da niêm nhợt nhạt\\n Đau thượng vị\\n Không có đầu xuất huyết dưới da\\n Tuyến giáp không to, hạch ngoại vì không sờ chạm\\n Mạch:72 lần/phút\\n Nhiệt: 37 độ C\\n Huyết áp: 119/69\\n Nhịp thở: 16 lần/phút\\n Spo2: 98%\\n Cân nặng: 57 kg\\n Chiều cao 1m72\\n Bmi: 18.8\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"khám lâm sàng\": {\n    \"Ngày nhập liệu\": \"17/01/2018 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Khám toàn thân\",\n        \"Nội dung\": \"- Tình trạng:\\n  - Bệnh tỉnh, tiếp xúc tốt\\n  - Da, niêm mạc hồng hào\\n  - Huyết áp tư thế: không thay đổi\\n  - Không có dấu xuất huyết dưới da\\n  - Tuyến giáp không to, hạch ngoại vi không sờ chạm\\n  - Mạch: 65 lần/phút\\n  - Nhiệt: 37 độ C\\n  - Huyết áp: 100/60 mmHg\\n  - Nhịp thở: 20 lần/phút\\n  - SpO2: 98%\\n  - Cân nặng: 57 kg\\n  - Chiều cao: 1m72\\n  - BMI: 18.8 kg/m2\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tuần hoàn\",\n        \"Nội dung\": \"- Lồng ngực không dị dạng, không sẹo, di động đều theo nhịp thở\\n- Tĩnh mạch cổ nổi (-)\\n- Không có âm rung miu, dấu Harzer (-)\\n- Mỏm tim: liên sườn IV đường trung đòn trái, điện đập bình thường\\n- Tiếng T1 T2 rõ, đều, không có âm bất thường.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám hô hấp\",\n        \"Nội dung\": \"- Lồng ngực cân đối, di động theo nhịp thở, không co kéo, không rút lõm\\n- Rung thanh đều 2 bên\\n- Rì rào phế nang đều, 2 phổi rõ\\n- Không rale ẩm, rale nổ\\n- Không nghe tiếng tim bệnh lý\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tiêu hóa\",\n        \"Nội dung\": \"- Bụng di động theo nhịp thở, không co cứng, không đề kháng, không có dấu hiệu xuất huyết dưới da\\n- Không có dấu hiệu rắn bò\\n- Phản ứng thành bụng (-), không có điểm đau, ấn đau Murphy (-), McBurney (-)\\n- Bụng mềm, không chướng, không có khối bất thường\\n- Nhu động ruột: 2 lần/phút\",\n        \"Nhận xét\": \"Thăm trực tràng: (-)\"\n      },\n      {\n        \"Tên\": \"Khám thận - tiết niệu\",\n        \"Nội dung\": \"- Không chạm thận, đau hông ranh thân âm tính\\n- Ấn đau điểm niệu quản (-)\\n- Tiểu không ra máu, không tiểu đục\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám thần kinh\",\n        \"Nội dung\": \"- Cảm giác, vận động, cơ đều bình thường\\n- Dáng vẻ tỉnh táo\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám cơ xương khớp\",\n        \"Nội dung\": \"- Không biến dạng xương, vận động tốt\\n- Cơ lực: 5/5\\n- Cảm giác: bình thường\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám các cơ quan khác\",\n        \"Nội dung\": \"- Chưa ghi nhận bất thường\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"chẩn đoán sơ bộ và phân biệt\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Chẩn đoán sơ bộ\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên mức độ nhẹ, nghĩ do loét dạ dày - tá tràng. Hiện tại ổn chưa có biến chứng\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Chẩn đoán phân biệt\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên do giãn tĩnh mạch thực quản\\n- Viêm loét dạ dày\\n- Viêm thực quản\\n- Rối loạn đông máu\\n- U dạ dày\\n- Các phân nhóm\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"đề nghị cận lâm sàng và kết quả\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Công thức máu\\n- Sinh hóa máu: ure creatinin, AST, ALT, GGT\\n- GLUCOSE\\n- Điện giải đồ\\n- Nhóm máu\\n- Sinh hóa nước tiểu: creatinin, AST, ALT, GGT\\n- GLUCOSE máu\\n- Điện giải đồ\\n- H.P test\\n- Nội soi dạ dày thực quản tá tràng\\n- X-quang, đoạn tiêu\",\n        \"Nhận xét\": \"Tìm máu ẩn trong phân\"\n      }\n    ]\n  },\n  \"biện luận và chẩn đoán cuối cùng\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Bệnh nhân có xuất huyết tiêu hóa trên và tiêu phân đen do máu nhiều nên nghĩ nhiều đến loét dạ dày - tá tràng. Có thể là xuất huyết tiêu hóa do nguyên nhân thường gặp, trước đó bệnh nhân không sử dụng thuốc NSAID và không có sang chấn thực thể. Đã được chỉ định làm thêm các xét nghiệm cận lâm sàng và nội soi để khẳng định nguyên nhân gây xuất huyết.\\n- Tư vấn bệnh nhân nên tạm thời nhịn ăn trước khi thực hiện xét nghiệm nội soi dạ dày thực quản tá tràng để chẩn đoán phân biệt.\\n- Có thể loại trừ một số nguyên nhân ít gặp như giãn tĩnh mạch thực quản, u dạ dày...\\n- Bệnh nhân vào viện trong tình trạng ổn định, không dấu hiệu mất bù hô hấp, tuần hoàn.\\n- Đã chỉ định xuất huyết tiêu hóa do các ổ loét, phù hợp triệu chứng lâm sàng, cần nội soi để xác định tổn thương.\\n- Nguyễn nhân xuất huyết tiêu hóa: viêm loét dạ dày tá tràng, loét dạ dày, viêm loét ruột nhiễm trùng\",\n        \"Nhận xét\": \"Sao không thấy test máu ẩn trong phân? Nếu nghi ngờ xuất huyết tiêu hóa sao không làm xét nghiệm tìm máu ẩn trong phân từ đầu? Nếu thiếu 8.0 g/dl có phù hợp với lâm sàng là XHTH trên không? Hay có thiếu máu mạn tính?\"\n      }\n    ]\n  }\n}\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        400,
+        -320
+      ],
+      "id": "3196e3ea-ea67-4e36-8406-40d6bbd3ab67",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        -320
+      ],
+      "id": "4fb6f701-290b-41ab-84cb-1481b3def48b",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "jsCode": "let output = $input.first().json.text; // Adjust based on your LLM output structure\n\n// Remove Markdown code block wrappers\noutput = output.replace(/^```(?:json|markdown)?\\n?/, \"\").replace(/\\n?```$/, \"\");\n\n// Remove common LLM text prefixes\noutput = output.replace(/^(Here is the JSON:|Here is your Markdown document:)\\s*/, \"\");\n\nreturn [{ cleanedOutput: output }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        840,
+        -320
+      ],
+      "id": "41f5d913-0f05-4137-804e-de71efe8c6d4",
+      "name": "Filter md"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        -320
+      ],
+      "id": "b061c82d-3c53-4bce-a091-226646982e77",
+      "name": "Parse JSON"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1220,
+        140
+      ],
+      "id": "b46b6c2b-c96f-47b4-8b1e-e52d5b03bf76",
+      "name": "Convert to File1",
+      "disabled": true
     },
     {
       "parameters": {
@@ -62,11 +279,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        60,
-        240
+        400,
+        -120
       ],
-      "id": "fcbeb00d-1300-407e-9aba-835cd00b5fb0",
-      "name": "Google Gemini Chat Model",
+      "id": "418303bb-ee48-46f6-9127-02bad13ebd6d",
+      "name": "2.5-flash",
       "credentials": {
         "googlePalmApi": {
           "id": "W6dxZLFCXIkzEHfX",
@@ -76,26 +293,24 @@
     },
     {
       "parameters": {
-        "formTitle": "Nhập liệu",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "Bệnh",
-              "requiredField": true
-            }
-          ]
-        },
+        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.2,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [
-        0,
-        0
+        400,
+        380
       ],
-      "id": "b21f71de-ce95-4a80-9b2d-d301d655fa70",
-      "name": "On form submission",
-      "webhookId": "f3aba981-5249-49e1-93d3-6e7bb89e8538"
+      "id": "fcbeb00d-1300-407e-9aba-835cd00b5fb0",
+      "name": "2.5-flash1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      },
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -105,6 +320,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T01:53:31.000Z",
-  "versionId": "b815760c-2b9d-446f-ac82-e3e75d4bd076"
+  "updatedAt": "2025-07-06T03:00:12.000Z",
+  "versionId": "90ad255d-14bb-462e-a16e-65a656bdecbd"
 }
