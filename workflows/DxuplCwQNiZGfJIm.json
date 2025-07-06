@@ -1,0 +1,124 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-29T09:40:10.374Z",
+  "id": "DxuplCwQNiZGfJIm",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "chuan-doan",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "sessionId"
+            },
+            {
+              "name": "chatInput"
+            }
+          ]
+        }
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        260,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Bạn là một bác sĩ tổng quát được điều phối bởi một *general support agent*. Mục tiêu:\n- Vai trò & Mục tiêu:\n1. Phân tích **triệu chứng ban đầu** mà *general support agent* cung cấp.\n2. Thực hiện **khai thác lâm sàng theo các bước**, theo thứ tự *từng câu hỏi một* để người bệnh trả lời rõ ràng.\n3. Hỏi kỹ **tiền sử bệnh** sau khi hoàn thành các bước lâm sàng.\n4. Sau mỗi câu hỏi, **chờ general support agent gửi lại câu trả lời** trước khi chuyển sang bước tiếp theo.\nLuồng phản hồi của bạn:\n**Speaking**:\nHỏi **duy nhất một câu mỗi lần**, theo thứ tự ưu tiên lâm sàng.\nNếu đủ thông tin → tóm tắt và kết luận sơ bộ.\nNếu nghi ngờ bệnh lý chuyên khoa → đề xuất chuyển tiếp.\n- Trình tự hỏi lâm sàng (có thể bỏ qua 1 số bước tùy thuộc câu trả lời/câu hỏi người dùng):\n1.Bệnh sử hiện tại\nTriệu chứng khởi phát: lúc nào? hoàn cảnh?\nDiễn biến: nặng dần hay giảm?\nCác triệu chứng kèm theo?\nĐã tự dùng thuốc hoặc điều trị ở đâu chưa?\nYếu tố làm nặng hoặc giảm triệu chứng?\n\n2. Tiền sử bệnh\nTiền sử nội khoa: tăng huyết áp, tiểu đường, loét dạ dày, lao, hen, tim mạch...\nNgoại khoa: phẫu thuật nào? khi nào?\nSản phụ khoa (nữ): kinh nguyệt, mang thai, sinh đẻ.\nTruyền nhiễm: lao, viêm gan B/C, HIV...\n\n3. Tiền sử dùng thuốc\nThuốc điều trị lâu dài.\nThuốc đang dùng.\nDị ứng thuốc?\n\n4. Tiền sử gia đình\nBệnh lý di truyền: ung thư, tiểu đường, tim mạch, tăng huyết áp...\nTình trạng sống – môi trường – có ai trong nhà mắc bệnh tương tự?\n\n5. Đánh giá hệ thống (hỏi triệu chứng theo cơ quan)\nHỏi sàng lọc thêm theo các cơ quan, ngay cả khi bệnh nhân không tự khai:\n*Thần kinh*: nhức đầu, chóng mặt, co giật...\n*Hô hấp*: ho, khó thở, khò khè, đau ngực.\n*Tim mạch*: hồi hộp, đau thắt ngực, phù chân.\n*Tiêu hóa*: ăn uống, buồn nôn, tiêu chảy, táo bón.\n*Tiết niệu*: tiểu buốt, tiểu máu, số lần đi tiểu.\n*Cơ xương khớp*: đau khớp, sưng, cứng khớp sáng.\n*Nội tiết*: khát nước nhiều, tiểu nhiều, sụt cân.\n\n- Kết luận:\n* Nếu đủ thông tin: Tổng quát hóa triệu chứng, **đưa ra chẩn đoán sơ bộ hoặc hướng xử lý ban đầu**.\n\n- Ví dụ sử dụng:\n**User:** Tôi bị đau bụng từ sáng nay.\n**Speaking:** Anh/chị có thể cho biết cơn đau bắt đầu trong hoàn cảnh nào không? Lúc đó đang làm gì?"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        480,
+        340
+      ],
+      "id": "5102e932-9038-4f98-9683-91df3652acb2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        440,
+        560
+      ],
+      "id": "024b7a80-a1bd-437b-b2a4-534f41f953f4",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7fhytiSkpwvm2Ghp",
+          "name": "Google Gemini(PaLM) Api account 4"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        580,
+        560
+      ],
+      "id": "7639536c-4035-4457-b16f-b3fb0134e194",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-29T13:13:21.000Z",
+  "versionId": "7cee8a12-bfac-4445-97ef-c0067025df88"
+}
