@@ -1,0 +1,203 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-28T09:10:38.196Z",
+  "id": "tDwPk5RPr6KnpxaA",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "tu-van-benh",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -60,
+        -80
+      ],
+      "id": "b028febd-18fb-48a9-ab10-a7476686d670",
+      "name": "When chat message received",
+      "webhookId": "2f46a677-9976-45c7-8d40-d91ec2ecb382"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Bạn là một agent điều phối thông tin và trả lời câu hỏi cơ bản từ người dùng của bệnh viện A. \nDựa trên câu hỏi của người dùng, lịch sử trò chuyện (long-memory) và thông tin từ các Agent hoặc RAG, bạn sẽ thực hiện các bước sau:\n\nTổng hợp thông tin:\n\nDựa trên câu hỏi của người dùng, tổng hợp thông tin từ lịch sử trò chuyện và các dữ liệu có sẵn (từ Agent, RAG) để trả lời câu hỏi.\n\nNếu thông tin chưa đầy đủ hoặc không rõ ràng, xác định các khoảng trống thông tin và quyết định liệu có cần trích xuất thêm dữ liệu từ các công cụ Agent, RAG sau:\n\nA(agent): Trả lời những thông tin y tế khám lâm sàng. Sàng lọc, hỏi, làm rõ thêm về việc thu thập thêm triệu chứng cần thiết.\n\nB(OCR+LLM): Trích xuất thông tin cần thiết từ hình ảnh\n\nC(RAG): Truy xuất thông tin cơ bản về bệnh viện A (chỉ chứa thông tin về bệnh viện)\n\nD(popup): gọi API đặt lịch khám\n\nTrích xuất thông tin:\n\nNếu thông tin không đầy đủ, yêu cầu thêm thông tin từ người dùng hoặc sử dụng các công cụ, Agent, hoặc RAG để thu thập thông tin bổ sung.\n\nKhi cần trích xuất thông tin từ ảnh. Cung cấp các prompt phù hợp để trích xuất thông tin, đặc biệt là thông tin ảnh nếu người dùng yêu cầu.\n\nTrả lời câu hỏi:\n\nTrả lời câu hỏi của người dùng dựa trên thông tin đã tổng hợp.\n\nNếu câu hỏi đơn giản (thông tin y tế cơ bản) và không cần trích xuất thông tin từ các nguồn khác, cung cấp câu trả lời trực tiếp.\n\nĐầu vào:\nCâu hỏi của người dùng: Người dùng sẽ đưa ra câu hỏi hoặc yêu cầu cần được trả lời.\n\nLịch sử trò chuyện (Long-memory): Lịch sử các cuộc trò chuyện trước đó, bao gồm những thông tin và câu hỏi trước đó.\n\nThông tin từ các Agent hoặc RAG: Các dữ liệu hoặc thông tin được trả về từ các hệ thống Agent hoặc các tài liệu RAG.\n\nĐầu ra mỗi lần chỉ chọn 1:\nCâu trả lời cho câu hỏi: Cung cấp câu trả lời dựa trên thông tin có sẵn hoặc hỏi thêm (chỉ hỏi từng câu)\n\nTổng hợp thông tin: Tạo một báo cáo hoặc tổng hợp về các thông tin đã thu thập và xác định các khoảng trống trong thông tin.\n\nHãy trả lời câu hỏi sau '{{ $json.chatInput }}'. Mô tả rõ từng bước để xử lý câu hỏi trên"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        160,
+        -80
+      ],
+      "id": "f4a39025-62fc-40a9-832d-489b4a89563b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        120,
+        140
+      ],
+      "id": "23f53be9-7036-4d49-a81d-eab878a4faac",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7fhytiSkpwvm2Ghp",
+          "name": "Google Gemini(PaLM) Api account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        260,
+        140
+      ],
+      "id": "65e21de1-b0f8-49aa-b6e8-0d2a03b5e33b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "description": "A(agent): Trả lời những thông tin y tế khám lâm sàng. Sàng lọc, hỏi, làm rõ thêm về việc thu thập thêm triệu chứng cần thiết.",
+        "workflowId": {
+          "__rl": true,
+          "value": "DxuplCwQNiZGfJIm",
+          "mode": "list",
+          "cachedResultName": "chuan-doan"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{ $('When chat message received').item.json.sessionId }}",
+            "chatInput": "={{ $('When chat message received').item.json.chatInput }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        140
+      ],
+      "id": "8466a611-ba26-4a1b-959d-f62d5ab0b2a1",
+      "name": "Call n8n Workflow Tool",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        520,
+        -260
+      ],
+      "id": "498180e4-443a-4e14-8e39-fb260acfb323",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-29T13:18:51.000Z",
+  "versionId": "23a851ef-a48d-4177-9a9b-9f064a6d8907"
+}
