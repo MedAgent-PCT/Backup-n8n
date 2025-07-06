@@ -1,0 +1,155 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "unsqueeze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "uuid_maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "unsqueeze": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T06:08:24.402Z",
+  "id": "zwcm5uwgtJOG5in9",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 14",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -120
+      ],
+      "id": "aad5c308-ec6f-4211-bc59-20f91864944f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/duckq1u/Documents/file.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        -60
+      ],
+      "id": "16159fe6-0127-4277-a3fe-98b67a112944",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -80
+      ],
+      "id": "6a6a1d7d-506c-40a9-9b43-46b226efa19b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        280,
+        -80
+      ],
+      "id": "e9002f8f-d529-4b23-a811-e5e3689a92e1",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\nitems[0].json.uuid = uuid.v4();\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        540,
+        -60
+      ],
+      "id": "d1f993f2-5174-4936-b307-afd1254d3da0",
+      "name": "uuid_maker"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nreturn $input.first().json.data"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        100,
+        -80
+      ],
+      "id": "95b343d1-d093-401a-b77a-dc89cd983078",
+      "name": "unsqueeze"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-06T06:43:17.000Z",
+  "versionId": "e3e66a53-cfb2-4137-a9c2-a947a67e4047"
+}
