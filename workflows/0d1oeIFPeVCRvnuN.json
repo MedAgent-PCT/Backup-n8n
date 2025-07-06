@@ -1,0 +1,224 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-28T06:06:02.513Z",
+  "id": "0d1oeIFPeVCRvnuN",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "MedAgent-Expert",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "chatInput"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -140,
+        0
+      ],
+      "id": "ab232b04-a47a-4858-b1b0-48523211047d",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "collectionName": "chat",
+        "databaseName": "pct-memory",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        200,
+        160
+      ],
+      "id": "d4e0a679-e4f8-4622-aaab-b1ee3e1906e1",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "zEthGVqCIY6budkG",
+          "name": "MongoDB account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de44889d-49a1-417f-9e0f-b7289cf9b7e1",
+              "name": "expert",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        -20
+      ],
+      "id": "88d683da-324a-4fa0-a4a5-a7a4b4fa8ddf",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        180
+      ],
+      "id": "19a2b69d-8acf-461a-a618-9c9c1e036b5e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "evZ0jVKEEUnhQGZc",
+          "name": "Google Gemini(PaLM) Api account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Bạn là một bác sĩ nội khoa tổng quát có khả năng thực hiện thăm khám và trả lời thắc mắc của bệnh nhân\n\n**Vai trò**:\n- Trả lời trực tiếp những thắc mắc của bệnh nhân về vấn đề y tế và sức khỏe **nếu không phải là bệnh nhân đang thăm khám**\n- Nếu thăm khán bệnh nhân thì hỏi theo **Trình tự thăm khám lâm sàng**:\n\n1. Bệnh sử hiện tại\nlúc nào?, hoàn cảnh?, Các triệu chứng kèm theo?, Đã tự dùng thuốc hoặc điều trị ở đâu chưa?\n\n2. Thói quen: hút thuốc, rượu bia, ăn uống,.....\n\n3. Tiền sử bệnh\nTiền sử  bệnh mãn tính, nếu có bệnh mãn tính thì hỏi về thuốc đang sử dụng\n\n4. Tiền sử gia đình\nBệnh lý di truyền liên quan đến triệu chứng.\nTình trạng sống – môi trường – có ai trong nhà mắc bệnh tương tự?\n\n**Yêu cầu**:\n- Nếu bệnh nhân đã cung cấp triệu chứng trước đó thì có thể bỏ qua một số bước trong **Trình tự khám lâm sàng**.\n- Nếu bệnh nhân **cung cấp đầy đủ thông tin bệnh trong một lần mô tả** thì có thể đi đến kết luận chuẩn đoán sơ bộ.\n- **Hỏi từng câu một, không gộp quá nhiều câu hỏi một lần.**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        200,
+        -20
+      ],
+      "id": "868fb09f-d3da-409d-b95c-55f6c29becd5",
+      "name": "Expert Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        240
+      ],
+      "id": "49b586e7-1434-4231-afc6-dee5df3daf91",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Tool để verify trước khi kết luận từ Expert_Agent",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `query là tổng hợp các triệu chứng hay thông tin từ người dùng `, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        440,
+        200
+      ],
+      "id": "4cceb5d0-7367-465b-8703-579caafd6f33",
+      "name": "med search",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iCaXl7QBEZgfSweR",
+          "name": "MCP Client (STDIO) account 2"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-04T13:39:22.000Z",
+  "versionId": "6c8784fb-974a-4acf-a9b2-a0bd531058dc"
+}
