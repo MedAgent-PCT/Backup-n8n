@@ -34,7 +34,193 @@
         ]
       ]
     },
-    "Loop Over Items": {
+    "unsqueeze": {
+      "main": [
+        [
+          {
+            "node": "1st level",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "uuid_maker": {
+      "main": [
+        [
+          {
+            "node": "ho_so maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ly_do_vao_vien": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tien_su": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "benh_su": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "kham_lam_san": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "de_nghi_can_lam_sang_va_ket_qua": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "chan_doan_so_bo_va_phan_biet": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "bien_luan_va_chan_doan_cuoi_cung": {
+      "main": [
+        [
+          {
+            "node": "split contact_type",
+            "type": "main",
+            "index": 6
+          }
+        ]
+      ]
+    },
+    "tieu_chi maker1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ho_so maker": {
+      "main": [
+        [
+          {
+            "node": "modified_output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "modified_output1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "modified_output": {
+      "main": [
+        []
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "ho_so_tieu_chi maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "modified_output1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ho_so_tieu_chi maker": {
+      "main": [
+        []
+      ]
+    },
+    "unsqueeze1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1st level": {
       "main": [
         [],
         [
@@ -42,11 +228,148 @@
             "node": "uuid_maker",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "ly_do_vao_vien",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "tien_su",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "benh_su",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "kham_lam_san",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "de_nghi_can_lam_sang_va_ket_qua",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "bien_luan_va_chan_doan_cuoi_cung",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "chan_doan_so_bo_va_phan_biet",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
-    "unsqueeze": {
+    "split contact_type": {
+      "main": [
+        [
+          {
+            "node": "loop contact_type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get ngay_nhap_lieu": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "loop contact_type": {
+      "main": [
+        [],
+        [
+          {
+            "node": "unsqueeze2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "loop tieu_chi": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        []
+      ]
+    },
+    "Additional": {
+      "main": [
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "loop contact_type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "uuid_maker1": {
+      "main": [
+        [
+          {
+            "node": "tieu_chi maker1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "uuid_maker1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "unsqueeze2": {
       "main": [
         [
           {
@@ -61,7 +384,9 @@
   "createdAt": "2025-07-06T06:08:24.402Z",
   "id": "zwcm5uwgtJOG5in9",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow 14",
   "nodes": [
     {
@@ -70,7 +395,7 @@
       "typeVersion": 1,
       "position": [
         -660,
-        -120
+        1255
       ],
       "id": "aad5c308-ec6f-4211-bc59-20f91864944f",
       "name": "When clicking ‘Execute workflow’"
@@ -83,8 +408,8 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        -300,
-        -60
+        -440,
+        1255
       ],
       "id": "16159fe6-0127-4277-a3fe-98b67a112944",
       "name": "Read/Write Files from Disk"
@@ -97,24 +422,11 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        -120,
-        -80
+        -220,
+        1255
       ],
       "id": "6a6a1d7d-506c-40a9-9b43-46b226efa19b",
       "name": "Extract from File"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        280,
-        -80
-      ],
-      "id": "e9002f8f-d529-4b23-a811-e5e3689a92e1",
-      "name": "Loop Over Items"
     },
     {
       "parameters": {
@@ -123,8 +435,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        540,
-        -60
+        440,
+        200
       ],
       "id": "d1f993f2-5174-4936-b307-afd1254d3da0",
       "name": "uuid_maker"
@@ -136,11 +448,792 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        100,
-        -80
+        0,
+        1255
       ],
       "id": "95b343d1-d093-401a-b77a-dc89cd983078",
       "name": "unsqueeze"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ho_so",
+          "mode": "list",
+          "cachedResultName": "ho_so"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.uuid }}",
+            "ngay_sinh": "={{ $json['hành chính']['Ngày sinh'] }}",
+            "gioi_tinh": "={{ $json['hành chính']['Giới tính'] }}",
+            "dia_chi": "={{ $json['hành chính']['Địa chỉ'] }}",
+            "ngay_gio_vao_vien": "={{ $json['hành chính']['Ngày giờ vào viện'] }}",
+            "ngay_gio_vao_khoa": "={{ $json['hành chính']['Ngày giờ vào khoa'] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ngay_sinh",
+              "displayName": "ngay_sinh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gioi_tinh",
+              "displayName": "gioi_tinh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "dia_chi",
+              "displayName": "dia_chi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ngay_gio_vao_vien",
+              "displayName": "ngay_gio_vao_vien",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ngay_gio_vao_khoa",
+              "displayName": "ngay_gio_vao_khoa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        660,
+        195
+      ],
+      "id": "e510d071-fa4c-428a-b20f-2b0807842f2e",
+      "name": "ho_so maker",
+      "credentials": {
+        "postgres": {
+          "id": "ELQddAYl4jkjOfBz",
+          "name": "benh_an"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['lý do vào viện'] }}",
+              "type": "object"
+            },
+            {
+              "id": "1292b439-4704-424e-99e4-7d7b7cd1a1ce",
+              "name": "contact_type",
+              "value": "lý do vào viện",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        395
+      ],
+      "id": "0e97b756-9647-42c8-8100-1216d9dc1225",
+      "name": "ly_do_vao_vien",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['tiền sử'] }}",
+              "type": "object"
+            },
+            {
+              "id": "2b785ab3-6e95-4964-b155-d4fdbd42d131",
+              "name": "contact_type",
+              "value": "tiền sử",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        595
+      ],
+      "id": "84f74b64-6bde-460c-be88-2fedc3c32b44",
+      "name": "tien_su",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['bệnh sử'] }}",
+              "type": "object"
+            },
+            {
+              "id": "7794ff0c-f282-4214-ad66-3bfd26dfb9de",
+              "name": "contact_type",
+              "value": "bệnh sử",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        795
+      ],
+      "id": "fbf53151-daea-41a7-8908-a2c8748bae18",
+      "name": "benh_su",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['khám lâm sàng'] }}",
+              "type": "object"
+            },
+            {
+              "id": "9ce099d0-80a0-4408-8c26-c332b0633a34",
+              "name": "contact_type",
+              "value": "khám lâm sàng",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        995
+      ],
+      "id": "d3267070-f729-4781-8815-2ba6ea6dad21",
+      "name": "kham_lam_san",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['đề nghị cận lâm sàng và kết quả'] }}",
+              "type": "object"
+            },
+            {
+              "id": "adc6918b-71e0-4ea9-a2a8-74f12b248505",
+              "name": "contact_type",
+              "value": "đề nghị cận lâm sàng và kết quả",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        1200
+      ],
+      "id": "5fb6a3d5-c7c2-4509-9d0b-78dc803c3dd9",
+      "name": "de_nghi_can_lam_sang_va_ket_qua",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['chẩn đoán sơ bộ và phân biệt'] }}",
+              "type": "object"
+            },
+            {
+              "id": "e4e2cf79-7611-401b-bc03-6f8a7767cc8f",
+              "name": "contact_type",
+              "value": "chẩn đoán sơ bộ và phân biệt",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        1395
+      ],
+      "id": "c34ec204-34fd-45f6-be7b-73ba609ac54b",
+      "name": "chan_doan_so_bo_va_phan_biet",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6af93f7-a0e6-4b8e-afc7-4cd6304092a4",
+              "name": "output",
+              "value": "={{ $json['biện luận và chẩn đoán cuối cùng'] }}",
+              "type": "object"
+            },
+            {
+              "id": "b3a53391-c29a-4c59-94b3-a13cc3c13852",
+              "name": "contact_type",
+              "value": "biện luận và chẩn đoán cuối cùng",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        1595
+      ],
+      "id": "fddbc3a7-3405-4e51-b7d4-b98559f88538",
+      "name": "bien_luan_va_chan_doan_cuoi_cung",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tieu_chi",
+          "mode": "list",
+          "cachedResultName": "tieu_chi"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.uuid }}",
+            "noi_dung": "=qdqdwwq",
+            "nhan_xet": "=sdfsdfsdf",
+            "ngay_nhap_lieu": "2025-07-01T00:00:00"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ngay_nhap_lieu",
+              "displayName": "ngay_nhap_lieu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "noi_dung",
+              "displayName": "noi_dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nhan_xet",
+              "displayName": "nhan_xet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2860,
+        1080
+      ],
+      "id": "dfa56bd5-2783-4993-be5c-06de86cfd42e",
+      "name": "tieu_chi maker1",
+      "credentials": {
+        "postgres": {
+          "id": "ELQddAYl4jkjOfBz",
+          "name": "benh_an"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4580,
+        1120
+      ],
+      "id": "27994c6d-ad39-4ccd-aab4-e89c252fff3b",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ed21a024-3c0b-4bba-86a0-25e171a99495",
+              "name": "ho_so_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        180
+      ],
+      "id": "f42a04db-1f74-4a16-bb3b-d75f77c31bc9",
+      "name": "modified_output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "134391ef-f8cb-41ca-adfd-25da3c12f563",
+              "name": "tieu_chi_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9e993f7b-f20b-47a7-ab54-3cfc67044347",
+              "name": "contact_type",
+              "value": "={{ $json.contact_type }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4100,
+        1680
+      ],
+      "id": "1552798d-ce8d-458a-b4c6-60ad8a55ffdf",
+      "name": "modified_output1"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ho_so_tieu_chi",
+          "mode": "list",
+          "cachedResultName": "ho_so_tieu_chi"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tieu_chi_id": "={{ $json.tieu_chi_id }}",
+            "loai_ho_so": "={{ $json.contact_type }}",
+            "ho_so_id": "={{ $json.ho_so_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ho_so_id",
+              "displayName": "ho_so_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tieu_chi_id",
+              "displayName": "tieu_chi_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "loai_ho_so",
+              "displayName": "loai_ho_so",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5080,
+        1380
+      ],
+      "id": "1564ce67-dc91-4172-95a7-03a157b82138",
+      "name": "ho_so_tieu_chi maker",
+      "credentials": {
+        "postgres": {
+          "id": "ELQddAYl4jkjOfBz",
+          "name": "benh_an"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3600,
+        1660
+      ],
+      "id": "e4995da9-b705-4f4d-92b6-4e52b2daa3d8",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a7d4e5c-9ffb-40e0-93ba-b1a3499fa547",
+              "name": "contact_type",
+              "value": "={{ $json.contact_type }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1620,
+        1740
+      ],
+      "id": "5d9ee9e1-21a1-46c5-adaf-44ae90497da6",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nreturn $input.first().json.output['Tiêu chí']"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3240,
+        980
+      ],
+      "id": "c287405b-ad91-4830-a997-eb0b23f2db9d",
+      "name": "unsqueeze1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        220,
+        1255
+      ],
+      "id": "e9002f8f-d529-4b23-a811-e5e3689a92e1",
+      "name": "1st level"
+    },
+    {
+      "parameters": {
+        "numberInputs": 7
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        660,
+        920
+      ],
+      "id": "04e0957c-eebf-46f0-ac6e-82c04d5fa3f9",
+      "name": "split contact_type"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "79971c26-3c2c-46a7-83c1-9995d674bf59",
+              "name": "Ngày nhập liệu",
+              "value": "={{ $json.output['Ngày nhập liệu'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3860,
+        1280
+      ],
+      "id": "a330eb6a-8079-4982-93ea-9cd83cb287bc",
+      "name": "get ngay_nhap_lieu"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1160,
+        860
+      ],
+      "id": "f38dffe6-0621-40c6-899e-e403b169f748",
+      "name": "loop contact_type"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3060,
+        800
+      ],
+      "id": "11f3304e-4074-4c24-b1a3-26f191a8054f",
+      "name": "loop tieu_chi"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3920,
+        960
+      ],
+      "id": "b5f34ead-8d38-446e-b79d-5aeeaf12427e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1b1890d6-511f-4756-8e4f-5f1f9014ba10",
+              "name": "=output",
+              "value": "={{ $json }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3320,
+        880
+      ],
+      "id": "287d05a2-e14d-46c6-9efa-dfe77050da0c",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "01d5b433-0e69-494f-8cb7-5cd9bc842fb3",
+              "name": "output['Ngày nhập liệu']",
+              "value": "={{ $json.output['Ngày nhập liệu'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b7439c5f-2c9a-400d-831d-3f94af9c1783",
+              "name": "contact_type",
+              "value": "={{ $json.contact_type }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1420,
+        1360
+      ],
+      "id": "8647d78d-973f-4c56-a68e-d697e7ffe76c",
+      "name": "Additional"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1880,
+        880
+      ],
+      "id": "54d17095-a36f-491d-838a-8b0fca7639f0",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\nitems[0].json.uuid = uuid.v4();\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        960
+      ],
+      "id": "0c5f4753-c8d7-4132-b44f-abcbbe6e0a66",
+      "name": "uuid_maker1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2240,
+        860
+      ],
+      "id": "2e962060-7fc6-490a-ab98-28721c771abc",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nreturn $input.first().json.output['Tiêu chí']"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        880
+      ],
+      "id": "c267198b-ad59-42c1-8811-7d6184556145",
+      "name": "unsqueeze2"
     }
   ],
   "pinData": {},
@@ -150,6 +1243,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T06:43:17.000Z",
-  "versionId": "e3e66a53-cfb2-4137-a9c2-a947a67e4047"
+  "updatedAt": "2025-07-06T09:53:52.000Z",
+  "versionId": "519cfee3-756e-4282-a879-babe0e8c3beb"
 }
