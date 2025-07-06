@@ -1,0 +1,275 @@
+{
+  "active": false,
+  "connections": {
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med_web": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med_fetch": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Expert 9:29",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert 9:29": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-30T16:18:26.226Z",
+  "id": "fDUI1Nj9SsOuE0ZB",
+  "isArchived": false,
+  "meta": null,
+  "name": "Expert",
+  "nodes": [
+    {
+      "parameters": {
+        "description": "=### Mô tả chi tiết cho Tool `think`\n\n**Tên tool**: `think`  \n**Mục đích**: Đóng vai trò \"bộ não phân tích\" trong quy trình xử lý, giúp đưa ra quyết định thông minh thông qua:  \n- **Đánh giá ngữ cảnh**  \n- **Phân tích rủi ro**  \n- **Tối ưu hóa hành động**  \n- **Kiểm tra tính nhất quán dữ liệu**\n\n---\n\n### CƠ CHẾ HOẠT ĐỘNG\n```mermaid\ngraph TB\n  A[Kích hoạt think] --> B{Phân loại nhiệm vụ}\n  B -->|Kiểm tra triệu chứng| C[Định danh đại từ + từ khóa bệnh lý]\n  B -->|Đánh giá nguồn| D[Tính điểm uy tín domain]\n  B -->|Xử lý mâu thuẫn| E[So sánh med_RAG vs web_search]\n  B -->|Tối ưu truy vấn| F[Chuyển hóa ngôn ngữ tự nhiên → truy vấn chuẩn]\n  C --> G[Ra quyết định]\n```\n\n---\n\n### THÔNG SỐ KỸ THUẬT\n1. **Đầu vào (Input)**:\n   ```json\n   {\n     \"thought\": \"Mô tả rõ ràng nhiệm vụ phân tích\",\n     \"parameters\": {\n       \"data_type\": \"text/url/data_array\",\n       \"evaluation_metrics\": [\"trust_score\", \"relevance\", \"consistency\"],\n       \"decision_criteria\": {\"priority_rules\": \"Ưu tiên pcthealthcare > .gov.vn\"}\n     }\n   }\n   ```\n\n2. **Đầu ra (Output)**:\n   ```json\n   {\n     \"insight\": \"Kết luận phân tích\",\n     \"confidence\": 0-100,\n     \"next_action\": \"Gợi ý hành động tiếp theo\",\n     \"risk_flags\": [\"Mâu thuẫn dữ liệu\", \"Nguồn không xác định\"]\n   }\n   ```\n\n---\n\n### ỨNG DỤNG THỰC TẾ\n#### 1. Phát hiện bệnh lý cá nhân\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Phân tích cảnh báo khẩn cấp trong câu: 'Tôi tức ngực khó thở 30 phút'\",\n  \"parameters\": {\n    \"red_flags\": [\"tức ngực\", \"khó thở\"],\n    \"time_critical\": true\n  }\n}\n→ Output: \n{\n  \"insight\": \"CẢNH BÁO: Triệu chứng tim mạch cấp tính\",\n  \"confidence\": 99,\n  \"next_action\": \"Trả ngay kết quả ER và gọi cấp cứu\"\n}\n```\n\n#### 2. Đánh giá độ tin cậy URL\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Xếp hạng độ ưu tiên các nguồn tìm được\",\n  \"parameters\": {\n    \"urls\": [\n      \"https://pcthealthcare.vn/benh-da-lieu\",\n      \"https://suckhoe.danang.gov.vn\",\n      \"https://benhvienblog.wordpress.com\"\n    ]\n  }\n}\n→ Output:\n{\n  \"insight\": \"Ưu tiên #1: pcthealthcare.vn (trust_score=100)\",\n  \"risk_flags\": [\"Nguồn wordpress.com: trust_score=15\"]\n}\n```\n\n#### 3. Giải quyết xung đột thông tin\n```json\n{\n  \"tool\": \"think\",\n  \"thought\": \"Giải quyết mâu thuẫn: med_RAG nói 'Khám cả CN' vs web_search nói 'Chỉ T2-T6'\",\n  \"parameters\": {\n    \"sources\": {\n      \"med_RAG\": {\"content\": \"Khám cả chủ nhật\", \"timestamp\": \"2024-01-01\"},\n      \"web_search\": {\"content\": \"Chỉ T2-T6\", \"source\": \"pcthealthcare.vn\"}\n    }\n  }\n}\n→ Output:\n{\n  \"insight\": \"Ưu tiên thông tin từ pcthealthcare.vn (mới nhất)\",\n  \"next_action\": \"Sử dụng dữ liệu web_search + kiểm tra fanpage\"\n}\n```\n\n---\n\n### ƯU ĐIỂM NỔI BẬT\n1. **Ngăn ngừa sai sót**:  \n   - Phát hiện mâu thuẫn dữ liệu trước khi trả lời người dùng  \n   - Cảnh báo sớm thông tin lỗi thời\n\n2. **Tối ưu hiệu năng**:  \n   - Giảm 70% lượt fetch_content không cần thiết  \n   - Tự động chọn truy vấn hiệu quả nhất\n\n3. **Xử lý ngữ cảnh nhạy cảm**:  \n   - Tự động nâng cảnh báo với triệu chứng nguy hiểm  \n   - Nhận diện ngôn ngữ địa phương (\"con\" = \"tôi\")\n\n---\n\n### GIỚI HẠN CẦN LƯU Ý\n1. **Không thay thế chuyên gia y tế**:  \n   → Chỉ phân tích dữ liệu, không chẩn đoán bệnh\n\n2. **Phụ thuộc vào chất lượng đầu vào**:  \n   → Kết quả phân tích chỉ tốt khi dữ liệu đầu vào đầy đủ\n\n3. **Thời gian xử lý**:  \n   → Giới hạn < 500ms/request để đảm bảo trải nghiệm\n\n> 💡 **Câu thần chú vận hành**:  \n> *\"Phân tích trước - Hành động sau: Luôn kích hoạt think khi nghi ngờ độ tin cậy hoặc cần ra quyết định phức tạp\"*"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        800,
+        640
+      ],
+      "id": "55c8eb73-0b38-4566-b189-fbe0dd658bb5",
+      "name": "Think",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Dùng công cụ này khi:\n- Cần thông tin về  bệnh viện y khoa Phan Châu Trinh, bệnh tổng quát\n- Cần kiểm tra hướng dẫn điều trị mới nhất  \n- Cần xác định tiêu chuẩn chuyển khoa  \n- Tra cứu tương tác thuốc  ",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `đầu vào cho công cụ này phải có định dạng JSON như sau\n{\n  \"query\": <thông tin cần tra cứu>\n}`, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        660,
+        640
+      ],
+      "id": "12528517-95e5-4414-9fc6-3dae3ea6ccbc",
+      "name": "med_web",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        200,
+        640
+      ],
+      "id": "4c69ba7f-c2b0-447d-85cb-ed54bdd97d18",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "evZ0jVKEEUnhQGZc",
+          "name": "Google Gemini(PaLM) Api account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        360,
+        640
+      ],
+      "id": "f1418ad3-77e9-49d7-bc5f-63527806c644",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Dùng công cụ này khi:\n- Cần thông tin chi tiết cho lý do chẩn đoán \n- Cần bằng chứng cho những chẩn đoán \n- Tra cứu tương tác thuốc  ",
+        "operation": "executeTool",
+        "toolName": "fetch_content",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `đầu vào cho công cụ này phải có định dạng JSON như sau\n{\n  \"url\": <đường link>\n}`, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        520,
+        640
+      ],
+      "id": "6c0008ce-6bb7-4127-84e4-7a80c133b68a",
+      "name": "med_fetch",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "chatInput"
+            },
+            {
+              "name": "sessionId"
+            },
+            {
+              "name": "bệnh sử"
+            }
+          ]
+        }
+      },
+      "id": "f0b59fb0-2ba4-474f-83c6-897e71364f5e",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        120,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Bệnh sử: {{ $json['bệnh sử'] }} \\n\nTHông tin trả về từ người dùng: {{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=**Vai Trò:** Bác sĩ tổng quát được điều phối bởi *general support agent*  \n<Mục Tiêu>\n- Tiến hành khai thác lâm sàng **từng bước** theo trình tự chuẩn y khoa  \n- Dựa vào thông tin về \"bệnh sử\" được đưa vào, hỏi dựa vào BỆNH SỬ đó nếu thông tin đã đầy đủ thì đưa ra kết luận.\n- Kết hợp công cụ tìm kiếm web khi cần tham khảo hướng dẫn điều trị  \n- Đưa ra kết luận sơ bộ\n</Mục Tiêu> \n\n<Quy Trình ReSpact>\n  [Reason] → [Speak] → [Act] → [Observation] → (Lặp lại)\n</Quy Trình ReSpact>\n\n<Cấu Trúc Prompt Tối Ưu> \n  [Reason]\n  1. **Phân tích tình trạng hiện tại:**  \n     - Xác định bước khai thác tiếp theo (dựa trên trình tự 7 bước)  \n     - Đánh giá thông tin đã có để chọn câu hỏi tối ưu  \n     - Xác định nhu cầu tra cứu web (nếu cần)  \n  \n  [Speak]  \n  - **Chỉ hỏi 1 câu duy nhất** tập trung vào:  \n    {Câu hỏi cụ thể cho bước hiện tại}  \n  -  Định dạng tiếng Việt, dễ hiểu\n  [Act]  \n  - **Tool sử dụng:** `search_web`\n  - **Kết quả:**  \n    [Observation] = {Output từ tool/search/fetch}  \n  [Observation]  \n  - Ghi nhận phản hồi từ người dùng/general support agent  \n  - Cập nhật vào bệnh án \n  \n  ## Lưu ý:\n    - Luôn bắt đầu bằng [Reason] để xác định bối cảnh\n    - [Act] chỉ kích hoạt tool khi CẦN THIẾT\n    - Giữ [Speak] ngắn gọn (<20 từ) và tập trung\n</Cấu Trúc Prompt Tối Ưu>\n\n<Trình Tự Khai Thác Chi Tiết>\n  1. Hành chính & lý lịch\n    [Reason] Bắt đầu thu thập thông tin nhận dạng và yếu tố nguy cơ. Ưu tiên hỏi tuổi/giới trước.\n    [Speak] Bạn có thể cho tôi biết bạn bao nhiêu tuổi, giới tính gì để tiện xưng hô không?\n    [Act] \n      1. Phân tích bệnh sử: \"{{ $json['bệnh sử'] }}\" để lấy ra thông tin\n      2. Nếu bệnh sử đưa vào đã đầy đủ như các yêu cầu dưới hãy dừng hỏi và suy luận trả ra kết quả.\n  \n    [Reason] Nghề nghiệp và môi trường làm việc.\n    [Speak] Anh/chị có thể cho tôi biết nghề nghiệp của anh là gì và môi trường làm việc của Anh/chị có gì đặc biệt không?\n    [Act]  suy luận kết hợp với thông tin bệnh sử\n    \n  2. Đánh giá can thiệp y tế và dị ứng\n    [Reason] Hỏi thêm những thông tin liên quan đến triệu chứng chính.\n    [Speak] <thông tin cần thu thập thêm kèm theo triệu chứng chính bao gồm: [cường độ đau, cường độ xuất hiện, thói quen hàng ngày, sử dụng chất kích thích]>\n    [Act] \n      1. hỏi trong 1 đến 3 câu về triệu chứng liên hệ.\n      2. trong một câu hỏi chỉ hỏi về 2 thông tin.\n      3. thang đo phải theo ngôn ngữ như (tự nhiên, dữ dội, v.v) tùy triệu chứng.\n      4. câu hỏi phải đi kèm theo ví dụ để người dùng bám vào để trả lời.\n\n    [Reason] đánh giá Hỏi về tình trạng dị ứng thuốc hoặc thực phẩm \n    [Speak] <thông tin cần thu thập thêm về tình trạng dị ứng> (nếu cần)\n    [Act]       \n      1. từ thông tin thu thập được kết hợp với công cụ 'web_search' xác định có liên quan đến dị ứng hay không?\n      2. Nếu không hãy bỏ qua câu hỏi này.\n      3. Nếu có dị ứng hãy hỏi thêm về thông tin dị ứng -> kết hợp với công cụ 'med_search'.\n\n  4. Tiền sử bệnh\n    [Reason] Đánh giá xem có phải bệnh mãn tính hay không \n    [Speak] Bạn có mắt căn bệnh mãn tính nào không? (nếu cần)\n    [Act] \n      1. từ thông tin thu thập được kết hợp với công cụ 'web_search' xác định có liên quan đến bệnh mãn tính hay không?\n      2. Nếu không hãy bỏ qua câu hỏi này.\n      3. Nếu có bệnh mãn tính hãy hỏi thêm về thuốc của bệnh mãn tính đấy -> kết hợp với công cụ 'med_search'.\n\n  5. Tiền sử gia đình\n    [Reason] Đánh giá có bệnh di truyền nào \n    [Speak] Gia đình của bạn có mắt phải căn bệnh nào không? (nếu cần)\n    [Act]       \n      1. từ thông tin thu thập được kết hợp với 'web_search' xác định có liên quan đến di truyền hay không?\n      2. Nếu không hãy bỏ qua câu hỏi này.\n      3. Nếu có hãy hỏi về thông tin gia đình -> kết hợp với công cụ 'med_search'.\n\n## Lưu ý:\n- Nếu người dùng cung cấp bệnh sử và thông tin lâm sàng trên 2 thì kết hợp 'med_search' đưa ra kết luận.\n- Chỉ trả về cho người dùng câu hỏi trong [speak].\n</Trình Tự Khai Thác Chi Tiết>\n\n<Kết Luận>\n  [Reason] Tổng hợp thông tin và kích hoạt 'med_search' để liệt kê bệnh lý có thể\n    - Tổng hợp triệu chứng chính và yếu tố nguy cơ\n    - Đánh giá mức độ ưu tiên dựa trên bằng chứng\n  [Act]  \n    `search_web: {\n      \"query\": \"Chẩn đoán phân biệt cho {triệu chứng chính} + {yếu tố nguy cơ}\",\n      \"purpose\": \"Liệt kê tối thiểu 3 bệnh lý có thể với bằng chứng triệu chứng\"\n    }`\n  \n  [Speak]  \n   \"Dựa trên thông tin thu thập được, anh/chị có thể đang gặp\":\n    1. [Bệnh X] - [Mức độ phù hợp]\n       - Triệu chứng khớp: [A], [B]\n    ..v.v\n    \"[semi_clinical_pred]\"\n    {đề xuất khám tại bệnh viện Phan Châu Trinh}\n\n    \"[Lời khuyên]\"\n    {kết hợp với công cụ 'med_search' để đưa ra vài lời khuyên}\n\n  ## Lưu ý:\n  - Nếu thông tin đầu ra có nội dung không chắc chắn sử dụng tool `med_search`.\n  - Giới hạn 3 bệnh trong danh sách phân biệt.\n</Kết Luận>\n\n<Lưu Ý Quan Trọng>\n  - Xác định là Anh hay Chị thì dùng đúng không ghi là \"Anh/chị\" trong câu hỏi.\n</Lưu Ý Quan Trọng>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        340,
+        400
+      ],
+      "id": "e479d08c-8b86-4832-9818-5679848a9045",
+      "name": "Expert 9:29",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c6fb2983-ffbb-4360-ba69-1a3aad79c4c3",
+              "name": "output",
+              "value": "={{ $json.output.match(/\\[Speak\\](.*)/s)?.[1]?.trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        400
+      ],
+      "id": "c66b2a20-4c49-4b46-acf9-742c67ae818d",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Start": [
+      {
+        "json": {
+          "chatInput": "tôi bị đau bụng",
+          "sessionId": "tôi bị đau bụng",
+          "bệnh sử": "tôi bị đau bụng"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-04T14:04:55.000Z",
+  "versionId": "50678778-3a94-4a42-a7fc-3b78c3e616e9"
+}
