@@ -21,7 +21,7 @@
             "index": 0
           },
           {
-            "node": "Edit Fields",
+            "node": "EditMessage",
             "type": "main",
             "index": 0
           }
@@ -50,11 +50,33 @@
         ]
       ]
     },
-    "Edit Fields": {
+    "AI Agent": {
       "main": [
         [
           {
-            "node": "HTML",
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "HTML1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EditMessage": {
+      "main": [
+        [
+          {
+            "node": "Message",
             "type": "main",
             "index": 0
           }
@@ -87,7 +109,7 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -100,
+        -80,
         0
       ],
       "id": "3b4d0da5-8e73-4b28-a6dd-35cbd098e7ba",
@@ -97,7 +119,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    session_id = '{{ $json.Id }}'\nGROUP BY \n    session_id;\n\n\n",
+        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    session_id = '7d5346e92a664e05ad4d71bffbced5f7'\nGROUP BY \n    session_id;\n\n\n",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -140,7 +162,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        340,
+        420,
         220
       ],
       "id": "d7571448-3b04-4138-ac53-5f3887178a72",
@@ -171,9 +193,9 @@
         "assignments": {
           "assignments": [
             {
-              "id": "30c70ab7-dee6-4d57-a423-241231564404",
-              "name": "combined_messages",
-              "value": "={{ \n  $json.combined_messages\n    .split('||')\n    .map(e => {\n      try {\n        const obj = JSON.parse(e.trim());\n        if (obj.type === 'human') return `Human: ${obj.content}`;\n        if (obj.type === 'ai') return `AI: ${obj.content}`;\n        return '';\n      } catch (err) {\n        return '';\n      }\n    })\n    .filter(e => e)\n    .join('\\n')\n}}",
+              "id": "70bac3e6-d6da-4128-8b0b-82a8fa16b0ae",
+              "name": "output",
+              "value": "={{ $json.output.replace(/\\n/g, '<br>').replace(/\\*/g, '') }}",
               "type": "string"
             }
           ]
@@ -183,24 +205,60 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        400,
-        -140
+        800,
+        0
       ],
-      "id": "d1cba8de-04cf-4d7b-a0f8-abc23f73af7b",
-      "name": "Edit Fields"
+      "id": "8de6a069-4060-43d5-8017-9de20e5a950c",
+      "name": "Edit Fields1"
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>This is an H1 heading</h1>\n    <h2>This is an H2 heading</h2>\n    <p>{{ $json.combined_messages }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Tóm tắt hội thoại</h1>\n    <p>{{ $json.output }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\np {\n  text-align: left;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        620,
-        -140
+        1000,
+        0
+      ],
+      "id": "f5d67712-cef2-4504-b2ab-cce835a03810",
+      "name": "HTML1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "30c70ab7-dee6-4d57-a423-241231564404",
+              "name": "combined_messages",
+              "value": "={{ \n  '<div class=\"chat-history\">' +\n  $json.combined_messages\n    .split(' || ')\n    .map(e => {\n      try {\n        const obj = JSON.parse(e.trim());\n        if (obj.type === 'human') {\n          return `<div class=\"message human\"><strong>Human:</strong> ${obj.content}</div>`;\n        }\n        if (obj.type === 'ai') {\n          return `<div class=\"message ai\"><strong>AI:</strong> ${obj.content}</div>`;\n        }\n        return '';\n      } catch (err) {\n        return '';\n      }\n    })\n    .filter(e => e)\n    .join('') +\n  '</div>'\n}}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        -180
+      ],
+      "id": "d1cba8de-04cf-4d7b-a0f8-abc23f73af7b",
+      "name": "EditMessage"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Cuộc hội thoại</h1>\n    {{ $json.combined_messages }}\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\ndiv.chat-history {\n  text-align: left;\n}\n.message {\n  margin: 12px 0;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        -180
       ],
       "id": "322c0a6e-2685-450e-a312-677a46277dc1",
-      "name": "HTML"
+      "name": "Message"
     }
   ],
   "pinData": {},
@@ -210,6 +268,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T09:57:50.000Z",
-  "versionId": "6c7e17a5-b921-48d6-988a-dde46987eb09"
+  "updatedAt": "2025-07-06T10:23:53.000Z",
+  "versionId": "b24a5546-a38a-408d-83bc-c3f74fabacaa"
 }
