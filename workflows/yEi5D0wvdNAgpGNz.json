@@ -1,0 +1,19 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-06-26T04:03:04.446Z",
+  "id": "yEi5D0wvdNAgpGNz",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow 3",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-04T03:40:44.000Z",
+  "versionId": "f48c8ee4-901d-4323-b2b1-a2afa3caaeb7"
+}
