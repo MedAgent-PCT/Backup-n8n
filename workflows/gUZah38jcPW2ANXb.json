@@ -1,0 +1,131 @@
+{
+  "active": false,
+  "connections": {
+    "loop contact_type": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "unsqueeze2": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "unsqueeze2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T10:46:10.849Z",
+  "id": "gUZah38jcPW2ANXb",
+  "isArchived": false,
+  "meta": null,
+  "name": "ho_so",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nreturn $input.first().json['Tiêu chí']",
+        "notice": ""
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        1040
+      ],
+      "id": "c267198b-ad59-42c1-8811-7d6184556145",
+      "name": "unsqueeze2"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc0577a5-ff8b-4897-9da8-cfd407fce0fa",
+              "name": "Tiêu chí",
+              "value": "={{ $json.output['Tiêu chí'] }}",
+              "type": "array"
+            },
+            {
+              "id": "54268da7-1aa0-4642-8e7c-0c713429086d",
+              "name": "contact_type",
+              "value": "={{ $json.contact_type }}",
+              "type": "string"
+            },
+            {
+              "id": "a1a37f2f-45ff-4b0b-8a1d-debbfa367080",
+              "name": "Ngày nhập liệu",
+              "value": "={{ $json.output['Ngày nhập liệu'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        1040
+      ],
+      "id": "09e059df-f505-42ff-bcb5-fdc7025a7fb8",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "splitInBatchesNotice": "",
+        "batchSize": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        920,
+        1020
+      ],
+      "id": "f38dffe6-0621-40c6-899e-e403b169f748",
+      "name": "loop contact_type"
+    },
+    {
+      "id": "a6d03bc8-c60b-4837-8183-e142c30c8d25",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        700,
+        1020
+      ],
+      "parameters": {
+        "inputSource": "passthrough"
+      }
+    }
+  ],
+  "pinData": null,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-06T10:46:10.849Z",
+  "versionId": "a2420003-d076-493d-aff7-9ae6a0e78a49"
+}
