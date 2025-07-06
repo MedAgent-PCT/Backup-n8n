@@ -1,0 +1,110 @@
+{
+  "active": false,
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-06T01:31:15.726Z",
+  "id": "0LtLQ0HtOcfxwqQq",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "gen_ho_so",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Hãy cho tôi ",
+        "options": {
+          "systemMessage": "Bạn là chuyên gia sinh dữ liệu"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        360,
+        0
+      ],
+      "id": "d4c97703-cd01-440b-aa4a-5a78d4a9260c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        60,
+        240
+      ],
+      "id": "fcbeb00d-1300-407e-9aba-835cd00b5fb0",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Nhập liệu",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Bệnh",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b21f71de-ce95-4a80-9b2d-d301d655fa70",
+      "name": "On form submission",
+      "webhookId": "f3aba981-5249-49e1-93d3-6e7bb89e8538"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-06T01:53:31.000Z",
+  "versionId": "b815760c-2b9d-446f-ac82-e3e75d4bd076"
+}
