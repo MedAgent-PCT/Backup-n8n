@@ -1,0 +1,1729 @@
+{
+  "active": false,
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Planned Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from PDF File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Planned Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Planned Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Planned Agent": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research Agent 1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Detailed_Report_HTML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Summary Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Professional Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown1": {
+      "main": [
+        [
+          {
+            "node": "HTML_Planned_Steps",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown2": {
+      "main": [
+        [
+          {
+            "node": "Summary_Report_HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summary Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summary Agent": {
+      "main": [
+        [
+          {
+            "node": "Markdown2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summary Agent1": {
+      "main": [
+        [
+          {
+            "node": "Markdown4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summary Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown4": {
+      "main": [
+        [
+          {
+            "node": "Summary_Report_HTML1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown3": {
+      "main": [
+        [
+          {
+            "node": "Detailed_Report_HTML1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Summary Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research Agent 2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Synthesized and Evaluation Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown5": {
+      "main": [
+        [
+          {
+            "node": "Synthesized_Report_HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combined Reports": {
+      "main": [
+        [
+          {
+            "node": "Synthesized and Evaluation Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesized and Evaluation Agent": {
+      "main": [
+        [
+          {
+            "node": "Markdown5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Research Agent 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Combined Reports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Agent 1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Agent 2": {
+      "main": [
+        [
+          {
+            "node": "Markdown3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Plan Agent": {
+      "main": [
+        [
+          {
+            "node": "Markdown6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model6": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research Plan Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown6": {
+      "main": [
+        [
+          {
+            "node": "HTML_Detailed_Plan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Research Plan Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Research Plan Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from PDF File": {
+      "main": [
+        [
+          {
+            "node": "Extract Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown7": {
+      "main": [
+        [
+          {
+            "node": "Summary_Report_HTML2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model7": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summary Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summary Agent2": {
+      "main": [
+        [
+          {
+            "node": "Markdown7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Text": {
+      "main": [
+        [
+          {
+            "node": "Planned Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown8": {
+      "main": [
+        [
+          {
+            "node": "Summary_Report_HTML3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Professional Summary": {
+      "main": [
+        [
+          {
+            "node": "Markdown8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model8": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Professional Summary",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Extend Plan Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Markdown1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch-Options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model9": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extend Plan Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extend Plan Agent": {
+      "main": [
+        [
+          {
+            "node": "Extend Research Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Markdown1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-Options": {
+      "main": [
+        [
+          {
+            "node": "Research Agent 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Research Agent 2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Research Agent 2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Research Agent 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Research Plan Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Summary Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model10": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extend Research Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extend Research Agent": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Extend Plan Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-28T12:11:33.358Z",
+  "id": "qn8z9Pmn6VrSfqdu",
+  "isArchived": false,
+  "meta": null,
+  "name": "Research - Thầy Minh",
+  "nodes": [
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1000,
+        840
+      ],
+      "id": "2328d3b2-b204-4f83-a061-0da465328d6a",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "formTitle": "Research Assistant",
+        "formDescription": "Research for a topic",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Keywords",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Requirements"
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "English"
+                  },
+                  {
+                    "option": "Tiếng Việt"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Options",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Gemini"
+                  },
+                  {
+                    "option": "GPT"
+                  },
+                  {
+                    "option": "Both Models"
+                  },
+                  {
+                    "option": "Detailed Research Plan"
+                  },
+                  {
+                    "option": "Summarize Report"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "More detail",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Default"
+                  },
+                  {
+                    "option": "Extend"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Upload File",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -1560,
+        660
+      ],
+      "id": "76ba9c5e-3bcf-4a6c-bb15-7a0d124e6722",
+      "name": "On form submission",
+      "webhookId": "6c5754d2-2e49-4694-886a-5273f6061ddc"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        860
+      ],
+      "id": "2a0dc9d4-86e4-483b-991e-ba69f050fb85",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"category\": \"AI Trends Analysis\",\n\"keyword\": \"AI\",\n\"definition\": \"Outline a structured research process to identify new fields, assess their potential, and determine future trends within Artificial Intelligence\",\n\"Research_Steps\": \"1. Step 1: Information Gathering - Identify current emerging areas and -breakthroughs in AI through academic research, industry reports, and tech news. \\n 2. Step 2: Potential Assessment - For each identified new area, analyze its market potential, technological maturity, societal impact, and investment trends. \\n 3. Step 3: Trend Identification - Based on the analysis, extrapolate current developments into future trends, considering technical, ethical, and regulatory factors. \\n 4. Step 4: Synthesis and Documentation - Compile all findings into a structured report, highlighting key insights, potential, and future directions.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -720,
+        780
+      ],
+      "id": "9454a082-1689-4c84-b8ec-edf82b956545",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=[empty]",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an intelligent research assistant for research planning. \nKeywords:{{ $('On form submission').item.json.Keywords }}\nRequirements: {{ $('On form submission').item.json.Requirements }}\n\nBased on the Keywords and Requirements, assistant will use tool (Think) to analyze required steps to research.\nReturn the steps to perform Yêu Cầu for example:\n1.Step 1: Search and Retrieve for the new information\n2.Step 2: Analyze the information and document\n3.Step 3: Figure out the key contents\nOnly return steps without perform the steps. Answer in {{ $('On form submission').item.json.Language }}",
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -1000,
+        600
+      ],
+      "id": "7c765a72-282a-408d-bee4-582c09425471",
+      "name": "Planned Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        700
+      ],
+      "id": "c95a77a5-4d54-41f8-b5a8-55da83156738",
+      "name": "Google Gemini Chat Model1"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        440,
+        400
+      ],
+      "id": "037e6332-607a-4728-b912-242ed8aff579",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output.Research_Steps }}",
+        "destinationKey": "html_output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        140
+      ],
+      "id": "63f2ac1f-67e8-454a-9d52-e352c0ffd6d0",
+      "name": "Markdown1"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results for research</h1>\n    <p> {{ $json.data }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        280
+      ],
+      "id": "8819b2f4-8d07-4f44-ae2e-946bae9160f6",
+      "name": "Detailed_Report_HTML"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "destinationKey": "summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        980,
+        480
+      ],
+      "id": "44563d1d-b955-4bdd-ae25-b6a910eb4fd4",
+      "name": "Markdown2"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        680,
+        640
+      ],
+      "id": "9be6e135-9ec8-4cb8-8f58-4f0226853e56",
+      "name": "Google Gemini Chat Model2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "options": {
+          "systemMessage": "=You are a research assistant.\nSummarize the detailed report {{$json.output}}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        640,
+        500
+      ],
+      "id": "36f5cdd1-7208-4cfb-ae77-1f4685609b8c",
+      "name": "Summary Agent"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Summary Results for research</h1>\n    <p> {{ $json.summary }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        480
+      ],
+      "id": "60e59fde-f9eb-496d-bcbf-a163bfece0cf",
+      "name": "Summary_Report_HTML"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Summary Results for research</h1>\n    <p> {{ $json.summary }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1240,
+        1300
+      ],
+      "id": "7c0a494f-98b7-4f51-b5bf-78e514efcc1e",
+      "name": "Summary_Report_HTML1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "options": {
+          "systemMessage": "=You are a research assistant.\nSummarize the detailed report {{$json.output}}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        740,
+        1280
+      ],
+      "id": "7f492844-2d77-47cb-8419-d0a4914b23b9",
+      "name": "Summary Agent1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        640,
+        1440
+      ],
+      "id": "1afcdcc8-6edc-4378-8e3f-113a75141b96",
+      "name": "Google Gemini Chat Model3"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "destinationKey": "summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        1280
+      ],
+      "id": "5ba70efc-96c2-436b-95aa-bd9f44165b1c",
+      "name": "Markdown4"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results for research</h1>\n    <p> {{ $json.data }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        840,
+        1080
+      ],
+      "id": "af733324-2449-4173-91e1-6c2c8d3f39b8",
+      "name": "Detailed_Report_HTML1"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        580,
+        1080
+      ],
+      "id": "e3214974-b406-4103-8243-cd6d0f9361ae",
+      "name": "Markdown3"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        140,
+        1180
+      ],
+      "id": "058b5797-9e89-433a-b226-ecf86598b968",
+      "name": "Google Gemini Chat Model4"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Research Plan</h1>\n    <h2>Keywork </h2>\n    <p> {{ $json.output.keyword }}</p>\n    <h2>Category </h2>\n    <p> {{ $json.output.category }}</p>\n    <h2>Definition </h2>\n    <p> {{ $json.output.definition }}</p>\n    <h2>Research Plan </h2>\n    <p> {{ $json.html_output }}</p>\n    <h2>Research Prompt for further study in depth </h2>\n    <p> You are an intelligent research assistant. Your task is research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\n<br> Perform these research steps: {{ $json.output.Research_Steps }} </br>\n<br> Return the results for each step.\nTry to use information in 2025.</br> </p>\n    \n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -220,
+        400
+      ],
+      "id": "cfa38dff-18e1-4c60-8e48-1ff9300f79ca",
+      "name": "HTML_Planned_Steps"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        900
+      ],
+      "id": "dd93f41b-4a60-487f-9ea2-2dfbebab4646",
+      "name": "Google Gemini Chat Model5"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        760
+      ],
+      "id": "c16bd731-d495-4bda-89dd-0ed351ac3fde",
+      "name": "Markdown5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ca2ed1d8-3bdb-492b-a274-6eb538bf68c4",
+              "name": "Report 1",
+              "value": "={{ $('Research Agent 1').first().json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "c96f62e3-9e8b-4569-9fb3-b2a9f7c1a5fd",
+              "name": "Report 2",
+              "value": "={{ $('Research Agent 2').first().json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        760
+      ],
+      "id": "4c6949b9-644f-422c-9f86-6e72fd67cffc",
+      "name": "Combined Reports"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "options": {
+          "systemMessage": "=Report 1: {{ $json['Report 1'] }}\nReport 2: {{ $json['Report 2'] }}\nYou are a research assistant tasked with synthesizing key findings from two reports, Report 1 and Report 2, and performing a self-critical evaluation of the information from these reports. Your goal is to produce a concise, accurate, and insightful contents that integrates the main points of both reports while critically assessing the strengths, limitations, and potential biases in your synthesis. Follow these steps:\n1. Synthesis of Reports:\n    * Identify and extract the primary objectives, methodologies, findings, and conclusions from Report 1 and Report 2.\n    * Highlight areas of agreement, divergence, or complementarity between the two reports.\n    * Synthesize the information into a cohesive summary that addresses the key themes, trends, or implications, ensuring clarity and logical flow.\n    * If relevant, note any gaps or inconsistencies in the data, methodologies, or conclusions between the reports.\n2. Self-Critical Evaluation:\n    * Reflect on your synthesis process and evaluate its robustness. Consider the following:\n        * Comprehensiveness: Did you capture all critical points from both reports, or were any overlooked due to complexity or ambiguity?\n        * Bias: Could your interpretation of the reports have been influenced by assumptions, selective focus, or the framing of the reports themselves?\n        * Clarity: Is the synthesized summary clear and accessible to the intended audience?\n        * Limitations: Are there limitations in the reports (e.g., sample size, methodology, or scope) that affect the reliability of your synthesis? How did you address these?\n    * Suggest one or two specific improvements to enhance the accuracy or depth of your synthesis (e.g., consulting additional sources, clarifying ambiguous terms, or addressing gaps).\n\n3. Output Format:\n* Provide a concise synthesized contents of Report 1 and Report 2, followed by a brief self-critical evaluation\n* Use clear headings: \"Synthesized Content” and \"Self-Critical Evaluation.\"\n* Ensure the tone is professional, objective, and reflective."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1780,
+        760
+      ],
+      "id": "426a34c2-c6c7-4016-ad20-0f48107685d0",
+      "name": "Synthesized and Evaluation Agent"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results for research</h1>\n    <p> {{ $json.data }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        2260,
+        760
+      ],
+      "id": "3354d4b0-4cf7-434b-b17e-67c7a086037e",
+      "name": "Synthesized_Report_HTML"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5cb360d2-5710-4b75-bbdd-342980e18cd1",
+              "leftValue": "={{ $('On form submission').item.json.Models }}",
+              "rightValue": "Both",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        420,
+        660
+      ],
+      "id": "a7ffc8d8-59fc-48e2-bdc1-1cf9ec6409e3",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5cb360d2-5710-4b75-bbdd-342980e18cd1",
+              "leftValue": "={{ $('On form submission').item.json.Models }}",
+              "rightValue": "Both",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        900
+      ],
+      "id": "3a55ec09-5146-4450-923b-a0dfede15f41",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=[empty]",
+        "options": {
+          "systemMessage": "=You are an intelligent research assistant. Your task is research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\nPerform these research steps: {{ $('Planned Agent').item.json.output.Research_Steps }}\n\nReturn the results for each step.\nTry to use information in 2025. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        120,
+        540
+      ],
+      "id": "f5d3e95c-8bb4-4be4-a480-705a2bd02b8d",
+      "name": "Research Agent 1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=[empty]",
+        "options": {
+          "systemMessage": "=You are an intelligent research assistant. Your task is research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\nPerform these research steps: {{ $('Planned Agent').item.json.output.Research_Steps }}. \nReturn the results for each step.\nTry to use information in 2025."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        140,
+        1000
+      ],
+      "id": "515d478d-f864-4b10-b50f-a5adb875f664",
+      "name": "Research Agent 2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=[empty]",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an intelligent research assistant. Your task is research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\nPerform these research steps: {{ $('Planned Agent').item.json.output.Research_Steps }}. \nPerform each step, try to use information in 2025.\nBased on the result of steps, refine the plan to conduct a in depth research plan."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        1060
+      ],
+      "id": "2c9b8e08-9ed1-47ec-99e3-1d836f42379e",
+      "name": "Research Plan Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        1260
+      ],
+      "id": "d9d57b19-43f5-4f3c-a5ad-646b61c6f87a",
+      "name": "Google Gemini Chat Model6"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output.Research_Steps }}",
+        "destinationKey": "html_output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        1080
+      ],
+      "id": "2f918387-c570-4103-ae2a-2b298315b5d8",
+      "name": "Markdown6"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"category\": \"AI Trends Analysis\",\n\"keyword\": \"AI\",\n\"definition\": \"Outline a structured research process to identify new fields, assess their potential, and determine future trends within Artificial Intelligence\",\n\"Research_Steps\": \"1. Step 1: Information Gathering - Identify current emerging areas and -breakthroughs in AI through academic research, industry reports, and tech news. \\n 2. Step 2: Potential Assessment - For each identified new area, analyze its market potential, technological maturity, societal impact, and investment trends. \\n 3. Step 3: Trend Identification - Based on the analysis, extrapolate current developments into future trends, considering technical, ethical, and regulatory factors. \\n 4. Step 4: Synthesis and Documentation - Compile all findings into a structured report, highlighting key insights, potential, and future directions.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -500,
+        1300
+      ],
+      "id": "80ce5f09-76bd-4b49-9f69-7b1e9831c0e2",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        1280
+      ],
+      "id": "dd8f0419-449c-4635-b8ac-d3460721f946",
+      "name": "Think1"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Research Plan</h1>\n    <h2>Keywork </h2>\n    <p> {{ $json.output.keyword }}</p>\n    <h2>Category </h2>\n    <p> {{ $json.output.category }}</p>\n    <h2>Definition </h2>\n    <p> {{ $json.output.definition }}</p>\n    <h2>Research Plan </h2>\n    <p> {{ $json.html_output }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -260,
+        1140
+      ],
+      "id": "7d87d9ce-4c8e-4ee3-8bcc-433967c37e75",
+      "name": "HTML_Detailed_Plan"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d906514d-0e80-4c35-9fc6-7d00d6c6f3e8",
+              "name": "text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1220,
+        660
+      ],
+      "id": "58fed623-717b-44cb-8436-7eac77ef4ce5",
+      "name": "Extract Text"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "=Upload_File",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -1380,
+        660
+      ],
+      "id": "05961dc9-9a5c-403e-a729-d1cf368e9e1e",
+      "name": "Extract from PDF File"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "destinationKey": "summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        80,
+        1760
+      ],
+      "id": "5d4a3fa2-e1ea-4915-a9e0-7b826dce2308",
+      "name": "Markdown7"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        1900
+      ],
+      "id": "bc2c3e2f-97ef-4966-94c7-f16f08fdb154",
+      "name": "Google Gemini Chat Model7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "options": {
+          "systemMessage": "=You are a research assistant tasked with summarize the detailed research report provided. Focus on extracting the key findings, main arguments, and conclusions while maintaining the report's core insights. Exclude unnecessary details, such as lengthy background information or repetitive data, and present the summary in a clear, concise manner. Ensure the summary captures the report's purpose, methodology, significant results, and any actionable recommendations or implications. If specific sections (e.g., executive summary, data analysis, or conclusions) are particularly relevant, prioritize those. Use neutral, professional language and avoid adding personal opinions or external information not present in the report. If the report includes technical terms or jargon, briefly explain them for clarity. Provide the summary in a structured format with clear headings (e.g., Purpose, Key Findings, Conclusions) to enhance readability.\nThe detailed report: {{ $('Extract Text').item.json.text }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        1760
+      ],
+      "id": "cecc6199-8cc0-4b3e-9ea1-68aa9834fdbe",
+      "name": "Summary Agent2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "options": {
+          "systemMessage": "=You are a research assistant tasked with summarize the detailed research report provided. Focus on extracting the key findings, main arguments, and conclusions while maintaining the report's core insights. Exclude unnecessary details, such as lengthy background information or repetitive data, and present the summary in a clear, concise manner. Ensure the summary captures the report's purpose, methodology, significant results, and any actionable recommendations or implications. If specific sections (e.g., executive summary, data analysis, or conclusions) are particularly relevant, prioritize those. Use neutral, professional language and avoid adding personal opinions or external information not present in the report. If the report includes technical terms or jargon, briefly explain them for clarity. Provide the summary in a structured format with clear headings (e.g., Purpose, Key Findings, Conclusions) to enhance readability.\nThe detailed report:  {{$json.output}}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        640,
+        100
+      ],
+      "id": "94147fd7-996f-4f38-abb2-1cdf5421cb17",
+      "name": "Professional Summary"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "destinationKey": "summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        980,
+        80
+      ],
+      "id": "a62eae13-56f9-4b15-ae11-fb7afdae9476",
+      "name": "Markdown8"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Summary Results for research</h1>\n    <p> {{ $json.summary }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1180,
+        80
+      ],
+      "id": "8cbe365c-2ff0-42ab-ade6-e147a5633e5d",
+      "name": "Summary_Report_HTML3"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        660,
+        260
+      ],
+      "id": "8c2c0568-a476-48dd-b451-a142e00c647f",
+      "name": "Google Gemini Chat Model8"
+    },
+    {
+      "parameters": {
+        "content": "## Step 1. Get Input from form and read upload file\n",
+        "height": 430,
+        "width": 564,
+        "color": 4
+      },
+      "id": "cd527e77-f540-4d1d-9ba9-d9385b8af80c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1640,
+        520
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Step 4. Synthesize and Evaluation for 2 Reports from 2 AI\n## - AI 1: ...\n## - AI 2: ...",
+        "height": 450,
+        "width": 944
+      },
+      "id": "414a7182-e229-4a1e-b0ea-11f856cb8e5a",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1520,
+        620
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Step 3. AI Research and Summary\n## - Gvien the research plan from Step 2, one or two AI models will perform research\n## - Then summarize the report",
+        "height": 1590,
+        "width": 1444,
+        "color": 7
+      },
+      "id": "5759b6f1-d075-4e28-aabd-648dec77ee73",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Step 5. Summarize the file content\n## - Get file from Step 1",
+        "height": 450,
+        "width": 944,
+        "color": 4
+      },
+      "id": "b0b0def5-4efe-4ed3-8880-02e15f7a5d43",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -440,
+        1620
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Step 2. Plan for the answer\n## - Default Plan (1 Step)\n## - Detailed Plan (2 Steps)\n",
+        "height": 1310,
+        "width": 984
+      },
+      "id": "8a23df21-afa0-4d7b-9237-8c2e785fa828",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1040,
+        140
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Summary Results for research</h1>\n    <p> {{ $json.summary }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        1740
+      ],
+      "id": "db52fda5-0da8-4f9c-9043-3197f81e5598",
+      "name": "Summary_Report_HTML2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d3d89705-5df0-4cc8-8e20-133731a88df6",
+              "leftValue": "={{ $('On form submission').item.json['More detail'] }}",
+              "rightValue": "Extend",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        440
+      ],
+      "id": "23fa861d-fcc6-4b58-bf83-88c8e12afc6f",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        300
+      ],
+      "id": "74ee1c35-c33d-4580-8bf9-e63b757eccde",
+      "name": "Google Gemini Chat Model9"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "[empty]",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Given topic: research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\n\nExtend the following plan with the short remark to research in depth of the given topic.\n {{ $('Planned Agent').item.json.output.Research_Steps }}\n\nOnly return the main steps."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -680,
+        160
+      ],
+      "id": "85f36ff2-57a2-4a10-9765-061d1b1addb0",
+      "name": "Extend Plan Agent"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('On form submission').item.json.Options }}",
+                    "rightValue": "Gemini",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "74ee6bad-38be-4391-be83-150be9c10779"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "918a6c94-1c84-4a51-b875-a44e59af3252",
+                    "leftValue": "={{ $('On form submission').item.json.Options }}",
+                    "rightValue": "GPT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "14043c01-ceac-4a2b-9b1b-d77ec538772f",
+                    "leftValue": "={{ $('On form submission').item.json.Options }}",
+                    "rightValue": "Both Models",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b5432842-052b-42b7-8a59-1fc84dce18b4",
+                    "leftValue": "={{ $('On form submission').item.json.Options }}",
+                    "rightValue": "Detailed Research Plan",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5a8ee56c-a2b8-4e26-9239-3f2c5d41e630",
+                    "leftValue": "={{ $('On form submission').item.json.Options }}",
+                    "rightValue": "Summarize Report",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -580,
+        600
+      ],
+      "id": "2978d35c-b05b-481d-8e61-748330689135",
+      "name": "Switch-Options"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        420
+      ],
+      "id": "20755f82-fae5-401d-b7f3-25670d57c320",
+      "name": "Google Gemini Chat Model10"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=[empty]",
+        "options": {
+          "systemMessage": "=You are an intelligent research assistant. Your task is research the area {{ $('Planned Agent').item.json.output.keyword }}.{{ $('Planned Agent').item.json.output.definition }}\nPerform these research steps: {{ $('Extend Plan Agent').item.json.output.Research_Steps }}\n\nReturn the results for each step.\nTry to use information in 2025. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        100,
+        280
+      ],
+      "id": "1f1c1c48-65f9-4249-8434-2f30e2de396a",
+      "name": "Extend Research Agent"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"category\": \"AI Trends Analysis\",\n\"keyword\": \"AI\",\n\"definition\": \"Outline a structured research process to identify new fields, assess their potential, and determine future trends within Artificial Intelligence\",\n\"Research_Steps\": \"1. Step 1: Information Gathering - Identify current emerging areas and -breakthroughs in AI through academic research, industry reports, and tech news. \\n 2. Step 2: Potential Assessment - For each identified new area, analyze its market potential, technological maturity, societal impact, and investment trends. \\n 3. Step 3: Trend Identification - Based on the analysis, extrapolate current developments into future trends, considering technical, ethical, and regulatory factors. \\n 4. Step 4: Synthesis and Documentation - Compile all findings into a structured report, highlighting key insights, potential, and future directions.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -500,
+        360
+      ],
+      "id": "a4b00393-2b18-447c-a9f4-db0a94ad5ab7",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        160
+      ],
+      "id": "76eac6bc-16c7-4a05-984b-fe002c78f073",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-04T03:41:39.000Z",
+  "versionId": "70f397ec-ce9e-4865-b2a9-087d3b7311dc"
+}
