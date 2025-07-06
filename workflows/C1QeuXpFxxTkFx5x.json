@@ -1,0 +1,232 @@
+{
+  "active": false,
+  "connections": {
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "med_RAG",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med_RAG": {
+      "main": [
+        []
+      ],
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-07-02T10:16:32.587Z",
+  "id": "C1QeuXpFxxTkFx5x",
+  "isArchived": true,
+  "meta": {
+    "templateId": "rag-starter-template",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Demo: RAG in n8n",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "=Công cụ chuyên tìm kiếm thông tin bệnh viện y khoa Phan Châu Trinh ",
+        "tableName": "documents_pg",
+        "topK": 5,
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        -20
+      ],
+      "id": "ae6154c1-0bab-4452-857f-0826557deb6c",
+      "name": "med_RAG",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "9sFxVN20egMoKcpX",
+          "name": "Postgres account 3"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        180
+      ],
+      "id": "30eadece-ed30-4622-9343-74b57d0a8445",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "oKPYEmR3sGNJdsZT",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "{{$json.query}}",
+        "options": {
+          "systemMessage": "Bạn là trợ lý chuyên truy xuất thông tin về Bệnh viện \"Đại học Y khoa Phan Châu Trinh\"\nHãy trả lời các câu hỏi dựa trên context bạn nhận được, nếu bạn không biết hoặc không có context thì hãy trả lời \"Hệ thống không có thông tin này.\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        80,
+        -260
+      ],
+      "id": "7e551380-9e41-43ee-ba3e-6d685a210850",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -20
+      ],
+      "id": "41b3d738-156a-4006-af8e-8c79a7c7ee43",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "evZ0jVKEEUnhQGZc",
+          "name": "Google Gemini(PaLM) Api account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -220
+      ],
+      "id": "6de9afc8-2f7f-423a-b473-712a558d29f1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bb3183a2-e58e-4863-9d9b-4eb8fdb5e1d8",
+              "name": "info",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        -260
+      ],
+      "id": "fcf182e8-fac9-4a86-b36c-94563637111b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        540,
+        140
+      ],
+      "id": "29a556cf-f240-4cba-86c4-b45079c9b2f5",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "dgIm4tm2TKQFqa98",
+          "name": "CohereApi account 3"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-04T03:41:56.000Z",
+  "versionId": "900df060-d799-47bf-ad38-5b49a84a9aac"
+}
