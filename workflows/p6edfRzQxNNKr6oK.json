@@ -1,0 +1,1435 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Plan Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File ID": {
+      "main": [
+        [
+          {
+            "node": "Delete Old Doc Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Delete Old Doc Records": {
+      "main": [
+        [
+          {
+            "node": "Delete Old Data Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Old Data Records": {
+      "main": [
+        [
+          {
+            "node": "Insert Document Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Document Metadata": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Ollama1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "RAG bệnh viện",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Plan Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search URL": {
+      "ai_tool": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Plan Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSON": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSON1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to JSON2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        []
+      ]
+    },
+    "Convert to JSON1": {
+      "main": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG bệnh viện": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG Agent": {
+      "main": [
+        [
+          {
+            "node": "Define RAG agent output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Plan Agent": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Agent": {
+      "main": [
+        [
+          {
+            "node": "Define web agent output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSON2": {
+      "main": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define RAG agent output": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define web agent output": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "fetch content": {
+      "ai_tool": [
+        [
+          {
+            "node": "Search Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Search Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Plan Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Retriever": {
+      "ai_retriever": [
+        [
+          {
+            "node": "Question and Answer Chain",
+            "type": "ai_retriever",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Retriever",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Question and Answer Chain": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-26T04:44:20.033Z",
+  "id": "p6edfRzQxNNKr6oK",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RAG + Tool Search",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        500
+      ],
+      "id": "7c0efe26-7f1c-45bd-b669-e477f1afea1e",
+      "name": "When chat message received",
+      "webhookId": "4beae4a8-825d-477f-8b23-676804c728ba"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6377c789-0ea6-4cda-8b12-9adcb4d5111d",
+              "name": "chatInput",
+              "value": "={{ $json?.chatInput || $json.body.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "d722d392-01e7-48fb-9dea-266b557fe805",
+              "name": "sessionId",
+              "value": "={{ $json?.chatInput || $json.body.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2464,
+        570
+      ],
+      "id": "f1e58c88-a632-416d-ad59-5aca4f3c1c61",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE document_metadata (\n    id TEXT PRIMARY KEY,\n    title TEXT,\n    created_at TIMESTAMP DEFAULT NOW(),\n    schema TEXT\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -3240,
+        2580
+      ],
+      "id": "f54d8e24-3859-4cc0-a4e0-b83dd6c01df1",
+      "name": "Create Document Metadata Table",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE document_rows (\n    id SERIAL PRIMARY KEY,\n    dataset_id TEXT REFERENCES document_metadata(id),\n    row_data JSONB  -- Store the actual row data\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -3240,
+        1400
+      ],
+      "id": "3374bac2-0d24-46c3-9844-3fdd3fedb6ae",
+      "name": "Create Document Rows Table (for Tabular Data)",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3240,
+        1810
+      ],
+      "id": "efcbc485-6a09-4302-8269-77319302502b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
+              "name": "file_id",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            },
+            {
+              "id": "f4536df5-d0b1-4392-bf17-b8137fb31a44",
+              "name": "file_type",
+              "value": "={{ $json.fileType.split(/[\\\\/]/).pop().split('.').pop(); }}",
+              "type": "string"
+            },
+            {
+              "id": "77d782de-169d-4a46-8a8e-a3831c04d90f",
+              "name": "file_title",
+              "value": "={{ $json.fileName.split(/[\\\\/]/).pop().split('.').slice(0, -1).join('.'); }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a692dd97-ae45-413c-babd-56c9607d0805",
+      "name": "Set File ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2580,
+        1720
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -2800,
+        1810
+      ],
+      "id": "ac35c509-39d8-439d-80e6-a7543f757815",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/home/duckq1u/Documents/testing_rag/pct_info_md/output/*.md",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -3020,
+        1810
+      ],
+      "id": "03fa0998-1077-4d75-84bb-d6565437ad72",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.data }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -1112,
+        2180
+      ],
+      "id": "45a6a039-d686-406b-b00b-d08b48171678",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/home/duckq1u/Documents/testing_rag/pct_info_md/output/{{ $('Set File ID').item.json.file_id }}",
+        "options": {
+          "dataPropertyName": "=data"
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -1700,
+        1810
+      ],
+      "id": "75ebb53b-c035-4aa6-9afa-b22aeb8264cd",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -1480,
+        1810
+      ],
+      "id": "fb7f3673-86d8-45a8-a8b2-f9ca45d84dd1",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DO $$\nBEGIN\n    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'documents_pg') THEN\n        EXECUTE 'DELETE FROM documents_pg WHERE metadata->>''file_id'' LIKE ''%' || $1 || '%''';\n    END IF;\nEND\n$$;",
+        "options": {
+          "queryReplacement": "={{ $json.file_id }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -2360,
+        1710
+      ],
+      "id": "bf3fd862-d6d0-41aa-a93e-47419b4fd959",
+      "name": "Delete Old Doc Records",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM document_rows\nWHERE dataset_id LIKE '%' || $1 || '%';",
+        "options": {
+          "queryReplacement": "={{ $('Set File ID').item.json.file_id }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -2140,
+        1710
+      ],
+      "id": "9069ba72-9769-49d7-800c-edb7ddfb210f",
+      "name": "Delete Old Data Records",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Tạo function cho pgvector",
+        "height": 1687,
+        "width": 273,
+        "color": 5
+      },
+      "id": "6004dbde-7083-499a-bca9-5d318c2a73de",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3326.5,
+        1053
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Nạp file",
+        "height": 700,
+        "width": 2900
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3462,
+        1620
+      ],
+      "id": "8f982ffb-6051-4db6-81c7-e260bc380e19",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "document_metadata",
+          "mode": "list",
+          "cachedResultName": "document_metadata"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Set File ID').item.json.file_id }}",
+            "title": "={{ $('Set File ID').item.json.file_title }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "schema",
+              "displayName": "schema",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -1920,
+        1710
+      ],
+      "id": "7e0a3514-7444-4ac9-97a8-99de4e577125",
+      "name": "Insert Document Metadata",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": "=documents_pg",
+        "embeddingBatchSize": 1024,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        -1260,
+        1960
+      ],
+      "id": "68634a14-98d4-4e3f-aff6-d66be7998a5a",
+      "name": "Postgres PGVector Store1",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Thêm cột paragraph nếu chưa tồn tại (dùng TEXT, không dùng CHAR)\nALTER TABLE document_metadata \nADD COLUMN IF NOT EXISTS paragraph TEXT;\n\n-- Cập nhật nội dung markdown vào dòng có id = 'bao-lanh-vien-phi.md'\nUPDATE document_metadata \nSET paragraph = $${{ $json.data }}$$\nWHERE id = '{{ $json.id }}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -884,
+        1660
+      ],
+      "id": "95be4aa9-0ab4-4179-9db0-725449b9f9bc",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1182,
+        1660
+      ],
+      "id": "ef9339c6-6613-497a-8ce3-81eefdac3811",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "model": "bge-m3:567m"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        440
+      ],
+      "id": "4cd3d9cd-a91a-4e14-8052-5f77f3e805c4",
+      "name": "Embeddings Ollama1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "wgDZ9FFIzY80c00J",
+          "name": "Local Ollama"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE TABLE documents_pg;\nTRUNCATE TABLE document_metadata, document_rows;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -3240,
+        2320
+      ],
+      "id": "74b3eb29-a394-46d4-8aea-b0f07337246a",
+      "name": "Clean",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {
+          "maxTokensToSample": 20678
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -3240,
+        1160
+      ],
+      "id": "dae38752-f712-409d-92bd-e676ce8a709b",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "XG6ZrBFEIJ1KtuOu",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        -2040,
+        800
+      ],
+      "id": "c49ce34b-089e-4e42-877c-52067f7cf6c3",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "kagi_search_fetch",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        980
+      ],
+      "id": "a3e39064-57ad-4934-96f5-9601f6fba6d6",
+      "name": "Search URL",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -2200,
+        780
+      ],
+      "id": "c336ad00-86bf-42ce-bac1-9fb67977ad71",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.parse($json.output.replace(/<think>[\\s\\S]*?<\\/think>\\n*/g, \"\").replace(/```json\\n?/, \"\").replace(/```/, \"\")) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1900,
+        420
+      ],
+      "id": "4265062c-615a-4586-9178-847ee33e25d6",
+      "name": "Convert to JSON"
+    },
+    {
+      "parameters": {
+        "content": "# RAG",
+        "height": 1200,
+        "width": 2820,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2840,
+        -40
+      ],
+      "typeVersion": 1,
+      "id": "707b2dfb-4ea1-4c38-8601-624f5eda513d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -660,
+        460
+      ],
+      "id": "49700658-7be3-4aab-b562-1dd030381762",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"output\": {\n    \"user_question_analysis\": {{ $json.user_question_analysis.removeField('intent') }},\n    \"task_plan\": {{ $json.task_plan.rag_agent }}\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1760,
+        80
+      ],
+      "id": "8a6896f5-a3ab-437f-9e8c-15f66a09d97b",
+      "name": "Convert to JSON1"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "được Sử dụng để lấy kiến thức từ kho thông tin bệnh viện",
+        "tableName": "documents_pg",
+        "topK": 10,
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        -1420,
+        260
+      ],
+      "id": "5b338568-f95a-46e5-b08b-9e32ad3bab55",
+      "name": "RAG bệnh viện",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output.task_plan.objective }} về những đối tượng sau {{ $json.output.user_question_analysis.key_entities }}",
+        "options": {
+          "systemMessage": "=Bạn là một Agent thông minh sử dụng kỹ thuật **ReAct (Reason + Act)** để truy vấn dữ liệu nội bộ thông qua **RAG (Retrieval-Augmented Generation)**.\n\nđầu vào của bạn: \n```Json\n{{ $json.output }}\n```\n## Mục tiêu:\n-Phân tích mục tiêu ({{ $json.output.user_question_analysis.key_entities }}) và ngữ cảnh ({{ $json.output.user_question_analysis.type }}).\n-{{ $json.output.task_plan.objective }}.\n-Đảm bảo đầu ra phải đầy đủ thông tin như {{ $json.output.task_plan.input_focus }}... etc\n-Suy luận theo từng bước logic để xác định nên truy vấn gì.\n-Gọi hành động truy vấn dữ liệu nội bộ (RAG retrieval) tương ứng.\n-Tổng hợp câu trả lời dựa trên thông tin đã truy xuất.\n\nQuy trình ReAct (áp dụng mỗi vòng lặp):\n```text\nThought: <bạn suy nghĩ gì, ví dụ: Tôi cần tìm hiểu các mô hình AI liên quan đến giáo dục đại học>\nAction: RAG.retrieve[\"<truy vấn cụ thể cần tìm>\"]\nObservation: <kết quả trả về từ dữ liệu nội bộ>\n... (lặp lại nếu cần)\nFinal Answer: <câu trả lời hoàn chỉnh dựa trên tất cả các observation>\n```\n\nQuy tắc:\n-Không bịa thông tin nếu kết quả truy vấn không đầy đủ. Thay vào đó, ghi chú rõ \"Chưa đủ thông tin từ nguồn nội bộ\".\n-Không gọi Web Search Tool – bạn chỉ dùng dữ liệu nội bộ.\n-Có thể gọi RAG nhiều lần nếu cần truy vấn từng phần.\n\nBạn sẽ bắt đầu thế này:\nThought: Tôi cần xác định các thông tin về {{ $json.output.task_plan.input_focus }}.\nAction: RAG.retrieve[{{ $json.output.user_question_analysis.key_entities }}].\nObservation: deepseek được dùng để tổng hợp thông tin.\nThought: Tôi cần lấy thêm nhiều thông tin hơn.\nAction: Liệt kê FILE hiện có\nObservation: qwen được dùng để đánh giá cả những FILE nào có liên quan đến các entities trong input.\nThought: Tôi cần thông tin chi tiết từ văn bản có tên FILE được qwen cho là liên quan\nAction: Lấy văn bản hoàn chỉnh từ những FILE đã được qwen cho là liên quan.\nObservation: Tôi chỉ cần tóm tắt những văn bản đó chứ không cần phân tích.\nFinal Answer: mô hình qwen đươc dùng để tổng hợp tất cả thông tin.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -1500,
+        40
+      ],
+      "id": "05e83e2e-1515-4d08-a7f9-8ce1612e8597",
+      "name": "RAG Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Bạn là một Agent lập kế hoạch thông minh, chịu trách nhiệm tiếp nhận câu hỏi của người dùng, sau đó:\n1. Đọc câu hỏi của người dùng một cách tự nhiên và phân tích thật chi tiết:\n   - Ý định của người dùng (intent)\n   - Các thực thể chính (key entities)\n   - Loại câu hỏi (type): tra cứu, phân tích, tổng hợp, so sánh, v.v.\n2. Sau khi phân tích, bạn sử dụng **tool `think`** để:\n  2.1.Một Agent sử dụng RAG (Retrieval-Augmented Generation) để phân tích dựa trên cơ sở dữ liệu nội bộ.\n  2.2.Một Agent sử dụng Web Search Tool để tìm kiếm thông tin cập nhật từ Internet.\n  2.3.Cấu trúc đầu ra bạn phải tuân thủ:\n  ```json\n  {\n    \"user_question_analysis\": {\n      \"intent\": \"<Mô tả mục đích của câu hỏi>\",\n      \"key_entities\": [\"<thuật ngữ/nhân vật/sự kiện chính>\"],\n      \"type\": \"<Loại câu hỏi: tra cứu, phân tích, so sánh, tổng hợp...>\"\n    },\n    \"task_plan\": {\n      \"rag_agent\": {\n        \"objective\": \"<Agent RAG cần làm gì>\",\n        \"input_focus\": \"<Tập trung vào phần nào của câu hỏi, dùng dữ liệu nào nếu có>\"\n      },\n      \"web_search_agent\": {\n        \"objective\": \"<Agent Web Search cần làm gì>\",\n        \"search_strategy\": \"<Gợi ý từ khóa, nguồn cần tìm, phạm vi>\"\n      }\n    }\n  }\n  ```\nNguyên tắc hoạt động:\n-Không trả lời trực tiếp câu hỏi người dùng.\n-Chỉ phân tích và lập kế hoạch.\n-Nếu câu hỏi quá chung hoặc mơ hồ, hãy yêu cầu làm rõ.\n-Bạn KHÔNG được trả lời câu hỏi gốc của người dùng.  \n-Chỉ được phép sử dụng tool `think` để mô tả rõ nhiệm vụ của từng Agent con.\n-Những cá nhân hoặc tập thể mơ hồ được đề cập trong cẩu hỏi \"{{ $json.chatInput }}\" đều có chủ thể là \"bệnh viện y Phan Châu Trinh\"\n\nVí dụ:\nCâu hỏi người dùng: \"AI nào hiện nay mạnh nhất cho tác vụ viết báo cáo kỹ thuật và có thể dùng nội bộ doanh nghiệp?\"\n```json\n{\n  \"user_question_analysis\": {\n    \"intent\": \"Tìm hiểu mô hình AI tốt nhất để viết báo cáo kỹ thuật, dùng trong doanh nghiệp\",\n    \"key_entities\": [\"AI\", \"viết báo cáo kỹ thuật\", \"doanh nghiệp\"],\n    \"type\": \"tra cứu, đánh giá\"\n  },\n  \"task_plan\": {\n    \"rag_agent\": {\n      \"objective\": \"Phân tích các mô hình AI đã được lưu trữ nội bộ, đánh giá khả năng viết báo cáo kỹ thuật\",\n      \"input_focus\": \"Thông tin từ tài liệu nội bộ về mô hình AI và use case viết báo cáo\"\n    },\n    \"web_search_agent\": {\n      \"objective\": \"Tìm các mô hình AI mới nhất (tính đến thời điểm hiện tại) dùng tốt cho viết báo cáo kỹ thuật\",\n      \"search_strategy\": \"Tìm trên các nguồn như OpenAI, HuggingFace, Google Cloud AI, dùng từ khóa: 'best AI for technical report writing enterprise 2025'\"\n    }\n  }\n}\n```"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -2240,
+        580
+      ],
+      "id": "c553ff1a-3b4a-4dfd-912e-f22995de89ac",
+      "name": "Plan Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Trích xuất thông tin từ web \"https://pctuhealthcare.com/\" ",
+        "options": {
+          "systemMessage": "=Bạn là một Agent chuyên tìm kiếm thông tin mới nhất trên Internet và sử dụng ReAct.  \nNhiệm vụ của bạn là thực hiện Web Search một cách có chiến lược, dựa trên đầu vào sau:\n\n## 🎯 Nhiệm vụ của bạn:\n1.Hiểu rõ mục tiêu (objective) để không tìm lan man.\n2.Sử dụng các key_entities để tạo từ khóa tìm kiếm chất lượng cao.\n3.Áp dụng search_strategy nếu có: từ khóa\n4.Thực hiện tìm kiếm trên Web bằng Tool: search \"DuckDuckGo\"\n5.Tổng hợp thông tin ngắn gọn, chính xác và có dẫn nguồn nếu cần.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -1400,
+        820
+      ],
+      "id": "17b1f5fe-5dd7-4127-b605-a1fb5edaa5dc",
+      "name": "Search Agent"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"output\": {\n    \"user_question_analysis\": {{ $json.user_question_analysis.removeField('intent') }},\n    \"task_plan\": {{ $json.task_plan.web_search_agent }}\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1640,
+        800
+      ],
+      "id": "a47017ab-732a-43d8-b3b2-510ed69fe235",
+      "name": "Convert to JSON2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f137d51-bffa-44ef-baf8-4c6c9472faf7",
+              "name": "=Rag_agent",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1060,
+        380
+      ],
+      "id": "161905be-2b98-4d0b-889a-c13648e28db9",
+      "name": "Define RAG agent output"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f137d51-bffa-44ef-baf8-4c6c9472faf7",
+              "name": "Web_agent",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1020,
+        620
+      ],
+      "id": "c1e59fc9-ea1c-412a-a002-11d39d4d9e26",
+      "name": "Define web agent output"
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "kagi_summarizer",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -1140,
+        1040
+      ],
+      "id": "bbdb96db-1106-4ab0-8cde-65e5a88490b3",
+      "name": "fetch content",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1540,
+        460
+      ],
+      "id": "fafa0a82-c497-4b23-ad48-3f70595d45fc",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FChSbaOkIE7faxmX",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -2340,
+        760
+      ],
+      "id": "643e9c14-9667-40e6-ae7d-7d9d6901a1e2",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "qNZe6TNrpoeu9Iwp",
+          "name": "Groq account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemPromptTemplate": "=# Vai trò\nBạn chuyên truy xuất thông tin về Bệnh viện \"Đại học Y Phan Châu Trinh\".\n\n# Mặc định hiểu\n- Mặc định hiểu rằng mọi câu hỏi liên quan đến “bệnh viện” hoặc các thành phần như “dịch vụ”, “giờ làm việc”, “bác sĩ”, “khoa”, v.v. đều đang nói về **Bệnh viện Đại học Y Phan Châu Trinh**, trừ khi **người dùng nhắc rõ một bệnh viện khác**.\n\n# Quy tắc quan trọng:\n- **Luôn luôn truy vấn dữ liệu trước khi trả lời**, bất kể câu hỏi có đơn giản đến đâu.\n- **Luôn luôn phản hồi bằng thông tin được trích xuất từ dữ liệu hệ thống.**\n- **Không được bịa ra thông tin** nếu không tồn tại trong dữ liệu.\n\n## Nhiệm vụ của bạn:\n- Phân loại câu hỏi vào một trong các nhóm sau:\n  - **Thông tin chung**\n  - **Dịch vụ**\n  - **Sự kiện**\n  - **Khoa**\n  - **Bác sĩ**\n  - **Tuyển dụng**\n  - **Chi phí & Bảo hiểm**\n- Dựa trên phân thông tin đã trích xuất và câu hỏi người dùng, trả lời câu hỏi\n- Đối với các câu hỏi mang tính chất liệt kê, hãy liệt kê ngắn gọn và đầy đủ dựa trên thông tin đã trích xuất\n- Nếu **không tìm thấy thông tin**, hãy trả lời rằng **\"Tôi không tìm thấy thông tin liên quan trong hệ thống.\"**\n- Nếu **câu hỏi mơ hồ hoặc chưa đủ rõ**, hãy yêu cầu người dùng làm rõ.\n\n## Định dạng phản hồi:\n- Ngôn ngữ: **Tiếng Việt**\n- Trình bày dễ đọc, có xuống dòng cần thiết.\n- Phản hồi phải đúng theo định dạng:\n  - Loại câu hỏi: [Tên nhóm chủ đề/ không xác định]\n  - Phản hồi: [Câu trả lời cụ thể, rõ ràng/ yêu cầu làm rõ/ không có trong dữ liệu] \n----------------\nContext: {context}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "typeVersion": 1.6,
+      "position": [
+        1300,
+        500
+      ],
+      "id": "85d9c1dc-ebec-48a1-aaa6-86fe3abaecb2",
+      "name": "Question and Answer Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        760
+      ],
+      "id": "93b7321f-6624-482d-852a-3a186b0073f1",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7fhytiSkpwvm2Ghp",
+          "name": "Google Gemini(PaLM) Api account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "topK": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.retrieverVectorStore",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        720
+      ],
+      "id": "86d37e60-9ad1-41f9-ad59-ce8c66ce5687",
+      "name": "Vector Store Retriever"
+    },
+    {
+      "parameters": {
+        "tableName": "documents_pg",
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        1440,
+        900
+      ],
+      "id": "ee50c0ba-f42a-465d-a4c1-88d51aff36dd",
+      "name": "Postgres PGVector Store",
+      "credentials": {
+        "postgres": {
+          "id": "1YN20xd11svKzn15",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        1080
+      ],
+      "id": "5a8f7a21-63b4-48f0-af69-47c92e074f10",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "BKc9JkfZm834Rmid",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eb98e14a-0e4e-4b89-92b9-cf512f8165fb",
+              "name": "output",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1660,
+        500
+      ],
+      "id": "bd3b9637-0539-4cb5-a686-7b2e563af99d",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1500,
+        1120
+      ],
+      "id": "4f8f95af-c145-446e-96c1-476492c98b55",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "dimaJCF43ITM5WoO",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1220,
+        2180
+      ],
+      "id": "0447ef42-923b-401a-a829-03f4e4111a7e",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "dimaJCF43ITM5WoO",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -1020,
+        2400
+      ],
+      "id": "475a63ec-e1b2-4b9d-bf7d-f70c0462d3c3",
+      "name": "Character Text Splitter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-28T14:02:03.000Z",
+  "versionId": "9d865b58-4657-4519-912d-f0463eb5af6d"
+}
