@@ -133,17 +133,6 @@
         ]
       ]
     },
-    "tieu_chi maker1": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "ho_so maker": {
       "main": [
         [
@@ -294,7 +283,7 @@
         [],
         [
           {
-            "node": "unsqueeze2",
+            "node": "Edit Fields2",
             "type": "main",
             "index": 0
           }
@@ -337,47 +326,39 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "loop contact_type",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "uuid_maker1": {
-      "main": [
-        [
-          {
-            "node": "tieu_chi maker1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Loop Over Items1": {
       "main": [
         [],
+        []
+      ]
+    },
+    "unsqueeze2": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
         [
           {
-            "node": "uuid_maker1",
+            "node": "Edit Fields4",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "unsqueeze2": {
+    "Edit Fields4": {
       "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        []
       ]
     }
   },
@@ -769,90 +750,6 @@
     },
     {
       "parameters": {
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tieu_chi",
-          "mode": "list",
-          "cachedResultName": "tieu_chi"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id": "={{ $json.uuid }}",
-            "noi_dung": "=qdqdwwq",
-            "nhan_xet": "=sdfsdfsdf",
-            "ngay_nhap_lieu": "2025-07-01T00:00:00"
-          },
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": true,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "ngay_nhap_lieu",
-              "displayName": "ngay_nhap_lieu",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "dateTime",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "noi_dung",
-              "displayName": "noi_dung",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "nhan_xet",
-              "displayName": "nhan_xet",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        2860,
-        1080
-      ],
-      "id": "dfa56bd5-2783-4993-be5c-06de86cfd42e",
-      "name": "tieu_chi maker1",
-      "credentials": {
-        "postgres": {
-          "id": "ELQddAYl4jkjOfBz",
-          "name": "benh_an"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
         "mode": "combine",
         "combineBy": "combineAll",
         "options": {}
@@ -1095,8 +992,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1160,
-        860
+        980,
+        960
       ],
       "id": "f38dffe6-0621-40c6-899e-e403b169f748",
       "name": "loop contact_type"
@@ -1177,8 +1074,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1420,
-        1360
+        1220,
+        1600
       ],
       "id": "8647d78d-973f-4c56-a68e-d697e7ffe76c",
       "name": "Additional"
@@ -1190,24 +1087,11 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1880,
-        880
+        2860,
+        1100
       ],
       "id": "54d17095-a36f-491d-838a-8b0fca7639f0",
       "name": "Loop Over Items"
-    },
-    {
-      "parameters": {
-        "jsCode": "const uuid = require('uuid');\nitems[0].json.uuid = uuid.v4();\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2620,
-        960
-      ],
-      "id": "0c5f4753-c8d7-4132-b44f-abcbbe6e0a66",
-      "name": "uuid_maker1"
     },
     {
       "parameters": {
@@ -1216,8 +1100,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        2240,
-        860
+        3220,
+        1080
       ],
       "id": "2e962060-7fc6-490a-ab98-28721c771abc",
       "name": "Loop Over Items1"
@@ -1229,11 +1113,103 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1540,
-        880
+        3020,
+        1240
       ],
       "id": "c267198b-ad59-42c1-8811-7d6184556145",
       "name": "unsqueeze2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc0577a5-ff8b-4897-9da8-cfd407fce0fa",
+              "name": "Tiêu chí",
+              "value": "={{ $json.output['Tiêu chí'] }}",
+              "type": "array"
+            },
+            {
+              "id": "54268da7-1aa0-4642-8e7c-0c713429086d",
+              "name": "contact_type",
+              "value": "={{ $json.contact_type }}",
+              "type": "string"
+            },
+            {
+              "id": "a1a37f2f-45ff-4b0b-8a1d-debbfa367080",
+              "name": "Ngày nhập liệu",
+              "value": "={{ $json.output['Ngày nhập liệu'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1240,
+        1060
+      ],
+      "id": "09e059df-f505-42ff-bcb5-fdc7025a7fb8",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22b3d78a-3e74-485f-9658-3cd9465bc1cf",
+              "name": "Tiêu chí",
+              "value": "={{ $json['Tiêu chí'] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2920,
+        920
+      ],
+      "id": "e5ff6743-b13d-4d6c-b320-98da54ffd7a9",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8855c9c6-709c-4bff-9604-f8f823e15506",
+              "name": "Tiêu chí",
+              "value": "={{ $json['Tiêu chí'] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1520,
+        1060
+      ],
+      "id": "75360cb1-592a-4949-bcd0-0b03e011d36f",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        1220
+      ],
+      "id": "ffe21975-ec26-4ff8-934c-01756e201305"
     }
   ],
   "pinData": {},
@@ -1243,6 +1219,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T09:53:52.000Z",
-  "versionId": "519cfee3-756e-4282-a879-babe0e8c3beb"
+  "updatedAt": "2025-07-06T10:23:56.000Z",
+  "versionId": "b50ebae8-c9ed-4820-87b2-3f5bf859dbac"
 }
