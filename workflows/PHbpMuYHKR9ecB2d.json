@@ -433,15 +433,7 @@
       "onError": "continueRegularOutput"
     },
     {
-      "parameters": {
-        "voice_id": {
-          "__rl": true,
-          "mode": "list",
-          "value": {}
-        },
-        "additionalFields": {},
-        "requestOptions": {}
-      },
+      "parameters": {},
       "type": "n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
@@ -459,6 +451,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-05T11:50:44.000Z",
-  "versionId": "874eace0-68dd-4b01-a5cb-9356284d29dd"
+  "updatedAt": "2025-07-06T02:02:52.000Z",
+  "versionId": "b7390574-7853-41c8-b408-fa1c3ff26698"
 }
