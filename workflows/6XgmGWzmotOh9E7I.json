@@ -1,0 +1,317 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "RAG PCT",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "PCT vector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG PCT": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-26T04:00:22.402Z",
+  "id": "6XgmGWzmotOh9E7I",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RAG Medicine",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -500,
+        -120
+      ],
+      "id": "f071c6ef-540b-4523-8b59-112288b09c01",
+      "name": "When chat message received",
+      "webhookId": "637cb802-fdfb-4e6b-b145-ea1fd3039466"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Vai trò\nBạn chuyên truy xuất thông tin về Bệnh viện \"Đại học Y Phan Châu Trinh\".\n\n# Mặc định hiểu\n- Mặc định hiểu rằng mọi câu hỏi liên quan đến “bệnh viện” hoặc các thành phần như “dịch vụ”, “giờ làm việc”, “bác sĩ”, “khoa”, v.v. đều đang nói về **Bệnh viện Đại học Y Phan Châu Trinh**, trừ khi **người dùng nhắc rõ một bệnh viện khác**.\n\n# Quy tắc quan trọng:\n- **Luôn luôn truy vấn dữ liệu trước khi trả lời**, bất kể câu hỏi có đơn giản đến đâu.\n- **Luôn luôn phản hồi bằng thông tin được trích xuất từ dữ liệu hệ thống.**\n- **Không được bịa ra thông tin** nếu không tồn tại trong dữ liệu.\n\n## Nhiệm vụ của bạn:\n- Phân loại câu hỏi vào một trong các nhóm sau:\n  - **Thông tin chung**\n  - **Dịch vụ**\n  - **Sự kiện**\n  - **Khoa**\n  - **Bác sĩ**\n  - **Tuyển dụng**\n  - **Chi phí & Bảo hiểm**\n- Dựa trên phân thông tin đã trích xuất và câu hỏi người dùng, trả lời câu hỏi\n- Đối với các câu hỏi mang tính chất liệt kê, hãy liệt kê ngắn gọn và đầy đủ dựa trên thông tin đã trích xuất\n- Nếu **không tìm thấy thông tin**, hãy trả lời rằng **\"Tôi không tìm thấy thông tin liên quan trong hệ thống.\"**\n- Nếu **câu hỏi mơ hồ hoặc chưa đủ rõ**, hãy yêu cầu người dùng làm rõ.\n\n## Định dạng phản hồi:\n- Ngôn ngữ: **Tiếng Việt**\n- Trình bày dễ đọc, có xuống dòng cần thiết.\n- Phản hồi phải đúng theo định dạng:\n  - Loại câu hỏi: [Tên nhóm chủ đề/ không xác định]\n  - Phản hồi: [Câu trả lời cụ thể, rõ ràng/ yêu cầu làm rõ/ không có trong dữ liệu] "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        -120
+      ],
+      "id": "0de8b356-507e-42da-a877-58bb0f1043f6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        280,
+        300
+      ],
+      "id": "ea5a4bd3-2473-40c5-bf05-9ba44c3cdb0e",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "dimaJCF43ITM5WoO",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "loader": "csvLoader",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        200
+      ],
+      "id": "83b6fe92-7248-4e53-a8c0-8f3290ecc5f2",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/home/duckq1u/Downloads/output.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -20
+      ],
+      "id": "f6b71b9d-440e-4805-963b-2abea2538ac1",
+      "name": "Read/Write Files from Disk",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        660,
+        0
+      ],
+      "id": "9ef6e00f-9f73-4ad4-b020-104d80819c05",
+      "name": "PCT vector"
+    },
+    {
+      "parameters": {
+        "chunkSize": 1500,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        600,
+        340
+      ],
+      "id": "a2bf8c6a-1fd5-4d54-a4ec-4e100105a55f",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "options": {
+          "maxTokensToSample": 4096,
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -80
+      ],
+      "id": "1436211d-5a8a-447a-a4ab-6659f51c0af2",
+      "name": "Groq Chat Model",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Gọi tool này để trích xuát các thông tin liên quan về bệnh viện đại học y Phan Châu Trinh",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        },
+        "includeDocumentMetadata": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        20,
+        100
+      ],
+      "id": "cec1ea79-2be2-470f-8090-11dd7d07f60f",
+      "name": "RAG PCT"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {
+          "maxOutputTokens": 10024,
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -360,
+        120
+      ],
+      "id": "036ba426-1ef0-48a2-8800-0d863c4a97c8",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FChSbaOkIE7faxmX",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -180,
+        140
+      ],
+      "id": "b9e59db9-7f0b-42e4-90d8-4090e5b4d012",
+      "name": "Simple Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "typeVersion": 1.6,
+      "position": [
+        1280,
+        60
+      ],
+      "id": "c1226e96-e8df-4dfa-bbca-27ec1c7c6349",
+      "name": "Question and Answer Chain"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-28T14:58:40.000Z",
+  "versionId": "5fd55e40-9fdc-4aef-974b-428bcdf041c2"
+}
