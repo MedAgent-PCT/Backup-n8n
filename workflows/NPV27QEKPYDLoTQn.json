@@ -65,9 +65,9 @@
       "main": [
         [
           {
-            "node": "HTML1",
+            "node": "Merge",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -76,7 +76,18 @@
       "main": [
         [
           {
-            "node": "Message",
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "HTML1",
             "type": "main",
             "index": 0
           }
@@ -90,7 +101,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 15",
+  "name": "TomTat",
   "nodes": [
     {
       "parameters": {
@@ -205,7 +216,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        800,
+        740,
         0
       ],
       "id": "8de6a069-4060-43d5-8017-9de20e5a950c",
@@ -213,13 +224,13 @@
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Tóm tắt hội thoại</h1>\n    <p>{{ $json.output }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\np {\n  text-align: left;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Đoạn hội thoại</h1>\n    <p>{{ $json.combined_messages }}<p>\n    <h2>Tóm tắt hội thoại</h2>\n    <p>{{ $json.output }}<p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n  \ndiv.chat-history {\n  text-align: left;\n}\n\n.message {\n  margin: 12px 0\n}\n  \np {\n  text-align: left;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        1000,
-        0
+        1140,
+        -100
       ],
       "id": "f5d67712-cef2-4504-b2ab-cce835a03810",
       "name": "HTML1"
@@ -241,7 +252,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        440,
+        460,
         -180
       ],
       "id": "d1cba8de-04cf-4d7b-a0f8-abc23f73af7b",
@@ -249,16 +260,18 @@
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Cuộc hội thoại</h1>\n    {{ $json.combined_messages }}\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\ndiv.chat-history {\n  text-align: left;\n}\n.message {\n  margin: 12px 0;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
       },
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
       "position": [
-        640,
-        -180
+        940,
+        -100
       ],
-      "id": "322c0a6e-2685-450e-a312-677a46277dc1",
-      "name": "Message"
+      "id": "ce16f513-3a32-4149-b595-2244d1581c06",
+      "name": "Merge"
     }
   ],
   "pinData": {},
@@ -268,6 +281,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T10:23:53.000Z",
-  "versionId": "b24a5546-a38a-408d-83bc-c3f74fabacaa"
+  "updatedAt": "2025-07-06T16:20:58.000Z",
+  "versionId": "5fff7cfd-a44f-43d8-855f-bfcf090914cf"
 }
