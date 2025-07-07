@@ -712,8 +712,8 @@
     {
       "parameters": {
         "content": "Tạo function cho pgvector",
-        "height": 1687,
-        "width": 273,
+        "height": 1747,
+        "width": 253,
         "color": 5
       },
       "id": "6004dbde-7083-499a-bca9-5d318c2a73de",
@@ -721,8 +721,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -3326.5,
-        1053
+        -3320,
+        1060
       ]
     },
     {
@@ -1430,6 +1430,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-06-28T14:02:03.000Z",
-  "versionId": "9d865b58-4657-4519-912d-f0463eb5af6d"
+  "updatedAt": "2025-07-07T06:15:01.000Z",
+  "versionId": "f8e17ab3-e304-4f1a-a107-2ea4c1588b83"
 }
