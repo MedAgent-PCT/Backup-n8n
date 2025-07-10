@@ -1,17 +1,6 @@
 {
   "active": false,
   "connections": {
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "Orchestrator Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "MongoDB Chat Memory": {
       "ai_memory": [
         []
@@ -45,17 +34,6 @@
           {
             "node": "Orchestrator Agent",
             "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Orchestrator Agent",
-            "type": "ai_memory",
             "index": 0
           }
         ]
@@ -118,6 +96,38 @@
       "main": [
         []
       ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-06-28T05:46:26.689Z",
@@ -128,20 +138,6 @@
   },
   "name": "MedAgent",
   "nodes": [
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -160,
-        20
-      ],
-      "id": "21e90a4b-301e-4e57-a597-7ec68d9cd058",
-      "name": "When chat message received",
-      "webhookId": "dcf42218-fea4-4cf7-b54e-582673b1c51b"
-    },
     {
       "parameters": {
         "collectionName": "chat2",
@@ -181,7 +177,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        400,
+        840,
         20
       ],
       "id": "c704770a-b06f-4c5f-8c00-5d77f5dba012",
@@ -195,8 +191,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -160,
-        220
+        280,
+        340
       ],
       "id": "74ab3187-4660-47fb-9c9c-c650f76b0211",
       "name": "Google Gemini Chat Model",
@@ -217,7 +213,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        40,
+        480,
         20
       ],
       "id": "bc0d1f13-9847-47e8-b3ea-55e8e4e10ba0",
@@ -268,7 +264,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        560,
+        1000,
         260
       ],
       "id": "d7e27771-5cf1-4cf0-be56-2d040f89c8e9",
@@ -277,25 +273,12 @@
     },
     {
       "parameters": {
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        -20,
-        220
-      ],
-      "id": "b4d3d9e2-2800-4299-a560-651cb741ae0f",
-      "name": "Simple Memory"
-    },
-    {
-      "parameters": {
         "description": "Suy luận ngữ cảnh đầu vào của người dùng liên quan đến tool nào: thông tin bệnh viện hay thông tin y tế"
       },
       "type": "@n8n/n8n-nodes-langchain.toolThink",
       "typeVersion": 1,
       "position": [
-        700,
+        1140,
         260
       ],
       "id": "692337a1-20e1-44eb-b86d-1c185a346eeb",
@@ -309,7 +292,7 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        60,
+        500,
         420
       ],
       "id": "edb0c76b-6db4-4caf-b3f3-46f6b188f50d",
@@ -326,7 +309,7 @@
       "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
       "typeVersion": 1,
       "position": [
-        160,
+        600,
         420
       ],
       "id": "485efefc-b430-4488-83ef-d994bcd80987",
@@ -349,7 +332,7 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        420,
+        860,
         260
       ],
       "id": "29b5391c-9189-4989-b30e-f110412f1d6e",
@@ -374,8 +357,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
       "typeVersion": 1.3,
       "position": [
-        80,
-        260
+        560,
+        240
       ],
       "id": "016b7ae9-cbd7-42db-9fca-c4cd5c8a8bdc",
       "name": "Info RAG",
@@ -387,6 +370,82 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "tableName": "n8n_chat_histories_overalls"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -420,
+        220
+      ],
+      "id": "f23106b7-e8ff-46d0-976f-f70cabd0605b",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "9sFxVN20egMoKcpX",
+          "name": "Postgres account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        440,
+        240
+      ],
+      "id": "1a1ecd4f-4640-4c38-8896-130b42c8d0f0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -360,
+        20
+      ],
+      "id": "21e90a4b-301e-4e57-a597-7ec68d9cd058",
+      "name": "When chat message received",
+      "webhookId": "dcf42218-fea4-4cf7-b54e-582673b1c51b"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -80,
+        200
+      ],
+      "id": "1f378643-7d45-4fe5-9a0a-a2f54ff7bc51",
+      "name": "Insert rows in a table",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "9sFxVN20egMoKcpX",
+          "name": "Postgres account 3"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -396,6 +455,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T13:12:00.000Z",
-  "versionId": "f6f76526-59a9-41ec-9331-bf9d9645d4bc"
+  "updatedAt": "2025-07-08T04:15:04.000Z",
+  "versionId": "e428133d-8e96-4d8d-94f5-dd8d95acf711"
 }
