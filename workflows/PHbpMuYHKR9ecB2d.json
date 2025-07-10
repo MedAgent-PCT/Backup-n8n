@@ -178,7 +178,7 @@
     },
     {
       "parameters": {
-        "tableName": "n8n_chat_histories_overalls",
+        "tableName": "orchestrate_chat_his",
         "contextWindowLength": 10
       },
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
@@ -431,17 +431,6 @@
       "alwaysOutputData": false,
       "retryOnFail": true,
       "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-elevenlabs.elevenLabs",
-      "typeVersion": 1,
-      "position": [
-        -1700,
-        60
-      ],
-      "id": "84a1c798-8b40-4fea-bcc0-a97354cf74ec",
-      "name": "Generate speech from text"
     }
   ],
   "pinData": {},
@@ -451,6 +440,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-06T02:02:52.000Z",
-  "versionId": "b7390574-7853-41c8-b408-fa1c3ff26698"
+  "updatedAt": "2025-07-08T14:53:07.000Z",
+  "versionId": "1cfc6434-3c37-45fa-a02d-d45e5043d181"
 }
