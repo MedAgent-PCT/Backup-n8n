@@ -3,25 +3,14 @@
   "connections": {
     "On form submission": {
       "main": [
-        [
-          {
-            "node": "Execute a SQL query",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Execute a SQL query": {
       "main": [
         [
           {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "EditMessage",
+            "node": "Tom Tat",
             "type": "main",
             "index": 0
           }
@@ -32,7 +21,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Tom Tat",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -43,55 +32,38 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent",
+            "node": "Tom Tat",
             "type": "ai_memory",
             "index": 0
           }
         ]
       ]
     },
-    "AI Agent": {
+    "Tom Tat": {
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Edit Fields1": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "EditMessage": {
-      "main": [
-        [
-          {
-            "node": "Merge",
+            "node": "Execute a SQL query",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Merge": {
+    "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "HTML1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -120,23 +92,24 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -80,
+        60,
         0
       ],
       "id": "3b4d0da5-8e73-4b28-a6dd-35cbd098e7ba",
       "name": "On form submission",
-      "webhookId": "b61d007b-fcea-425e-b954-492b63251f99"
+      "webhookId": "b61d007b-fcea-425e-b954-492b63251f99",
+      "disabled": true
     },
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    session_id = '7d5346e92a664e05ad4d71bffbced5f7'\nGROUP BY \n    session_id;\n\n\n",
+        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    session_id = '0b7a651641f14202ba788d6461f1b069'\nGROUP BY \n    session_id;\n\n\n",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        160,
+        540,
         0
       ],
       "id": "49a41d01-bda7-469a-a9c6-712162738233",
@@ -150,31 +123,13 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.combined_messages }}",
-        "options": {
-          "systemMessage": "=Bạn là một trợ lý AI có nhiệm vụ trích xuất và tổng hợp thông tin quan trọng từ một đoạn hội thoại y tế giữa người dùng và hệ thống.\nHãy đọc đoạn hội thoại sau và thực hiện các yêu cầu sau:\n1.Tóm tắt nội dung chính của cuộc hội thoại (ngắn gọn và rõ ràng).\n2.Trích xuất các thông tin quan trọng theo định dạng sau (mỗi định dạng là 1 đoạn ngắn gọn):\n- Lý do khám bệnh\n- Tiền sử\n- Bệnh sử\n- Chuẩn đoán sơ bộ"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        440,
-        0
-      ],
-      "id": "8468d301-b1b1-499e-bafc-cb9faecbe270",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        420,
-        220
+        700,
+        200
       ],
       "id": "d7571448-3b04-4138-ac53-5f3887178a72",
       "name": "Google Gemini Chat Model",
@@ -193,57 +148,49 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        540,
-        220
+        880,
+        280
       ],
       "id": "317f3baa-2018-4037-b998-6a165af8ca20",
       "name": "Simple Memory"
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "70bac3e6-d6da-4128-8b0b-82a8fa16b0ae",
-              "name": "output",
-              "value": "={{ $json.output.replace(/\\n/g, '<br>').replace(/\\*/g, '') }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
+        "promptType": "define",
+        "text": "={{ $json.combined_messages }}",
+        "options": {
+          "systemMessage": "=Bạn là một trợ lý AI có nhiệm vụ trích xuất và tổng hợp thông tin quan trọng từ một đoạn hội thoại y tế giữa người dùng và hệ thống.\nHãy đọc đoạn hội thoại sau và thực hiện các yêu cầu sau:\nTrích xuất các thông tin quan trọng theo định dạng json sau (mỗi định dạng là 1 đoạn ngắn gọn):\n{\n \"ly_do_kham_benh\": <lý do khám bệnh>,\n  \"tien_su\": <tiền sử bệnh>,\n  \"benh_su\": <bệnh sử của bệnh nhân>\n}"
+        }
       },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
       "position": [
-        740,
+        760,
         0
       ],
-      "id": "8de6a069-4060-43d5-8017-9de20e5a950c",
-      "name": "Edit Fields1"
+      "id": "8468d301-b1b1-499e-bafc-cb9faecbe270",
+      "name": "Tom Tat"
     },
     {
-      "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Đoạn hội thoại</h1>\n    <p>{{ $json.combined_messages }}<p>\n    <h2>Tóm tắt hội thoại</h2>\n    <p>{{ $json.output }}<p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n  \ndiv.chat-history {\n  text-align: left;\n}\n\n.message {\n  margin: 12px 0\n}\n  \np {\n  text-align: left;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
-      },
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
       "position": [
-        1140,
-        -100
+        340,
+        0
       ],
-      "id": "f5d67712-cef2-4504-b2ab-cce835a03810",
-      "name": "HTML1"
+      "id": "a242da00-b274-4380-8e4f-78beaca3b767",
+      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
         "assignments": {
           "assignments": [
             {
-              "id": "30c70ab7-dee6-4d57-a423-241231564404",
-              "name": "combined_messages",
-              "value": "={{ \n  '<div class=\"chat-history\">' +\n  $json.combined_messages\n    .split(' || ')\n    .map(e => {\n      try {\n        const obj = JSON.parse(e.trim());\n        if (obj.type === 'human') {\n          return `<div class=\"message human\"><strong>Human:</strong> ${obj.content}</div>`;\n        }\n        if (obj.type === 'ai') {\n          return `<div class=\"message ai\"><strong>AI:</strong> ${obj.content}</div>`;\n        }\n        return '';\n      } catch (err) {\n        return '';\n      }\n    })\n    .filter(e => e)\n    .join('') +\n  '</div>'\n}}\n",
-              "type": "string"
+              "id": "bbfa23ff-20fb-4d76-8a02-53475dc3f4cb",
+              "name": "output",
+              "value": "={{$json.output.replace(/```json|```/g, '').parseJson()}}",
+              "type": "object"
             }
           ]
         },
@@ -252,26 +199,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        460,
-        -180
+        1180,
+        60
       ],
-      "id": "d1cba8de-04cf-4d7b-a0f8-abc23f73af7b",
-      "name": "EditMessage"
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combineBy": "combineByPosition",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        940,
-        -100
-      ],
-      "id": "ce16f513-3a32-4149-b595-2244d1581c06",
-      "name": "Merge"
+      "id": "28b33371-ec81-449b-b588-9ab16df1f38e",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -281,6 +213,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T16:20:58.000Z",
-  "versionId": "5fff7cfd-a44f-43d8-855f-bfcf090914cf"
+  "updatedAt": "2025-07-10T03:01:57.000Z",
+  "versionId": "7dde2532-3f8e-4d36-87ad-565116a0748e"
 }
