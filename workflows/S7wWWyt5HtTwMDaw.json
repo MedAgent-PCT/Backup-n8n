@@ -1,0 +1,101 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-10T02:32:13.796Z",
+  "id": "S7wWWyt5HtTwMDaw",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Case2Medicine",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Hành chính",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "ID"
+            },
+            {
+              "fieldLabel": "Họ tên bệnh nhân"
+            },
+            {
+              "fieldLabel": "Ngày sinh",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Giới tính",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Nam "
+                  },
+                  {
+                    "option": "Nữ"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Địa chỉ"
+            },
+            {
+              "fieldLabel": "Ngày giờ vào viện",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Ngày giờ vào khoa",
+              "fieldType": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -2680,
+        2800
+      ],
+      "id": "be70be97-17aa-40fa-9b0f-50dd90940a8d",
+      "name": "On form submission",
+      "webhookId": "fde3d85f-d85f-475f-9a87-a5f562cb04ff"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -2460,
+        2800
+      ],
+      "id": "30e85b6b-4b42-4342-8945-489d94c6ec87",
+      "name": "AI Agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-10T08:42:51.000Z",
+  "versionId": "7d0387e6-5ad3-42e5-b7a9-f389cebf5ba6"
+}
