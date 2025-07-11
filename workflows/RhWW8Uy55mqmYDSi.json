@@ -126,10 +126,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        760,
-        -100
+        -360,
+        740
       ],
-      "id": "df894cce-89c0-49a9-a1f9-6fa9e4e0c6db",
+      "id": "98536cc8-0818-418d-a3f9-3dd49552e8c9",
       "name": "AI Agent",
       "disabled": true
     },
@@ -154,10 +154,10 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        300,
-        -560
+        -820,
+        280
       ],
-      "id": "f0bdd551-1d90-43a8-84e3-1ab754de2c3e",
+      "id": "88e12825-1837-45e9-8e66-d6bbe407912d",
       "name": "On form submission",
       "webhookId": "f3aba981-5249-49e1-93d3-6e7bb89e8538"
     },
@@ -168,10 +168,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1140,
-        -100
+        0,
+        760
       ],
-      "id": "9b545aa4-79a6-4ce8-bb07-fd87d040ca9b",
+      "id": "54ac3399-c0f4-47db-8cd1-a25032b54eea",
       "name": "Code",
       "disabled": true
     },
@@ -182,21 +182,21 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1360,
-        -100
+        240,
+        740
       ],
-      "id": "7248434e-65f9-4023-b5ad-a2fb808e0591",
+      "id": "4a3729e6-0758-4690-a398-fc0b87585a6d",
       "name": "Code1",
       "disabled": true
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Hãy cho tôi {{ $json['Số lượng'] }} sample mỗi bệnh",
+        "text": "=Hãy cho tôi {{ $json['Số lượng'] }} sample với mỗi loại bệnh",
         "messages": {
           "messageValues": [
             {
-              "message": "=Bạn là chuyên gia sinh dữ liệu y tế\n\nHãy sinh hồ sơ bệnh án tương ứng với các bệnh sau \"{{ $json['Bệnh'] }}\"\nSố lượng theo yêu cầu người dùng\n\n<Định dạng trả về>\n*Plain text array json*, không được trả về  bằng markdown\n</Định dạng trả về>\n\nMẫu hồ sơ bệnh án có ví dụ như sau:\n{\n    \"id\": \"ST_001\",\n    \"hành chính\": {\n      \"Họ tên\": \"Nguyễn Văn Hùng\",\n      \"Ngày sinh\": \"10/05/1965\",\n      \"Giới tính\": \"nam\",\n      \"Địa chỉ\": \"Số 12, Ngõ 34, Đường Trần Duy Hưng, Hà Nội\",\n      \"Ngày giờ vào viện\": \"15/03/2024 10:00\",\n      \"Ngày giờ vào khoa\": \"15/03/2024 14:00\"\n    },\n    \"lý do vào viện\": {\n      \"Ngày nhập liệu\": \"15/03/2024 14:00\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Nội dung\",\n          \"Nội dung\": \"Khó thở tăng dần, phù hai chi dưới\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"tiền sử\": {\n      \"Ngày nhập liệu\": \"15/03/2024 14:00\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Tiền sử bệnh tật\",\n          \"Nội dung\": \"Nội khoa: Tăng huyết áp 15 năm, đái tháo đường type 2 8 năm, điều trị không đều. Đã nhập viện 2 lần vì khó thở cấp trong 1 năm qua.\\nNgoại khoa: Chưa ghi nhận.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Tiền sử dị ứng\",\n          \"Nội dung\": \"Không dị ứng thuốc, thức ăn.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Thông tin khác\",\n          \"Nội dung\": \"Lối sống: Hút thuốc lá 1 gói/ngày trong 30 năm (đã bỏ 5 năm), uống rượu vừa phải.\\nThuốc đang dùng: Nifedipine, Metformin không đều.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"B. Tiền sử gia đình\",\n          \"Nội dung\": \"Cha mẹ có tiền sử tăng huyết áp.\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"bệnh sử\": {\n      \"Ngày nhập liệu\": \"15/03/2024 14:00\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Nội dung\",\n          \"Nội dung\": \"Bệnh nhân nam, 59 tuổi, vào viện vì khó thở và phù chân. Cách nhập viện 1 tuần, bệnh nhân bắt đầu cảm thấy khó thở nhiều hơn khi làm việc nhà nhẹ nhàng (NYHA II-III), đặc biệt khó thở khi nằm đầu thấp, phải kê gối cao. Kèm theo là phù tăng dần ở hai chi dưới, lúc đầu chỉ phù buổi chiều, nay phù liên tục, ấn lõm. Bệnh nhân mệt mỏi nhiều, ăn uống kém. Không đau ngực, không sốt, không ho. Tình trạng khó thở và phù không cải thiện dù đã nghỉ ngơi. Nay khó thở nhiều hơn, đi lại khó khăn nên gia đình đưa vào viện.\\nGhi nhận tại cấp cứu:\\n- Bệnh tỉnh, tiếp xúc chậm.\\n- Khó thở liên tục, ngồi tựa.\\n- Da niêm nhợt.\\n- Huyết áp: 160/90 mmHg\\n- Mạch: 105 lần/phút, đều.\\n- Nhịp thở: 28 lần/phút\\n- SpO2: 90% khí phòng.\\n- Phù ấn lõm 2 chi dưới đến đầu gối.\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"khám lâm sàng\": {\n      \"Ngày nhập liệu\": \"15/03/2024 14:30\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Khám toàn thân\",\n          \"Nội dung\": \"- Bệnh tỉnh, khó thở, ngồi tựa.\\n- Da, niêm mạc nhợt nhạt nhẹ.\\n- Phù ấn lõm 2 chi dưới đến 1/3 dưới đùi, mềm, không đau.\\n- Không có dấu xuất huyết dưới da.\\n- Tuyến giáp không to, hạch ngoại vi không sờ chạm.\\n- Mạch: 102 lần/phút, đều.\\n- Nhiệt: 37.2 độ C.\\n- Huyết áp: 155/85 mmHg.\\n- Nhịp thở: 26 lần/phút.\\n- SpO2: 92% khí phòng.\\n- Cân nặng: 75 kg (tăng 5kg so với trước khi bệnh).\\n- Chiều cao: 1m68.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám tuần hoàn\",\n          \"Nội dung\": \"- Lồng ngực cân đối, không sẹo.\\n- Tĩnh mạch cổ nổi rõ (JVP 4cm trên xương ức).\\n- Mỏm tim đập ở khoang liên sườn V, đường nách trước trái, diện đập rộng.\\n- Tiếng T1, T2 mờ, có tiếng T3 ở mỏm tim. Nhịp nhanh đều. Không nghe tiếng thổi bệnh lý rõ ràng.\\n- Gan to dưới bờ sườn 4cm, mềm, bờ tù, ấn tức. Phản hồi gan tĩnh mạch cổ (+).\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám hô hấp\",\n          \"Nội dung\": \"- Lồng ngực di động kém theo nhịp thở.\\n- Rung thanh giảm đều 2 bên đáy phổi.\\n- Rì rào phế nang giảm, có nhiều ran ẩm, ran nổ ở 2 đáy phổi.\\n- Không có hội chứng 3 giảm.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám tiêu hóa\",\n          \"Nội dung\": \"- Bụng chướng nhẹ, di động theo nhịp thở. Không tuần hoàn bàng hệ.\\n- Ấn mềm, không điểm đau khu trú. Nhu động ruột 4 lần/phút.\\n- Lách không sờ chạm.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám thận - tiết niệu\",\n          \"Nội dung\": \"- Không chạm thận, ấn đau hông lưng âm tính.\\n- Tiểu tiện ít hơn bình thường (khoảng 500ml/24h).\\n- Nước tiểu vàng trong.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám thần kinh\",\n          \"Nội dung\": \"- Bệnh tỉnh, tiếp xúc chậm, trả lời đúng câu hỏi.\\n- Không có dấu hiệu thần kinh khu trú.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám cơ xương khớp\",\n          \"Nội dung\": \"- Không biến dạng khớp, vận động khó khăn do phù.\\n- Cơ lực 4/5 các chi.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Khám các cơ quan khác\",\n          \"Nội dung\": \"- Chưa ghi nhận bất thường đáng kể.\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"chẩn đoán sơ bộ và phân biệt\": {\n      \"Ngày nhập liệu\": \"15/03/2024 15:00\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Chẩn đoán sơ bộ\",\n          \"Nội dung\": \"- Suy tim cấp trên nền suy tim mạn tính, NYHA III, nghi do tăng gánh thể tích và kiểm soát huyết áp kém.\",\n          \"Nhận xét\": \"\"\n        },\n        {\n          \"Tên\": \"Chẩn đoán phân biệt\",\n          \"Nội dung\": \"- Đợt cấp COPD/Hen phế quản (ít nghĩ vì không tiền sử bệnh phổi rõ).\\n- Bệnh thận mạn giai đoạn cuối (ít nghĩ vì phù tim điển hình, không có dấu hiệu suy thận rõ ràng).\\n- Xơ gan mất bù (ít nghĩ vì không vàng da, tiền sử uống rượu không quá nhiều, không gan bàn tay sao mạch).\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"đề nghị cận lâm sàng và kết quả\": {\n      \"Ngày nhập liệu\": \"15/03/2024 15:00\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Nội dung\",\n          \"Nội dung\": \"- Công thức máu: Hb, Hct.\\n- Sinh hóa máu: Glucose, Ure, Creatinine, GOT, GPT, Điện giải đồ (Na+, K+, Cl-), Troponin I/T, NT-proBNP.\\n- Tổng phân tích nước tiểu.\\n- ECG 12 chuyển đạo.\\n- X-quang ngực thẳng.\\n- Siêu âm tim Doppler màu.\\n- Siêu âm bụng tổng quát.\",\n          \"Nhận xét\": \"\"\n        }\n      ]\n    },\n    \"biện luận và chẩn đoán cuối cùng\": {\n      \"Ngày nhập liệu\": \"15/03/2024 15:30\",\n      \"Tiêu chí\": [\n        {\n          \"Tên\": \"Nội dung\",\n          \"Nội dung\": \"- Bệnh nhân có tiền sử tăng huyết áp, đái tháo đường không kiểm soát tốt, là các yếu tố nguy cơ chính của suy tim. Lâm sàng có hội chứng suy tim trái (khó thở khi gắng sức, khó thở kịch phát về đêm, ran ẩm ở phổi) và hội chứng suy tim phải (phù chi dưới, tĩnh mạch cổ nổi, gan to, phản hồi gan tĩnh mạch cổ dương tính).\\n- Tình trạng khó thở tăng nhanh kèm phù chi, SpO2 giảm, huyết áp tăng cao gợi ý đợt cấp của suy tim mạn tính, có thể do tăng gánh thể tích và áp lực.\\n- Các xét nghiệm như NT-proBNP dự kiến sẽ tăng cao, X-quang ngực có thể thấy bóng tim to, sung huyết phổi, siêu âm tim sẽ đánh giá chức năng co bóp của tim (EF), kích thước buồng tim và chức năng van tim để xác định nguyên nhân và mức độ suy tim.\\n- Troponin để loại trừ nguyên nhân nhồi máu cơ tim cấp gây suy tim cấp.\\n- Chức năng thận cần được đánh giá vì suy tim có thể ảnh hưởng đến thận và ngược lại.\\n- Chẩn đoán cuối cùng: Suy tim cấp trên nền suy tim mạn tính độ III (NYHA), nghi do tăng huyết áp chưa kiểm soát tốt. Cần chờ kết quả cận lâm sàng để xác định phân suất tống máu (HFpEF/HFrEF) và các bệnh đồng mắc.\",\n          \"Nhận xét\": \"Cần theo dõi sát dấu hiệu sinh tồn và đáp ứng với điều trị lợi tiểu, oxy liệu pháp.\"\n        }\n      ]\n    }\n}"
+              "message": "=Bạn là chuyên gia sinh dữ liệu y tế\n\nHãy sinh hồ sơ bệnh án tương ứng với các bệnh sau \"{{ $json['Bệnh'] }}\"\nSố lượng theo yêu cầu người dùng\n\n<Định dạng trả về>\n**Plain text array json**, không được trả về  bằng markdown\n</Định dạng trả về>\n\n<Chú ý>\nSinh đúng số lượng người dùng yêu cầu\n</Chú ý>\n\nMẫu hồ sơ bệnh án có ví dụ như sau:\n{\n  \"id\": \"28038\",\n  \"hành chính\": {\n    \"Họ tên\": \"Ngô Doãn Hải\",\n    \"Ngày sinh\": \"02/04/1988\",\n    \"Giới tính\": \"nam\",\n    \"Địa chỉ\": \"Thọ xuân-Thanh Hoá\",\n    \"Ngày giờ vào viện\": \"05/01/2025 08:00\",\n    \"Ngày giờ vào khoa\": \"05/01/2025 12:00\"\n  },\n  \"lý do vào viện\": {\n    \"Ngày nhập liệu\": \"05/01/2025 12:00\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Đau thượng vị, đi cầu phân đen\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"tiền sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung\": \"Nội khoa: \\n Xuất huyết tiêu hoá trên da do loét dạ dày-tá tràng vào tháng 11 năm 2024 đã điều trị (chưa test vi khuẩn Hp)\\n Ngoài ra chưa ghi nhận tiền sử nội khoa liên quan khác\\n Ngoại khoa: chưa ghi nhận tiền sử ngoại khoa\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung\": \"Chưa phát hiện tiền sử tác nhân dị ứng trước đây\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung\": \"Lối sống\\n Hút thuốc lá 9.5 gói, năm\\n uống rượu thường xuyên: 200ml\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"B. Tiền sử gia đình\",\n        \"Nội dung\": \"Gia đình\\n Chưa ghi nhận bệnh lý liên quan\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"Cách nhập viện 2 ngày bệnh nhân dạng uống rượu thì xuất hiện cơn đau bụng âm vùng thượng vị, đau liên tục, không lan, không có tư thế giảm đau, không nôn ói. Bệnh nhân không ăn tiết canh, lòng heo hoặc thực ổn màu đỏ. Sau đó về nhà bệnh nhân có đi cầu phân đen 4 lần mùi khắm, sệt không thành khuôn, bệnh nhân ăn uống kém. Tiểu tiện bình thường. Trước đó bệnh nhân không sử dụng sắt than hoạt, không táo bón.\\n Cách nhập viện 1 ngày tình trạng bệnh nhân không thuyên giảm, tiếp tục đã cầu phân đen nên vào viện\\n Trong quá trình bệnh, bệnh nhân không buồn nôn, không chóng một, không sốt, không vã mồ hôi, không đau ngực và không khó thở\\n Ghi nhận tại cấp cứu\\n Bệnh tỉnh tiếp xúc được\\n Da niêm nhợt nhạt\\n Đau thượng vị\\n Không có đầu xuất huyết dưới da\\n Tuyến giáp không to, hạch ngoại vì không sờ chạm\\n Mạch:72 lần/phút\\n Nhiệt: 37 độ C\\n Huyết áp: 119/69\\n Nhịp thở: 16 lần/phút\\n Spo2: 98%\\n Cân nặng: 57 kg\\n Chiều cao 1m72\\n Bmi: 18.8\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"khám lâm sàng\": {\n    \"Ngày nhập liệu\": \"17/01/2018 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Khám toàn thân\",\n        \"Nội dung\": \"- Tình trạng:\\n  - Bệnh tỉnh, tiếp xúc tốt\\n  - Da, niêm mạc hồng hào\\n  - Huyết áp tư thế: không thay đổi\\n  - Không có dấu xuất huyết dưới da\\n  - Tuyến giáp không to, hạch ngoại vi không sờ chạm\\n  - Mạch: 65 lần/phút\\n  - Nhiệt: 37 độ C\\n  - Huyết áp: 100/60 mmHg\\n  - Nhịp thở: 20 lần/phút\\n  - SpO2: 98%\\n  - Cân nặng: 57 kg\\n  - Chiều cao: 1m72\\n  - BMI: 18.8 kg/m2\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tuần hoàn\",\n        \"Nội dung\": \"- Lồng ngực không dị dạng, không sẹo, di động đều theo nhịp thở\\n- Tĩnh mạch cổ nổi (-)\\n- Không có âm rung miu, dấu Harzer (-)\\n- Mỏm tim: liên sườn IV đường trung đòn trái, điện đập bình thường\\n- Tiếng T1 T2 rõ, đều, không có âm bất thường.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám hô hấp\",\n        \"Nội dung\": \"- Lồng ngực cân đối, di động theo nhịp thở, không co kéo, không rút lõm\\n- Rung thanh đều 2 bên\\n- Rì rào phế nang đều, 2 phổi rõ\\n- Không rale ẩm, rale nổ\\n- Không nghe tiếng tim bệnh lý\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám tiêu hóa\",\n        \"Nội dung\": \"- Bụng di động theo nhịp thở, không co cứng, không đề kháng, không có dấu hiệu xuất huyết dưới da\\n- Không có dấu hiệu rắn bò\\n- Phản ứng thành bụng (-), không có điểm đau, ấn đau Murphy (-), McBurney (-)\\n- Bụng mềm, không chướng, không có khối bất thường\\n- Nhu động ruột: 2 lần/phút\",\n        \"Nhận xét\": \"Thăm trực tràng: (-)\"\n      },\n      {\n        \"Tên\": \"Khám thận - tiết niệu\",\n        \"Nội dung\": \"- Không chạm thận, đau hông ranh thân âm tính\\n- Ấn đau điểm niệu quản (-)\\n- Tiểu không ra máu, không tiểu đục\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám thần kinh\",\n        \"Nội dung\": \"- Cảm giác, vận động, cơ đều bình thường\\n- Dáng vẻ tỉnh táo\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám cơ xương khớp\",\n        \"Nội dung\": \"- Không biến dạng xương, vận động tốt\\n- Cơ lực: 5/5\\n- Cảm giác: bình thường\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Khám các cơ quan khác\",\n        \"Nội dung\": \"- Chưa ghi nhận bất thường\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"tóm tắt bệnh án\": {\n    \"Ngày nhập liệu\": \"\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"V. Tóm tắt bệnh ôn\\n Bệnh nhân năm 37 tuổi vào viện vì lý do đau bụng thương vị đã cầu phần đan ngày thứ 2. Qua hỏi bệnh sử, tiền sử và thăm khám ghi nhận các triệu chứng và hội chứng:\\n triệu chứng cơ năng:\\n -Đau vùng thượng vi\\n Đi cầu phân đen Triệu chứng thực thể:\\n - Ấn đau vùng thương vì\\n Murphy (-). Mcburney (-).\\n Tiền căn:\\n - Thường xuyên uống rượu\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"chẩn đoán sơ bộ và phân biệt\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Chẩn đoán sơ bộ\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên mức độ nhẹ, nghĩ do loét dạ dày - tá tràng. Hiện tại ổn chưa có biến chứng\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Chẩn đoán phân biệt\",\n        \"Nội dung\": \"- Xuất huyết tiêu hóa trên do giãn tĩnh mạch thực quản\\n- Viêm loét dạ dày\\n- Viêm thực quản\\n- Rối loạn đông máu\\n- U dạ dày\\n- Các phân nhóm\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"đề nghị cận lâm sàng và kết quả\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Công thức máu\\n- Sinh hóa máu: ure creatinin, AST, ALT, GGT\\n- GLUCOSE\\n- Điện giải đồ\\n- Nhóm máu\\n- Sinh hóa nước tiểu: creatinin, AST, ALT, GGT\\n- GLUCOSE máu\\n- Điện giải đồ\\n- H.P test\\n- Nội soi dạ dày thực quản tá tràng\\n- X-quang, đoạn tiêu\",\n        \"Nhận xét\": \"Tìm máu ẩn trong phân\"\n      }\n    ]\n  },\n  \"biện luận và chẩn đoán cuối cùng\": {\n    \"Ngày nhập liệu\": \"17/01/2025 09:20\",\n    \"Tiêu chí\": [\n      {\n        \"Tên\": \"Nội dung\",\n        \"Nội dung\": \"- Bệnh nhân có xuất huyết tiêu hóa trên và tiêu phân đen do máu nhiều nên nghĩ nhiều đến loét dạ dày - tá tràng. Có thể là xuất huyết tiêu hóa do nguyên nhân thường gặp, trước đó bệnh nhân không sử dụng thuốc NSAID và không có sang chấn thực thể. Đã được chỉ định làm thêm các xét nghiệm cận lâm sàng và nội soi để khẳng định nguyên nhân gây xuất huyết.\\n- Tư vấn bệnh nhân nên tạm thời nhịn ăn trước khi thực hiện xét nghiệm nội soi dạ dày thực quản tá tràng để chẩn đoán phân biệt.\\n- Có thể loại trừ một số nguyên nhân ít gặp như giãn tĩnh mạch thực quản, u dạ dày...\\n- Bệnh nhân vào viện trong tình trạng ổn định, không dấu hiệu mất bù hô hấp, tuần hoàn.\\n- Đã chỉ định xuất huyết tiêu hóa do các ổ loét, phù hợp triệu chứng lâm sàng, cần nội soi để xác định tổn thương.\\n- Nguyễn nhân xuất huyết tiêu hóa: viêm loét dạ dày tá tràng, loét dạ dày, viêm loét ruột nhiễm trùng\",\n        \"Nhận xét\": \"Sao không thấy test máu ẩn trong phân? Nếu nghi ngờ xuất huyết tiêu hóa sao không làm xét nghiệm tìm máu ẩn trong phân từ đầu? Nếu thiếu 8.0 g/dl có phù hợp với lâm sàng là XHTH trên không? Hay có thiếu máu mạn tính?\"\n      }\n    ]\n  }\n}\n\n"
             }
           ]
         },
@@ -205,10 +205,10 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        760,
-        -560
+        -360,
+        280
       ],
-      "id": "01c51c83-d3a4-4c6d-a95a-e79f2b3c6a26",
+      "id": "1e887516-afc7-4b3a-8a32-017b5af156ed",
       "name": "Basic LLM Chain"
     },
     {
@@ -219,10 +219,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        1680,
-        -560
+        560,
+        280
       ],
-      "id": "6f5de96f-e2a7-406a-8b9a-37ef67133f36",
+      "id": "677a0018-09df-4026-9299-dd24fffbc2a3",
       "name": "Convert to File"
     },
     {
@@ -232,10 +232,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1200,
-        -560
+        80,
+        280
       ],
-      "id": "e9b5f2e6-4f90-4186-a167-bc31277d9770",
+      "id": "9d742ed9-b373-4171-810b-c10ce4027fa2",
       "name": "Filter md"
     },
     {
@@ -245,10 +245,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1420,
-        -560
+        300,
+        280
       ],
-      "id": "9d737f4f-1f16-4616-9e7b-ef1dabebebdf",
+      "id": "292d429e-a445-42d4-a0ad-43132c75415c",
       "name": "Parse JSON"
     },
     {
@@ -259,25 +259,24 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        1580,
-        -100
+        460,
+        740
       ],
-      "id": "89180c3b-d506-4e04-a70b-20c95f76b24f",
+      "id": "d8dd55bf-3b03-4250-9d28-34c06cff5eee",
       "name": "Convert to File1",
       "disabled": true
     },
     {
       "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        740,
-        -360
+        -360,
+        480
       ],
-      "id": "b3f660cd-6201-4c69-bff4-4ef5a473557c",
+      "id": "20419d00-c224-41b8-87b7-91c645833f36",
       "name": "2.5-flash",
       "credentials": {
         "googlePalmApi": {
@@ -288,16 +287,15 @@
     },
     {
       "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        760,
-        160
+        -360,
+        980
       ],
-      "id": "0eef8b19-fb02-4f5c-a0f3-f7949c76203a",
+      "id": "ff7b8460-6693-45c1-9bfe-a07337233cbb",
       "name": "2.5-flash1",
       "disabled": true
     }
@@ -309,6 +307,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-06T13:38:49.000Z",
-  "versionId": "36bf4363-4d9e-4967-8a9c-bf42b562bfdd"
+  "updatedAt": "2025-07-11T04:32:36.000Z",
+  "versionId": "4121e159-351e-41d9-97ac-493767e8f25b"
 }
