@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -2680,
-        2800
+        -2720,
+        2740
       ],
       "id": "be70be97-17aa-40fa-9b0f-50dd90940a8d",
       "name": "On form submission",
@@ -83,7 +83,7 @@
       "typeVersion": 2,
       "position": [
         -2460,
-        2800
+        2760
       ],
       "id": "30e85b6b-4b42-4342-8945-489d94c6ec87",
       "name": "AI Agent"
@@ -96,6 +96,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-10T08:42:51.000Z",
-  "versionId": "7d0387e6-5ad3-42e5-b7a9-f389cebf5ba6"
+  "updatedAt": "2025-07-11T02:55:15.000Z",
+  "versionId": "0966ab73-fcda-45aa-a02b-4f61bb2c0596"
 }
