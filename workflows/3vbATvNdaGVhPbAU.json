@@ -1,0 +1,161 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-12T01:45:46.104Z",
+  "id": "3vbATvNdaGVhPbAU",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 15",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {
+          "allowFileUploads": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -580,
+        80
+      ],
+      "id": "aa7fcd9d-5e22-4a35-936e-6205d41c45fc",
+      "name": "When chat message received",
+      "webhookId": "28950856-14bd-4617-80ae-2669fd46a540"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        0
+      ],
+      "id": "6d27e907-56b3-44d4-ad60-2ae8efa2109e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "google/gemma-3-12b",
+          "mode": "list",
+          "cachedResultName": "google/gemma-3-12b"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -140,
+        240
+      ],
+      "id": "88ed74ec-44fd-4e85-b2d8-7a9a654bf9d9",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "9t4nREE9CW5VFmnl",
+          "name": "LMstudios"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableName": "OCR_chat_histories",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        20,
+        220
+      ],
+      "id": "2489371b-322d-40d6-9f21-900e42c6bc83",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "6iHsrxijv8bMwpA3",
+          "name": "Postgres account 4"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        180,
+        240
+      ],
+      "id": "4f56b134-107e-4765-8ae5-cb661c8680b7",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "from docling.document_converter import DocumentConverter"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        80
+      ],
+      "id": "c28effc2-1e4c-440e-903d-24ec8c252535",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-12T01:52:25.000Z",
+  "versionId": "1dfaa0e7-530a-44cd-b60b-a6afae09da4b"
+}
