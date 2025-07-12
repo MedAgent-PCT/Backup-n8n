@@ -21,7 +21,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "CanLamSan",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -32,7 +32,7 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent",
+            "node": "CanLamSan",
             "type": "ai_memory",
             "index": 0
           }
@@ -43,7 +43,7 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent1",
+            "node": "ChuanDoan",
             "type": "ai_memory",
             "index": 0
           }
@@ -54,7 +54,7 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent2",
+            "node": "TomTat",
             "type": "ai_memory",
             "index": 0
           }
@@ -65,17 +65,17 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "CanLamSan",
             "type": "main",
             "index": 0
           },
           {
-            "node": "AI Agent1",
+            "node": "ChuanDoan",
             "type": "main",
             "index": 0
           },
           {
-            "node": "AI Agent2",
+            "node": "TomTat",
             "type": "main",
             "index": 0
           }
@@ -86,7 +86,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent1",
+            "node": "ChuanDoan",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -97,41 +97,8 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent2",
+            "node": "TomTat",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent2": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent1": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields2",
-            "type": "main",
             "index": 0
           }
         ]
@@ -166,6 +133,39 @@
             "node": "Merge",
             "type": "main",
             "index": 2
+          }
+        ]
+      ]
+    },
+    "TomTat": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChuanDoan": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CanLamSan": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -208,19 +208,6 @@
       "parameters": {
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        220,
-        140
-      ],
-      "id": "e3582c54-84b3-413f-a8f0-23f578c4699f",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
@@ -248,19 +235,6 @@
       "name": "Simple Memory"
     },
     {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        220,
-        -180
-      ],
-      "id": "3a8a69e9-d3fb-4813-9486-b4d89b5cb562",
-      "name": "AI Agent1"
-    },
-    {
       "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
@@ -270,19 +244,6 @@
       ],
       "id": "db1e730d-fe74-4367-bf85-884437b7fed9",
       "name": "Simple Memory1"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        220,
-        -480
-      ],
-      "id": "0e0c2313-e419-442c-9c82-cca0bd013a1f",
-      "name": "AI Agent2"
     },
     {
       "parameters": {},
@@ -299,6 +260,12 @@
       "parameters": {
         "assignments": {
           "assignments": [
+            {
+              "id": "ed708997-e019-4f64-835c-cc122c1fc9fc",
+              "name": "sessionId",
+              "value": "1",
+              "type": "string"
+            },
             {
               "id": "dbda21a9-44d6-4fb6-b7c0-295d060c6c9e",
               "name": "Lý do khám bệnh",
@@ -376,6 +343,16 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "80050e5a-88b6-40c5-9880-f28089c6c20e",
+              "name": "tom_tat",
+              "value": "={{$json.output.replace(/```json|```/g, '').parseJson()}}",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -389,6 +366,16 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fae4d42c-109a-404a-94ad-4309ee2f6f96",
+              "name": "chuan_doan",
+              "value": "={{$json.output.replace(/```json|```/g, '').parseJson()}}",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -402,6 +389,16 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "900be553-572d-4660-b767-f066160305ed",
+              "name": "can_lam_sang",
+              "value": "={{$json.output.replace(/```json|```/g, '').parseJson()}}",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -425,6 +422,57 @@
       ],
       "id": "b0269550-ac46-415f-a358-3864b0142af4",
       "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Lý do khám bệnh\n{{ $json['Lý do khám bệnh'] }}\nTiền sử\n{{ $json['Tiền sử'] }}\nBệnh sử\n{{ $json['Bệnh sử'] }}\nKhám lâm sàng \n{{ $json['Khám lâm sàng'] }}",
+        "options": {
+          "systemMessage": "Bạn là một bác sĩ nội khoa. Hãy tóm tắt bệnh án theo định dạng sau:\nTriệu chứng cơ năng:  \n- [Liệt kê các triệu chứng chủ quan của bệnh nhân, viết gọn, mỗi dòng một ý]  \nTriệu chứng thực thể:  \n- [Liệt kê các dấu hiệu khách quan được khám lâm sàng ghi nhận, mỗi dòng một ý]  \nTiền căn:  \n+ [Tiền sử bệnh lý bản thân]  \n+ [Yếu tố nguy cơ hoặc tiền sử dùng thuốc, hút thuốc, rượu…]  \n+ [Tiền sử gia đình liên quan nếu có]\n\nYêu cầu:\n- Trình bày rõ ràng theo từng mục như trên.  \n- Sử dụng thuật ngữ y khoa tiếng Việt chính xác.  \n- Không phân tích hay chẩn đoán.  \n- Chỉ trích xuất và tóm tắt lại thông tin từ dữ liệu đầu vào.\n\nđầu ra:\n{\n \"trieu_chung_co_nang\": <triệu chứng cơ năng>,\n \"trieu_chung_thuc_the\": <triệu chứng thực thể>,\n \"tien_can\": <tiền căn>\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        -480
+      ],
+      "id": "0e0c2313-e419-442c-9c82-cca0bd013a1f",
+      "name": "TomTat"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Lý do khám bệnh\n{{ $json['Lý do khám bệnh'] }}\nTiền sử\n{{ $json['Tiền sử'] }}\nBệnh sử\n{{ $json['Bệnh sử'] }}\nKhám lâm sàng \n{{ $json['Khám lâm sàng'] }}",
+        "options": {
+          "systemMessage": "Bạn là một bác sĩ nội khoa có chuyên môn cao trong phân tích bệnh án. Dưới đây là thông tin bệnh án của một bệnh nhân. Nhiệm vụ của bạn là:\n\n1. Đưa ra chẩn đoán y khoa chính xác nhất (dựa trên triệu chứng, tiền sử, và khám lâm sàng).\n2. Giải thích rõ vì sao bạn đưa ra chẩn đoán đó — nêu rõ các yếu tố hỗ trợ, bao gồm:\n   - Triệu chứng cơ năng\n   - Tiền sử cá nhân và gia đình\n   - Dấu hiệu thực thể\n3. Có thể nêu ra chẩn đoán phân biệt nếu cần, nhưng phải chỉ ra tại sao nó ít khả năng hơn.\n\nHãy trình bày theo định dạng sau:\n{\n \"chuan_doan_chinh\": <chuẩn đoán chính>,\n \"giai_thich\": <Giải thích về chuẩn đoán>,\n \"chuan_doan_pb\": <chuẩn đoán phân biệt (3 chuẩn đoán)>\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        -180
+      ],
+      "id": "3a8a69e9-d3fb-4813-9486-b4d89b5cb562",
+      "name": "ChuanDoan"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Lý do khám bệnh\n{{ $json['Lý do khám bệnh'] }}\nTiền sử\n{{ $json['Tiền sử'] }}\nBệnh sử\n{{ $json['Bệnh sử'] }}\nKhám lâm sàng \n{{ $json['Khám lâm sàng'] }}",
+        "options": {
+          "systemMessage": "Bạn là bác sĩ nội khoa có kinh nghiệm trong phân tích và chỉ định xét nghiệm cận lâm sàng hợp lý. Dưới đây là thông tin bệnh án của một bệnh nhân. Nhiệm vụ của bạn là:\n\n1. Đề xuất các xét nghiệm cận lâm sàng cần thiết (xét nghiệm máu, hình ảnh học, chức năng hô hấp...) để làm rõ nguyên nhân triệu chứng.\n2. Giải thích tại sao nên chỉ định từng cận lâm sàng đó, dựa vào triệu chứng, tiền sử và thăm khám.\n3. Các cận lâm sàng nên được sắp xếp theo mức độ ưu tiên từ thiết yếu → bổ sung.\n4. Không chẩn đoán bệnh – chỉ tập trung vào đề xuất công cụ cận lâm sàng hợp lý.\n\nHãy trình bày theo định dạng sau:\n[\n {\n  \"can_lam_sang\": Tên xét nghiệm,\n  \"giai_thich\": Giải thích vì sao cần chỉ định, liên quan tới triệu chứng, dấu hiệu, nguy cơ... 1 cách ngắn gọn\n },\n ...\n]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        140
+      ],
+      "id": "e3582c54-84b3-413f-a8f0-23f578c4699f",
+      "name": "CanLamSan"
     }
   ],
   "pinData": {},
@@ -434,6 +482,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-12T06:29:53.000Z",
-  "versionId": "90588527-e3a3-41e6-b07d-b786a7fb302a"
+  "updatedAt": "2025-07-12T08:05:48.000Z",
+  "versionId": "a9b94bf9-9dce-4bff-b692-87fb1dea9688"
 }
