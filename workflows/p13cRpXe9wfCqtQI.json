@@ -1,0 +1,606 @@
+{
+  "active": false,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mock Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dialouge Summarizer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Dialouge Summarizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain2": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Data": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Basic LLM Chain2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dialouge Summarizer": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-11T10:57:33.587Z",
+  "id": "p13cRpXe9wfCqtQI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "doctor_sumarizer",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.params.param }}",
+                    "rightValue": "dialogue",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6b5850f5-5cb3-4bf6-9a81-5a9a1eed377b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "dialogue"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "da46212d-9d0f-4078-9423-fc73ad727e55",
+                    "leftValue": "={{ $json.params.param }}",
+                    "rightValue": "=clincial",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "clincial"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        260,
+        0
+      ],
+      "id": "9962dee8-ea50-4fc9-bb9a-8a9922050494",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "path": ":param",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f59b0e8e-bad7-4b0e-88a8-8a942f4cd7e4",
+      "name": "Webhook",
+      "webhookId": "ab67f854-971b-4037-b874-23c2b540c7e6"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1580,
+        -200
+      ],
+      "id": "59002769-4910-4854-a9d1-0c11cfdfe610",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        920,
+        -40
+      ],
+      "id": "d8316293-1215-46e4-bd6a-1f2d1bd29281",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "O4lpfbpLqdeOhe5t",
+          "name": "Google Gemini(PaLM) Api account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    n8n_chat_histories_overalls\nWHERE \n    -- session_id = '{{ $json.id }}'\n    session_id = '{{ $json.query.sessionId }}'\nGROUP BY \n    session_id;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        700,
+        -100
+      ],
+      "id": "fe722401-670f-4a0b-b147-29faf3894600",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.text\n\nconst json = JSON.parse(raw.replace(/```json|```/g, '').trim());\n return json"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        -200
+      ],
+      "id": "f41b95c3-f47d-497b-a1b1-2f601a38c7d4",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        820,
+        300
+      ],
+      "id": "d22e38fc-d0b0-4570-ba08-e6c7c657a62e",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "O4lpfbpLqdeOhe5t",
+          "name": "Google Gemini(PaLM) Api account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Bạn là một trợ lý AI chuyên nghiệp trong lĩnh vực y tế, có nhiệm vụ **tóm tắt hồ sơ bệnh án** từ một đoạn thông tin hoặc văn bản được cung cấp.\n\n---\n\n<Nhiệm vụ>\n\n- Hãy tóm tắt ngắn gọn, có cấu trúc và mang tính lâm sàng cao từ hồ sơ bệnh án.\n- Chỉ giữ lại các thông tin **liên quan đến lý do vào viện** và **hữu ích cho chẩn đoán**, bao gồm:\n  - Giới tính và tuổi (nếu có)\n  - Lý do vào viện\n  - Tiền sử y khoa có liên quan\n  - Bệnh sử gần đây\n  - Khám lâm sàng (triệu chứng, dấu hiệu)\n- Không đưa vào thông tin không liên quan đến lý do khám hoặc không hỗ trợ chẩn đoán.\n- Văn phong súc tích, rõ ràng, đúng chuẩn nhập liệu hồ sơ bệnh án.\n- **Cho phép sử dụng markdown đơn giản** trong trường `\"Nội dung\"` và `\"Nhận xét\"` để trình bày theo thời gian hoặc nhóm triệu chứng.\n  - `###` cho tiêu đề nhóm\n  - `-` cho đầu dòng\n  - `\\n` để xuống dòng\n\n---\n\n<Yêu cầu định dạng đầu ra: JSON>\n\n```json\n  \"Tóm tắt\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung nhập\": \"\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  }\n}\n\n<Ví dụ>\n{\n  \"Tóm tắt\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"NỘI DUNG\",\n        \"Nội dung nhập\": \"### Hành chính\\n- Nam, 45 tuổi\\n\\n### Lý do vào viện\\n- Đau ngực trái âm ỉ, lan ra vai trái, khởi phát cách nhập viện 2 giờ\\n\\n### Tiền sử\\n- Tăng huyết áp 8 năm\\n- Hút thuốc lá 20 năm\\n\\n### Bệnh sử gần đây\\n- Đau ngực xuất hiện đột ngột khi đang nghỉ ngơi\\n- Không sốt, không khó thở, không ho\\n\\n### Khám lâm sàng\\n- Mạch 98 lần/phút, huyết áp 150/90 mmHg\\n- Nghe tim rõ, không có tiếng thổi\\n- Phổi thông khí tốt\",\n        \"Nhận xét\": \"- Triệu chứng và tiền sử gợi ý hội chứng mạch vành cấp\"\n      }\n    ]\n  }\n}\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        860,
+        160
+      ],
+      "id": "5539e48b-9b27-489b-9735-6dc766fc6f3d",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        860,
+        460
+      ],
+      "id": "d8a053e6-64e2-4619-b23a-112e9042f8d6",
+      "name": "Basic LLM Chain2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        820,
+        600
+      ],
+      "id": "ffce6bd7-0b3e-4e47-8a33-7478fbec7b0d",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "O4lpfbpLqdeOhe5t",
+          "name": "Google Gemini(PaLM) Api account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        480
+      ],
+      "id": "e51a6615-d66d-4095-8c2d-b78b1c3fd895",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        200
+      ],
+      "id": "4e22a93d-5fdc-41af-9dac-9b3e5acca805",
+      "name": "Code2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1300,
+        320
+      ],
+      "id": "37cbd7db-6a56-4ee9-a338-bf931168c00f",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        300
+      ],
+      "id": "da1286a4-b768-470b-b74d-3d09c51bc164",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        480
+      ],
+      "id": "fa7450fe-f1e1-4678-91b9-4b75a7f1ef79",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "O4lpfbpLqdeOhe5t",
+          "name": "Google Gemini(PaLM) Api account 9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "operation": "executeTool",
+        "toolName": "web_search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', ``, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        500
+      ],
+      "id": "d86f1812-2852-4baf-bceb-4494e4c6ebe9",
+      "name": "MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "l7gNVLTzrA47Iigk",
+          "name": "DuckDuckGo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        260
+      ],
+      "id": "ff03784a-d205-44ed-a8df-ee25f0d9544d",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2040,
+        300
+      ],
+      "id": "b45d5311-0e73-4d15-86df-c7cf115a63ce",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        220
+      ],
+      "id": "cebc3721-c2ad-4e5c-b60f-fba2beb43e78",
+      "name": "Mock Data"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Trích xuất đoạn hội thoại dưới đây:\n```\n{{ $json.combined_messages }}\n```",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Bạn là một trợ lý AI y tế, có nhiệm vụ **trích xuất chính xác thông tin lâm sàng** từ hội thoại giữa **bệnh nhân và bác sĩ** để phục vụ cho việc nhập liệu vào hệ thống hồ sơ bệnh án điện tử (EMR).\n\n---\n\n## Mục tiêu:\nHãy đọc đoạn hội thoại y tế sau và thực hiện các yêu cầu sau:\n\n- Trích xuất các thông tin sau:\n  - **Lý do vào viện** (lý do đến khám)\n  - **Tiền sử**\n  - **Bệnh sử**\n\n- Chỉ sử dụng **thông tin thực sự được đề cập** trong hội thoại. Tuyệt đối **không tự suy diễn hoặc bổ sung** dữ kiện ngoài hội thoại.\n\n- Văn phong phải:\n  - Khách quan, súc tích, chuyên môn\n  - Giống như cách nhập trong **bệnh án điện tử**\n  - Tránh dùng đại từ (tôi, bệnh nhân…), không viết kiểu văn nói, không kể chuyện\n\n- Trong các trường `\"Nội dung nhập\"` và `\"Nhận xét\"` cho phép sử dụng **markdown đơn giản**:\n  - `###` cho tiêu đề nhỏ\n  - `-` đầu dòng liệt kê\n  - `\\n` để xuống dòng\n\n- Luôn trả về đủ cấu trúc JSON. Nếu không có thông tin cho mục nào, giữ nguyên key và để giá trị là chuỗi rỗng `\"\"`.\n\n---\n\n## Định dạng JSON yêu cầu:\n\n```json\n{\n  \"lý do vào viện\": \"\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung nhập\": \"\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên tiêu chí\": \"Nội dung\",\n        \"Nội dung nhập\": \"\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  }\n}\n\n## Ví dụ:\n```json\n{\n  \"lý do vào viện\": \"Hồi hộp trống ngực dữ dội, khó thở từng cơn.\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung nhập\": \"### Nội khoa\\n- Tăng huyết áp 10 năm\\n- Đái tháo đường type 2 – 5 năm\\n\\n### Ngoại khoa\\n- Chưa ghi nhận\",\n        \"Nhận xét\": \"- Các bệnh lý có thể liên quan đến biểu hiện tim mạch hiện tại\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung nhập\": \"- Không phát hiện dị ứng thuốc hoặc thức ăn\",\n        \"Nhận xét\": \"- Chưa ghi nhận yếu tố nguy cơ liên quan thuốc\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung nhập\": \"### Lối sống\\n- Hút thuốc lá (đã bỏ 5 năm)\\n- Uống rượu bia ít\\n- Ít vận động\",\n        \"Nhận xét\": \"- Có yếu tố nguy cơ tim mạch\"\n      },\n      {\n        \"Tên\": \"Tiền sử gia đình\",\n        \"Nội dung nhập\": \"- Mẹ: Tăng huyết áp\\n- Anh trai: Nhồi máu cơ tim\",\n        \"Nhận xét\": \"- Có yếu tố di truyền liên quan tim mạch\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên tiêu chí\": \"Nội dung\",\n        \"Nội dung nhập\": \"### Diễn biến lâm sàng\\n- Ngày 1: Xuất hiện hồi hộp, cảm giác tim đập mạnh như \\\"trống ngực\\\"\\n- Ngày 2: Triệu chứng tăng dần, kèm khó thở nhẹ khi gắng sức\\n- Ngày 3: Vào viện do triệu chứng không cải thiện\\n\\n### Triệu chứng kèm theo\\n- Không sốt\\n- Không đau ngực\\n- Không ngất\",\n        \"Nhận xét\": \"- Diễn biến cấp tính, có khả năng liên quan rối loạn nhịp hoặc thiếu máu cơ tim\"\n      }\n    ]\n  }\n}\n```\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1000,
+        -200
+      ],
+      "id": "0b30f2cd-ebae-4b8a-87ec-615933a4608f",
+      "name": "Dialouge Summarizer"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-11T15:13:35.000Z",
+  "versionId": "8095dc1f-1139-4ffd-bde8-52fddfc9bf97"
+}
