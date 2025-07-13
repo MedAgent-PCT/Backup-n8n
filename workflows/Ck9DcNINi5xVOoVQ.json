@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "create ho-so",
+            "node": "create uuid",
             "type": "main",
             "index": 0
           }
@@ -17,17 +17,6 @@
         [
           {
             "node": "Parse JSON",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -227,13 +216,7 @@
     },
     "create ho-so": {
       "main": [
-        [
-          {
-            "node": "respone hanh-chinh/tien-su/benh-su",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "update kham-lam-sang & get ho-so": {
@@ -301,6 +284,17 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "response hanh-chinh",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-07-11T13:23:52.101Z",
@@ -313,13 +307,13 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);"
+        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);\n\n\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        840,
-        100
+        920,
+        -120
       ],
       "id": "4cab13c4-8acd-4088-b211-d5d84e672f8b",
       "name": "Parse JSON"
@@ -331,28 +325,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        600,
-        100
+        680,
+        -120
       ],
       "id": "2c579d5c-3cec-45f9-99fb-4ecc24722245",
       "name": "Filter md"
-    },
-    {
-      "parameters": {
-        "httpMethod": "PUT",
-        "path": ":variable",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -680,
-        200
-      ],
-      "id": "3f0ce40c-1d75-4e96-9824-633f2f9d0ea4",
-      "name": "Webhook",
-      "webhookId": "cc052d3e-36e6-4fc1-9b20-4c6d947007af"
     },
     {
       "parameters": {
@@ -480,7 +457,7 @@
       "typeVersion": 1.4,
       "position": [
         -20,
-        -100
+        -620
       ],
       "id": "79fc56b6-729a-4bc8-908d-afa0b21d4b31",
       "name": "hello"
@@ -492,8 +469,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        220,
-        460
+        300,
+        380
       ],
       "id": "efe612e7-cc41-4993-a0da-7dba43dc89b3",
       "name": "mock"
@@ -528,8 +505,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        -660,
-        400
+        -740,
+        460
       ],
       "id": "f48a30ff-8e73-4b69-bf0d-7f7df69240e1",
       "name": "Summary agent",
@@ -552,8 +529,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        860,
-        460
+        940,
+        380
       ],
       "id": "29efc06f-ec98-4155-b9b4-72dd77cc73ed",
       "name": "Edit Fields"
@@ -565,7 +542,7 @@
         "messages": {
           "messageValues": [
             {
-              "message": "Bạn là chuyên gia trích xuất thông tin để lập hồ sơ y tế từ người dùng\n\n<Nhiệm vụ>\n- Hãy trích xuất các thông tin về lý do vào viện (lý do đến khám), tiền sử, bệnh sử trong đoạn trò chuyện cụ thể từ hệ thống\n- Chỉ trích xuất đúng thông tin được cung cấp, không tự sinh thêm\n- Những phần tiều sử, bệnh sử nào không có hoặc chưa thu thập, thì hãy điền vào không có hoặc chưa thu thập\n- Trả về đúng định dạng yêu cầu\n  </Nhiệm vụ>\n\n<Định dạng trả về>\n\n```json\n  \"lý do vào viện\": \"\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung\": \"\",\n        \"Nhận xét\": \"\"\n      },\n    ]\n  },\n  \"bệnh sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung\": \"\",\n        \"Nhận xét\": \"\"\n        },\n    ]\n  }\n```\n\n- Yêu cầu: bắt buộc trả về plain text json\n</Định dạng trả về>\n\n<Ví dụ định dạng trả về>\n\n```json\n{\n  \"lý do vào viện\": \"Hồi hộp trống ngực dữ dội, khó thở từng cơn\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung\": \"Nội khoa: Tăng huyết áp 10 năm, đái tháo đường type 2 - 5 năm. Đã từng có cơn hồi hộp tương tự nhưng tự hết. \\nNgoại khoa: Chưa ghi nhận.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung\": \"Chưa phát hiện tiền sử dị ứng thuốc hoặc thức ăn.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung\": \"Lối sống: Hút thuốc lá (đã bỏ 5 năm), uống rượu bia ít. Ít vận động.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"B. Tiền sử gia đình\",\n        \"Nội dung\": \"Gia đình: Mẹ bị tăng huyết áp. Anh trai bị nhồi máu cơ tim.\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": \"Cách nhập viện 3 ngày, bệnh nhân đột ngột cảm thấy hồi hộp, tim đập nhanh, mạnh như 'trống ngực', kèm khó thở nhẹ khi gắng sức.\"\n}\n```\n\n</Ví dụ định dạng trả về>\n"
+              "message": "Bạn là chuyên gia trích xuất thông tin để lập hồ sơ y tế từ người dùng\n\n<Nhiệm vụ>\n- Hãy trích xuất các thông tin về lý do vào viện (lý do đến khám), tiền sử, bệnh sử trong đoạn trò chuyện cụ thể từ hệ thống\n- Chỉ trích xuất đúng thông tin được cung cấp, không tự sinh thêm\n- Những phần tiều sử, bệnh sử nào không có hoặc chưa thu thập, thì hãy điền vào không có hoặc chưa thu thập\n- Trả về đúng định dạng yêu cầu\n  </Nhiệm vụ>\n\n<Định dạng trả về>\n\n```json\n  \"lý do vào viện\": \"\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung\": \"\",\n        \"Nhận xét\": \"\"\n      },\n    ]\n  },\n  \"bệnh sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung\": \"\",\n        \"Nhận xét\": \"\"\n        },\n    ]\n  }\n```\n\n- Yêu cầu: bắt buộc trả về plain text json\n</Định dạng trả về>\n\n<Ví dụ định dạng trả về>\n\n```json\n{\n  \"lý do vào viện\": \"Hồi hộp trống ngực dữ dội, khó thở từng cơn\",\n  \"tiền sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"Tiền sử bệnh tật\",\n        \"Nội dung\": \"Nội khoa: Tăng huyết áp 10 năm, đái tháo đường type 2 - 5 năm. Đã từng có cơn hồi hộp tương tự nhưng tự hết. \\nNgoại khoa: Chưa ghi nhận.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Tiền sử dị ứng\",\n        \"Nội dung\": \"Chưa phát hiện tiền sử dị ứng thuốc hoặc thức ăn.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"Thông tin khác\",\n        \"Nội dung\": \"Lối sống: Hút thuốc lá (đã bỏ 5 năm), uống rượu bia ít. Ít vận động.\",\n        \"Nhận xét\": \"\"\n      },\n      {\n        \"Tên\": \"B. Tiền sử gia đình\",\n        \"Nội dung\": \"Gia đình: Mẹ bị tăng huyết áp. Anh trai bị nhồi máu cơ tim.\",\n        \"Nhận xét\": \"\"\n      }\n    ]\n  },\n  \"bệnh sử\": {\n    \"tiêu chí\": [\n      {\n        \"Tên\": \"\",\n        \"Nội dung\": \"Cách nhập viện 3 ngày, bệnh nhân đột ngột cảm thấy hồi hộp, tim đập nhanh, mạnh như 'trống ngực', kèm khó thở nhẹ khi gắng sức.\",\n        \"Nhận xét\": \"\"\n        },\n    ]\n  }\n}\n```\n\n</Ví dụ định dạng trả về>\n"
             }
           ]
         },
@@ -574,8 +551,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        220,
-        100
+        300,
+        -120
       ],
       "id": "3d065f01-28af-48c1-88e2-0dcdbaed431f",
       "name": "Dialogue retrieval llm"
@@ -612,8 +589,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        800,
-        1260
+        700,
+        1360
       ],
       "id": "27743fcb-826a-4f19-badb-009341c2621b",
       "name": "Default Data Loader"
@@ -662,8 +639,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
-        740,
-        1460
+        880,
+        1420
       ],
       "id": "802edbc7-e242-43bc-82e7-1bb8f0cbbf3b",
       "name": "Embeddings Google Gemini",
@@ -698,8 +675,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        220,
-        280
+        300,
+        60
       ],
       "id": "dab7d264-ebc5-47ce-9867-20f4b4a6ea40",
       "name": "Google Gemini Chat Model",
@@ -717,8 +694,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        440,
-        620
+        520,
+        540
       ],
       "id": "2298f1d9-9ed6-4a8d-89bd-ecf0d9dcc77e",
       "name": "Google Gemini Chat Model1",
@@ -770,24 +747,90 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tieu_chi",
+          "mode": "list",
+          "cachedResultName": "tieu_chi"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ngay_nhap_lieu",
+              "displayName": "ngay_nhap_lieu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "noi_dung",
+              "displayName": "noi_dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nhan_xet",
+              "displayName": "nhan_xet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ten",
+              "displayName": "ten",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1100,
-        100
+        1440,
+        -480
       ],
       "id": "75b1a2b0-581b-426f-9363-89a0975281e8",
       "name": "create ho-so",
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -797,15 +840,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -20,
-        460
+        60,
+        380
       ],
       "id": "a1d8b528-df36-4eb6-8319-0f0f05b3eff1",
       "name": "update kham-lam-sang & get ho-so",
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
       },
       "disabled": true
@@ -818,15 +861,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
-        460
+        1200,
+        380
       ],
       "id": "07e24096-e6e4-4d4c-b93b-41b7108b0d9f",
       "name": "update tom-tat",
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
       },
       "disabled": true
@@ -847,7 +890,7 @@
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
       },
       "disabled": true
@@ -868,7 +911,7 @@
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
       },
       "disabled": true
@@ -882,8 +925,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        1380,
-        100
+        1440,
+        -60
       ],
       "id": "4e0adf11-1318-4cbd-b71d-d8d12bdde3ab",
       "name": "respone hanh-chinh/tien-su/benh-su"
@@ -897,15 +940,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -20,
-        100
+        60,
+        -120
       ],
       "id": "709aae83-0bb4-46e3-9f39-5e91fbd27d7d",
       "name": "response hanh-chinh",
       "credentials": {
         "postgres": {
           "id": "5i7jShWK4fXySSZZ",
-          "name": "Postgres account 2"
+          "name": "benh-an (phuc)"
         }
       }
     },
@@ -918,8 +961,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        1380,
-        460
+        1460,
+        380
       ],
       "id": "10531403-e977-46cf-9283-6ff55f69be9d",
       "name": "response tom-tat"
@@ -955,12 +998,81 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        440,
-        460
+        520,
+        380
       ],
       "id": "7ac09122-1276-402b-96ff-04fbbb85cf9e",
       "name": "Basic LLM Chain",
       "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Tóm tắt tiền sử - bệnh sử",
+        "height": 520,
+        "width": 1680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -20,
+        -300
+      ],
+      "typeVersion": 1,
+      "id": "99e55807-1ab8-40f9-94a3-f8f2ba923c63",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "height": 400,
+        "width": 1700
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -20,
+        300
+      ],
+      "typeVersion": 1,
+      "id": "70c0e960-c7d8-4f40-8774-2cc0d4a36f29",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        -160
+      ],
+      "id": "56cddbe9-b81f-4ef9-ba07-bf6a42c59a84",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\n\nconst data = $input.first().json;\ndata['tiền sử']['tiêu chí'].forEach(item => {\n  item.id = uuid.v4();\n});\n\nreturn [{ json: data }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        -120
+      ],
+      "id": "a85e211e-16ac-4697-bea3-34ad9556e8ce",
+      "name": "create uuid"
+    },
+    {
+      "parameters": {
+        "content": "## Dùng code để thực hiện trích xuất tin nhắn -> giảm token và tăng hiệu quả",
+        "height": 440,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        240,
+        -240
+      ],
+      "typeVersion": 1,
+      "id": "ce06e140-2fca-41c0-84cd-f8ee44a4f770",
+      "name": "Sticky Note2"
     }
   ],
   "pinData": {
@@ -1180,6 +1292,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-11T13:36:01.000Z",
-  "versionId": "46f1579b-a5a4-4f2a-bf0b-0d9d42ed621a"
+  "updatedAt": "2025-07-13T06:45:24.000Z",
+  "versionId": "f749a02c-6978-489a-97bd-abed63e803ff"
 }
