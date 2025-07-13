@@ -214,11 +214,6 @@
         ]
       ]
     },
-    "create ho-so": {
-      "main": [
-        []
-      ]
-    },
     "update kham-lam-sang & get ho-so": {
       "main": [
         [
@@ -285,11 +280,22 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
+    "create uuid": {
       "main": [
         [
           {
-            "node": "response hanh-chinh",
+            "node": "respone hanh-chinh/tien-su/benh-su",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -639,8 +645,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
-        880,
-        1420
+        740,
+        1440
       ],
       "id": "802edbc7-e242-43bc-82e7-1bb8f0cbbf3b",
       "name": "Embeddings Google Gemini",
@@ -747,93 +753,6 @@
     },
     {
       "parameters": {
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tieu_chi",
-          "mode": "list",
-          "cachedResultName": "tieu_chi"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": true,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "ngay_nhap_lieu",
-              "displayName": "ngay_nhap_lieu",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "dateTime",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "noi_dung",
-              "displayName": "noi_dung",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "nhan_xet",
-              "displayName": "nhan_xet",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "ten",
-              "displayName": "ten",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        1440,
-        -480
-      ],
-      "id": "75b1a2b0-581b-426f-9363-89a0975281e8",
-      "name": "create ho-so",
-      "credentials": {
-        "postgres": {
-          "id": "5i7jShWK4fXySSZZ",
-          "name": "benh-an (phuc)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "executeQuery",
         "options": {}
       },
@@ -925,8 +844,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        1440,
-        -60
+        1380,
+        -120
       ],
       "id": "4e0adf11-1318-4cbd-b71d-d8d12bdde3ab",
       "name": "respone hanh-chinh/tien-su/benh-su"
@@ -1002,8 +921,7 @@
         380
       ],
       "id": "7ac09122-1276-402b-96ff-04fbbb85cf9e",
-      "name": "Basic LLM Chain",
-      "disabled": true
+      "name": "Basic LLM Chain"
     },
     {
       "parameters": {
@@ -1036,17 +954,6 @@
       "name": "Sticky Note1"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -380,
-        -160
-      ],
-      "id": "56cddbe9-b81f-4ef9-ba07-bf6a42c59a84",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
         "jsCode": "const uuid = require('uuid');\n\nconst data = $input.first().json;\ndata['tiền sử']['tiêu chí'].forEach(item => {\n  item.id = uuid.v4();\n});\n\nreturn [{ json: data }];\n"
       },
@@ -1073,6 +980,23 @@
       "typeVersion": 1,
       "id": "ce06e140-2fca-41c0-84cd-f8ee44a4f770",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "PUT",
+        "path": ":variable",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        200
+      ],
+      "id": "14c5273b-cd2a-4968-b04e-04c3d02b4e88",
+      "name": "Webhook",
+      "webhookId": "b9a42937-27f5-4637-bd43-d5129c2cc99f"
     }
   ],
   "pinData": {
@@ -1292,6 +1216,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-13T06:45:24.000Z",
-  "versionId": "f749a02c-6978-489a-97bd-abed63e803ff"
+  "updatedAt": "2025-07-13T14:30:36.000Z",
+  "versionId": "70cb145d-2cb6-4578-a63e-2cbc3860b41c"
 }
