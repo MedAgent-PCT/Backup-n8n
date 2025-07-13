@@ -319,8 +319,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -2360,
-        -180
+        -1880,
+        -120
       ],
       "id": "aa7fcd9d-5e22-4a35-936e-6205d41c45fc",
       "name": "When chat message received",
@@ -563,8 +563,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -2360,
-        -540
+        -1880,
+        -480
       ],
       "id": "581b52d0-9b6b-4c9f-938f-e60fdbd4b904",
       "name": "Upload your file here",
@@ -577,8 +577,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        -2000,
-        -320
+        -1520,
+        -260
       ],
       "id": "09943f45-ccf9-4719-bd3d-0e2f75ab33e0",
       "name": "Default Data Loader"
@@ -596,8 +596,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        -2140,
-        -540
+        -1660,
+        -480
       ],
       "id": "8d6811d3-d7ec-48e7-8703-c8c8ec608298",
       "name": "Insert Data to Store"
@@ -616,8 +616,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        -1320,
-        -480
+        -1120,
+        -540
       ],
       "id": "88e1e8e1-b522-47a0-9092-c7053ef5becf",
       "name": "Query Data Tool"
@@ -627,8 +627,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -2120,
-        -320
+        -1640,
+        -260
       ],
       "id": "f81903da-6ae7-40a7-96ee-242486b12b8c",
       "name": "Embeddings Google Gemini",
@@ -1265,6 +1265,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-13T13:41:30.000Z",
-  "versionId": "e1e7f6e7-0d92-44c8-8a53-fcbc3edbe1f4"
+  "updatedAt": "2025-07-13T14:28:41.000Z",
+  "versionId": "8cf7d319-eb3c-46ea-8e86-0d8ace33c18f"
 }
