@@ -1,11 +1,6 @@
 {
   "active": false,
   "connections": {
-    "MongoDB Chat Memory": {
-      "ai_memory": [
-        []
-      ]
-    },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
@@ -29,17 +24,6 @@
       ]
     },
     "Expert Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "Orchestrator Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Think": {
       "ai_tool": [
         [
           {
@@ -97,11 +81,6 @@
         []
       ]
     },
-    "Postgres Chat Memory": {
-      "ai_memory": [
-        []
-      ]
-    },
     "Simple Memory": {
       "ai_memory": [
         [
@@ -120,10 +99,16 @@
             "node": "Orchestrator Agent",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "Info Search1": {
+      "ai_tool": [
+        [
           {
-            "node": "Insert rows in a table",
-            "type": "main",
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -138,28 +123,6 @@
   },
   "name": "MedAgent",
   "nodes": [
-    {
-      "parameters": {
-        "collectionName": "chat2",
-        "databaseName": "pct-memory",
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1,
-      "position": [
-        -880,
-        140
-      ],
-      "id": "d15578bb-a9be-40fa-b283-dcd3be0614c4",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "zEthGVqCIY6budkG",
-          "name": "MongoDB account"
-        }
-      },
-      "disabled": true
-    },
     {
       "parameters": {
         "assignments": {
@@ -177,7 +140,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        840,
+        900,
         20
       ],
       "id": "c704770a-b06f-4c5f-8c00-5d77f5dba012",
@@ -185,14 +148,13 @@
     },
     {
       "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        280,
-        340
+        260,
+        180
       ],
       "id": "74ab3187-4660-47fb-9c9c-c650f76b0211",
       "name": "Google Gemini Chat Model",
@@ -206,7 +168,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "=Bạn là một AI Agent y tế của **Bệnh Viện Đại học Y khoa Phan Châu Trinh** chuyên gọi Tool bằng cách phân tích ngữ cảnh của cuộc hội thoại để hỗ trợ người dùng, output khi gọi Tool sẽ có dạng: {Tool: []}\n- Nếu có output từ Tool \"Expert_Agent\" có chứa trường \"expert\": <phản hồi từ tool chuyên gia> thì lấy giá trị của \"expert\" trả cho người dùng và không nói gì thêm.\n- Nếu có output từ Tool call từ \"Info_RAG\"  có context không đúng hoặc không có context thì gọi \"Info_Search\", nếu cả 2 không có context phù hợp thì trả \"Tôi không có thông tin này\".\n- Nếu không có Tool thì sẽ trả lời bình thường\n",
+          "systemMessage": "=Bạn là một AI Agent y tế của **Bệnh Viện Đại học Y khoa Phan Châu Trinh** chuyên gọi Tool bằng cách phân tích ngữ cảnh của cuộc hội thoại để hỗ trợ người dùng, output khi gọi Tool sẽ có dạng: {Tool: []}\n- Nếu có output từ Tool \"Expert_Agent\" có chứa trường \"expert\": <phản hồi từ tool chuyên gia> thì lấy giá trị của \"expert\" trả cho người dùng và không nói gì thêm.\n- Nếu có output từ Tool call từ \"Info_RAG\"  có context không đúng hoặc không có context thì gọi \"Info_Search1\", nếu cả 2 không có context phù hợp thì trả \"Tôi không có thông tin này\".\n- Nếu không có Tool thì sẽ trả lời bình thường\n",
           "returnIntermediateSteps": false
         }
       },
@@ -264,26 +226,12 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        1000,
-        260
+        1060,
+        300
       ],
       "id": "d7e27771-5cf1-4cf0-be56-2d040f89c8e9",
       "name": "Expert Agent",
       "alwaysOutputData": false
-    },
-    {
-      "parameters": {
-        "description": "Suy luận ngữ cảnh đầu vào của người dùng liên quan đến tool nào: thông tin bệnh viện hay thông tin y tế"
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        1140,
-        260
-      ],
-      "id": "692337a1-20e1-44eb-b86d-1c185a346eeb",
-      "name": "Think",
-      "disabled": true
     },
     {
       "parameters": {
@@ -292,8 +240,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        500,
-        420
+        520,
+        440
       ],
       "id": "edb0c76b-6db4-4caf-b3f3-46f6b188f50d",
       "name": "Embeddings OpenAI",
@@ -309,8 +257,8 @@
       "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
       "typeVersion": 1,
       "position": [
-        600,
-        420
+        660,
+        440
       ],
       "id": "485efefc-b430-4488-83ef-d994bcd80987",
       "name": "Reranker Cohere",
@@ -332,8 +280,8 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        860,
-        260
+        960,
+        360
       ],
       "id": "29b5391c-9189-4989-b30e-f110412f1d6e",
       "name": "Info Search",
@@ -342,7 +290,8 @@
           "id": "iCaXl7QBEZgfSweR",
           "name": "MCP Client (STDIO) account 2"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -358,7 +307,7 @@
       "typeVersion": 1.3,
       "position": [
         560,
-        240
+        300
       ],
       "id": "016b7ae9-cbd7-42db-9fca-c4cd5c8a8bdc",
       "name": "Info RAG",
@@ -370,26 +319,6 @@
         }
       },
       "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "tableName": "n8n_chat_histories_overalls"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
-      "typeVersion": 1.3,
-      "position": [
-        -420,
-        220
-      ],
-      "id": "f23106b7-e8ff-46d0-976f-f70cabd0605b",
-      "name": "Postgres Chat Memory",
-      "credentials": {
-        "postgres": {
-          "id": "9sFxVN20egMoKcpX",
-          "name": "Postgres account 3"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -420,32 +349,45 @@
     },
     {
       "parameters": {
-        "schema": {
+        "description": "Công cụ chuyên tìm kiếm thông tin Bệnh Viện Đại học Y khoa Phan Châu Trinh khi truy vấn \"Info_RAG\" thất bại\n- Input có dạng:\n{\n\"query\": <query được generate từ input của người dùng dưới dạng: keyword tìm kiếm + 'Bệnh Viện Đại học Y khoa Phan Châu Trinh'>\n}\n",
+        "workflowId": {
           "__rl": true,
+          "value": "SqiCIpxsFelhfCA9",
           "mode": "list",
-          "value": "public"
+          "cachedResultName": "Info Search"
         },
-        "table": {
-          "__rl": true,
-          "mode": "list",
-          "value": ""
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
         }
       },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
       "position": [
-        -80,
-        200
+        840,
+        400
       ],
-      "id": "1f378643-7d45-4fe5-9a0a-a2f54ff7bc51",
-      "name": "Insert rows in a table",
-      "executeOnce": true,
-      "credentials": {
-        "postgres": {
-          "id": "9sFxVN20egMoKcpX",
-          "name": "Postgres account 3"
-        }
-      }
+      "id": "60204fd4-b13f-42f8-8eb0-7df425743677",
+      "name": "Info Search1"
     }
   ],
   "pinData": {},
@@ -455,6 +397,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-08T04:15:04.000Z",
-  "versionId": "e428133d-8e96-4d8d-94f5-dd8d95acf711"
+  "updatedAt": "2025-07-13T15:15:33.000Z",
+  "versionId": "1a6332aa-69f3-4a10-a5de-5fb3e9281776"
 }
