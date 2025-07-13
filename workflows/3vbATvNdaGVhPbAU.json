@@ -1,39 +1,300 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "When chat message received": {
       "main": [
         []
       ]
     },
-    "OpenAI Chat Model": {
+    "Parse JSON": {
+      "main": [
+        [
+          {
+            "node": "formal input before insert tieu_chi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter md": {
+      "main": [
+        [
+          {
+            "node": "Parse JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [],
+        [
+          {
+            "node": "response hanh-chinh",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "update kham-lam-sang & get ho-so",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "update tom-tat & get ho-so",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mock": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Diagnostic agent",
             "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "Postgres Chat Memory": {
-      "ai_memory": [
+    "Edit Fields": {
+      "main": [
         [
           {
-            "node": "AI Agent",
-            "type": "ai_memory",
+            "node": "formal input before insert tom_tat_benh_an",
+            "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Think": {
+    "Dialogue retrieval llm": {
+      "main": [
+        [
+          {
+            "node": "Filter md",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent",
+            "node": "Diagnostic agent",
             "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Diagnostic agent": {
+      "main": [
+        [
+          {
+            "node": "Filter md1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dialogue retrieval llm",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mock1": {
+      "main": [
+        [
+          {
+            "node": "Diagnostic agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse JSON1": {
+      "main": [
+        [
+          {
+            "node": "formal input before insert chan_doan_de_nghi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter md1": {
+      "main": [
+        [
+          {
+            "node": "Parse JSON1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update kham-lam-sang & get ho-so": {
+      "main": [
+        [
+          {
+            "node": "mock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update tom-tat & get ho-so": {
+      "main": [
+        [
+          {
+            "node": "mock1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "response hanh-chinh": {
+      "main": [
+        [
+          {
+            "node": "Dialogue retrieval llm",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "insert tom_tat": {
+      "main": [
+        []
+      ]
+    },
+    "formal input before insert tom_tat_benh_an": {
+      "main": [
+        [
+          {
+            "node": "insert tom_tat_benh_an",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formal input before insert tieu_chi": {
+      "main": [
+        [
+          {
+            "node": "insert tom_tat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formal input before insert chan_doan_de_nghi": {
+      "main": [
+        [
+          {
+            "node": "insert chan_doan_de_nghi",
+            "type": "main",
             "index": 0
           }
         ]
@@ -46,7 +307,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 15",
+  "name": "doc_pipelines (phúc)",
   "nodes": [
     {
       "parameters": {
@@ -58,8 +319,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -580,
-        80
+        -2360,
+        -180
       ],
       "id": "aa7fcd9d-5e22-4a35-936e-6205d41c45fc",
       "name": "When chat message received",
@@ -67,95 +328,943 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        -100,
-        0
-      ],
-      "id": "6d27e907-56b3-44d4-ad60-2ae8efa2109e",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "google/gemma-3-12b",
-          "mode": "list",
-          "cachedResultName": "google/gemma-3-12b"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        -140,
-        240
-      ],
-      "id": "88ed74ec-44fd-4e85-b2d8-7a9a654bf9d9",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "9t4nREE9CW5VFmnl",
-          "name": "LMstudios"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "tableName": "OCR_chat_histories",
-        "contextWindowLength": 10
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
-      "typeVersion": 1.3,
-      "position": [
-        20,
-        220
-      ],
-      "id": "2489371b-322d-40d6-9f21-900e42c6bc83",
-      "name": "Postgres Chat Memory",
-      "credentials": {
-        "postgres": {
-          "id": "6iHsrxijv8bMwpA3",
-          "name": "Postgres account 4"
-        }
-      }
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        180,
-        240
-      ],
-      "id": "4f56b134-107e-4765-8ae5-cb661c8680b7",
-      "name": "Think"
-    },
-    {
-      "parameters": {
-        "language": "python",
-        "pythonCode": "from docling.document_converter import DocumentConverter"
+        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);\n\n\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        440,
+        -940,
+        -1540
+      ],
+      "id": "625dff18-ae26-454a-a70b-f2ee8688a856",
+      "name": "Parse JSON"
+    },
+    {
+      "parameters": {
+        "jsCode": "let output = $input.first().json.text; // Adjust based on your LLM output structure\n// let output = $input.first().json.output; // Adjust based on your LLM output structure\n\n// Remove Markdown code block wrappers\noutput = output.replace(/^```(?:json|markdown)?\\n?/, \"\").replace(/\\n?```$/, \"\");\n\n// Remove common LLM text prefixes\noutput = output.replace(/^(Here is the JSON:|Here is your Markdown document:)\\s*/, \"\");\n\nreturn [{ cleanedOutput: output }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1300,
+        -1540
+      ],
+      "id": "da87e6ab-f752-459b-9114-1ad9efb7960d",
+      "name": "Filter md"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.params.variable }}",
+                    "rightValue": "test",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d5e952f6-c4f0-44a1-b8aa-3763b3db6ff4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "hello"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ad901a4b-27bc-4138-8718-83130be79dfb",
+                    "leftValue": "={{ $json.params.variable }}",
+                    "rightValue": "hanh-chinh",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "hành chính"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3f49c1ac-322e-4c68-b633-3f0fd56754ca",
+                    "leftValue": "={{ $json.params.variable }}",
+                    "rightValue": "lam-sang",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "lâm sàng"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ddf8c2f7-33f6-47ba-a2c1-1d4655932808",
+                    "leftValue": "={{ $json.params.variable }}",
+                    "rightValue": "chan-doan-de-nghi",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "chẩn đoán sơ bộ"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2360,
+        -1260
+      ],
+      "id": "b9202c5a-ef9d-4849-b6f3-be9e3e6a9f7e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1720,
+        -1240
+      ],
+      "id": "ae7e69ca-3094-45fb-8a2c-ea34ab3674ad",
+      "name": "mock"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        -680
+      ],
+      "id": "ba8f0477-5796-43f2-9361-153d611952cb",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "477b575d-13eb-4b73-89f7-1ca5b7999bce",
+              "name": "tóm tắt bệnh án",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -940,
+        -1240
+      ],
+      "id": "4556fc52-9793-4333-8988-d115a80a3b73",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tóm tắt thông tin dưới đây:\n{{ $json.combined_messages }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Bạn là chuyên gia trích xuất thông tin để lập hồ sơ y tế từ người dùng\n\n<Nhiệm vụ>\n- Hãy trích xuất các thông tin về ly_do_vao_vien (lý do đến khám), tien_su, benh_su trong đoạn trò chuyện cụ thể từ hệ thống\n- Chỉ trích xuất đúng thông tin được cung cấp, không tự sinh thêm\n- Những phần tiều sử, benh_su nào không có hoặc chưa thu thập, thì hãy điền vào không có hoặc chưa thu thập\n- Trả về đúng định dạng yêu cầu\n  </Nhiệm vụ>\n\n<Định dạng trả về>\n\n```json\n  \"ly_do_vao_vien\": \"\",\n  \"tien_su\": {\n    \"tieu_chi\": [\n      {\n        \"ten\": \"\",\n        \"noi_dung\": \"\",\n        \"nhan_xet\": \"\"\n      },\n    ]\n  },\n  \"benh_su\": {\n    \"tieu_chi\": [\n      {\n        \"ten\": \"\",\n        \"noi_dung\": \"\",\n        \"nhan_xet\": \"\"\n        },\n    ]\n  }\n```\n\n- Yêu cầu: bắt buộc trả về plain text json\n</Định dạng trả về>\n\n<Ví dụ định dạng trả về>\n\n```json\n{\n  \"ly_do_vao_vien\": \"Hồi hộp trống ngực dữ dội, khó thở từng cơn\",\n  \"tien_su\": {\n    \"tieu_chi\": [\n      {\n        \"ten\": \"tien_su bệnh tật\",\n        \"noi_dung\": \"Nội khoa: Tăng huyết áp 10 năm, đái tháo đường type 2 - 5 năm. Đã từng có cơn hồi hộp tương tự nhưng tự hết. \\nNgoại khoa: Chưa ghi nhận.\",\n        \"nhan_xet\": \"\"\n      },\n      {\n        \"ten\": \"tien_su dị ứng\",\n        \"noi_dung\": \"Chưa phát hiện tien_su dị ứng thuốc hoặc thức ăn.\",\n        \"nhan_xet\": \"\"\n      },\n      {\n        \"ten\": \"Thông tin khác\",\n        \"noi_dung\": \"Lối sống: Hút thuốc lá (đã bỏ 5 năm), uống rượu bia ít. Ít vận động.\",\n        \"nhan_xet\": \"\"\n      },\n      {\n        \"ten\": \"B. tien_su gia đình\",\n        \"noi_dung\": \"Gia đình: Mẹ bị tăng huyết áp. Anh trai bị nhồi máu cơ tim.\",\n        \"nhan_xet\": \"\"\n      }\n    ]\n  },\n  \"benh_su\": {\n    \"tieu_chi\": [\n      {\n        \"ten\": \"\",\n        \"noi_dung\": \"Cách nhập viện 3 ngày, bệnh nhân đột ngột cảm thấy hồi hộp, tim đập nhanh, mạnh như 'trống ngực', kèm khó thở nhẹ khi gắng sức.\",\n        \"nhan_xet\": \"\"\n        },\n    ]\n  }\n}\n```\n\n</Ví dụ định dạng trả về>\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -1780,
+        -1640
+      ],
+      "id": "a204b409-a450-4c79-b307-9bda8657fc1c",
+      "name": "Dialogue retrieval llm"
+    },
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv, .json",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -2360,
+        -540
+      ],
+      "id": "581b52d0-9b6b-4c9f-938f-e60fdbd4b904",
+      "name": "Upload your file here",
+      "webhookId": "82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -2000,
+        -320
+      ],
+      "id": "09943f45-ccf9-4719-bd3d-0e2f75ab33e0",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        -2140,
+        -540
+      ],
+      "id": "8d6811d3-d7ec-48e7-8703-c8c8ec608298",
+      "name": "Insert Data to Store"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Sử dụng công cụ này để tìm hồ sơ bệnh án tương tự",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        -1320,
+        -480
+      ],
+      "id": "88e1e8e1-b522-47a0-9092-c7053ef5becf",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -2120,
+        -320
+      ],
+      "id": "f81903da-6ae7-40a7-96ee-242486b12b8c",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Đưa ra chẩn đoán sơ bộ và biện luận dựa trên hồ sơ sau:\n{{ JSON.stringify($('mock1').item.json) }}",
+        "options": {
+          "systemMessage": "=Bạn là chuyên gia chẩn đoán và biện luận từ hồ sơ y tế của người dùng\n\n<Nhiệm vụ>\n- Bắt buộc sử dụng tool rag để tra cứu các hồ sơ liên quan \n- Đưa ra chẩn đoán sơ bộ, chẩn đoán phân biệt và đề nghị cận lâm sàng dựa trên hồ sơ được cung cấp và các hồ sơ liên quan\n</Nhiệm vụ>\n\n<Định dạng trả về>\n\n```json\n{\n  \"Chẩn đoán sơ bộ\": \"\",\n  \"Chẩn đoán phân biệt\": \"\",\n  \"Đề nghị cận lâm sàng\": \"\"\n}\n```\n\n- Yêu cầu: bắt buộc trả về plain text json\n</Định dạng trả về>\n\n<Ví dụ>\n```json\n{\n  \"Chẩn đoán sơ bộ\": \"- Xuất huyết tiêu hóa trên mức độ nhẹ, nghĩ do loét dạ dày - tá tràng. Hiện tại ổn chưa có biến chứng\",\n  \"Chẩn đoán phân biệt\": \"- Xuất huyết tiêu hóa trên do giãn tĩnh mạch thực quản\\n- Viêm loét dạ dày\\n- Viêm thực quản\\n- Rối loạn đông máu\\n- U dạ dày\\n- Các phân nhóm\",\n  \"Đề nghị cận lâm sàng\": \"- Công thức máu\\n- Sinh hóa máu: ure creatinin, AST, ALT, GGT\\n- GLUCOSE\\n- Điện giải đồ\\n- Nhóm máu\\n- Sinh hóa nước tiểu: creatinin, AST, ALT, GGT\\n- GLUCOSE máu\\n- Điện giải đồ\\n- H.P test\\n- Nội soi dạ dày thực quản tá tràng\\n- X-quang, đoạn tiêu\"\n}\n```\n</Ví dụ>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -1400,
+        -840
+      ],
+      "id": "55143a84-41cb-43da-bcd0-6b0e86c0bf5f",
+      "name": "Diagnostic agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1640,
+        -1480
+      ],
+      "id": "62b5086d-ddde-401e-9c10-fe05f2db1e74",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1280,
+        -1120
+      ],
+      "id": "946d6314-8ea8-48fb-add3-5e4eb558c2a3",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1720,
+        -840
+      ],
+      "id": "0b3f85d3-b0e8-400b-83fe-9f2ea8a8f3e3",
+      "name": "mock1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.cleanedOutput);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -840
+      ],
+      "id": "5f42f524-2675-428d-8974-7131c6b79f3c",
+      "name": "Parse JSON1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// let output = $input.first().json.text; // Adjust based on your LLM output structure\nlet output = $input.first().json.output; // Adjust based on your LLM output structure\n\n// Remove Markdown code block wrappers\noutput = output.replace(/^```(?:json|markdown)?\\n?/, \"\").replace(/\\n?```$/, \"\");\n\n// Remove common LLM text prefixes\noutput = output.replace(/^(Here is the JSON:|Here is your Markdown document:)\\s*/, \"\");\n\nreturn [{ cleanedOutput: output }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -940,
+        -840
+      ],
+      "id": "5a4fbf8f-6201-4404-9239-5a47fec055b8",
+      "name": "Filter md1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -2080,
+        -1240
+      ],
+      "id": "2895f1d7-d191-4204-a2da-b6f948121d03",
+      "name": "update kham-lam-sang & get ho-so",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -2080,
+        -840
+      ],
+      "id": "dc87e198-8584-4eed-bbf8-4d6f35940f08",
+      "name": "update tom-tat & get ho-so",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    session_id,\n    STRING_AGG(message::text, ' || ') AS combined_messages\nFROM \n    orchestrate_chat_his\nWHERE \n    -- session_id = '{{ $json.id }}'\n    session_id = 'e8fa71e0636d414785d5689448d85303'\nGROUP BY \n    session_id;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -2080,
+        -1540
+      ],
+      "id": "bc555087-897f-42ad-a14a-55a309c1b14c",
+      "name": "response hanh-chinh",
+      "credentials": {
+        "postgres": {
+          "id": "itRz48zLmuua8CzB",
+          "name": "benh-an-dev (phuc)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tóm tắt hồ sơ sau:\n{{ JSON.stringify($('mock').item.json) }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Bạn là chuyên gia tóm tắt thông tin từ hồ sơ y tế của người dùng\n\n<Nhiệm vụ>\n- Hãy tóm tắt ngắn gọn các thông tin từ hồ sơ bệnh án đuọc cung cấp\n- Các thông tin về hành chính chỉ lấy nam nữ và tuổi tác\n- Các thông tin tiền sử, bệnh sử, khám lâm sàng chỉ lấy những thông tin có liên quan đến lí do vào viện hoặc hỗ trỡ cho quá trình chẩn đoán của bác sĩ\n</Nhiệm vụ>\n\n<Ví dụ>\nTóm tắt bệnh án\nBệnh nhân năm 37 tuổi vào viện vì lý do đau bụng thương vị đã cầu phần đan ngày thứ 2. Qua hỏi bệnh sử, tiền sử và thăm khám ghi nhận các triệu chứng và hội chứng:\n- Triệu chứng cơ năng:\n  -Đau vùng thượng vi\n  -Đi cầu phân đen\n- Triệu chứng thực thể:\n  - Ấn đau vùng thương vì\n  - Murphy (-). Mcburney (-).\nTiền căn:\n- Thường xuyên uống rượu\n</Ví dụ>"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -1360,
+        -1340
+      ],
+      "id": "f37669a7-1fe9-4328-abda-bbf4c65a8a4d",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "content": "## Tóm tắt tiền sử - bệnh sử",
+        "height": 560,
+        "width": 1800,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2080,
+        -1840
+      ],
+      "typeVersion": 1,
+      "id": "1edf7484-460a-46f9-83a4-8903054b09c8",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Tóm tắt bệnh án",
+        "height": 400,
+        "width": 1800,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2080,
+        -1380
+      ],
+      "typeVersion": 1,
+      "id": "c5c29132-3c63-4643-8a0d-228f0f1c68d8",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2360,
         80
       ],
-      "id": "c28effc2-1e4c-440e-903d-24ec8c252535",
-      "name": "Code"
+      "id": "637666c7-a423-4ecb-b527-26e9ffeaebee",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Dùng code để thực hiện trích xuất tin nhắn -> giảm token và tăng hiệu quả",
+        "height": 440,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1800,
+        -1760
+      ],
+      "typeVersion": 1,
+      "id": "c304b636-6a1f-4415-9190-390ee5fa8c63",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "http://127.0.0.1:8080/insert_tieu_chi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "ly_do_vao_vien",
+              "value": "={{ $json.ly_do_vao_vien }}"
+            },
+            {
+              "name": "tien_su",
+              "value": "={{ $json.tien_su.tieu_chi }}"
+            },
+            {
+              "name": "benh_su",
+              "value": "={{ $json.benh_su.tieu_chi }}"
+            },
+            {
+              "name": "ho_so_id",
+              "value": "56cefa3e-185d-4dcf-b680-fe5963083203"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -500,
+        -1540
+      ],
+      "id": "554774ed-b4e6-41dc-82f2-6dff37285868",
+      "name": "insert tom_tat"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "http://127.0.0.1:8080/insert_tom_tat",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "tom_tat",
+              "value": "={{ $json.tom_tat }}"
+            },
+            {
+              "name": "ho_so_id",
+              "value": "={{ $json.ho_so_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -500,
+        -1240
+      ],
+      "id": "faba2919-95e6-44a2-8298-c8de9259cfdb",
+      "name": "insert tom_tat_benh_an"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "http://127.0.0.1:8080/insert_chan_doan_de_nghi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chan_doan",
+              "value": "={{ $json.chan_doan }}"
+            },
+            {
+              "name": "de_nghi",
+              "value": "={{ $json.de_nghi }}"
+            },
+            {
+              "name": "ho_so_id",
+              "value": "={{ $json.ho_so_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -280,
+        -840
+      ],
+      "id": "197974d5-ff36-4cdf-8296-5e71c75a90dc",
+      "name": "insert chan_doan_de_nghi"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\n\nreturn [{\n  tom_tat: {\n    ten: \"tóm tắt bệnh án\",\n    noi_dung: $input.first().json['tóm tắt bệnh án'],\n    nhan_xet: \"\",\n    id: uuid.v4(),\n    ngay_nhap_lieu: $now,\n  },\n  ho_so_id: \"56cefa3e-185d-4dcf-b680-fe5963083203\"\n}]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -1240
+      ],
+      "id": "28f62771-f4c2-403e-9805-92a3930f87c7",
+      "name": "formal input before insert tom_tat_benh_an"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\nconst input = $input.first().json;\n\n// thực hiện chèn thêm dữ liệu nếu nó không phải string \nfor (const item in input) {\n  const section = input[item];\n  if (\n    typeof section === 'object' &&\n    section !== null &&\n    Array.isArray(section['tieu_chi'])\n  )\n    input[item]['tieu_chi'].forEach(item => {\n      item.id = uuid.v4();\n      item.ngay_nhap_lieu = $now\n    });\n}\n\nreturn [{ json: input }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -1540
+      ],
+      "id": "43e45ce1-62bb-4e93-aa0b-135f237d9581",
+      "name": "formal input before insert tieu_chi"
+    },
+    {
+      "parameters": {
+        "content": "## Chẩn đoán đề nghị",
+        "height": 400,
+        "width": 2040,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2080,
+        -980
+      ],
+      "typeVersion": 1,
+      "id": "1d9d83d3-d5a5-4338-81da-fd74369fc345",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\n\nreturn [{\n  \"chan_doan\": \n  [\n    {\n      ten: \"chẩn đoán sơ bộ\",\n      noi_dung: $input.first().json['Chẩn đoán sơ bộ'],\n      nhan_xet: \"\",\n      id: uuid.v4(),\n      ngay_nhap_lieu: $now,\n    },\n    {\n      ten: \"chẩn đoán phân biệt\",\n      noi_dung: $input.first().json['Chẩn đoán sơ bộ'],\n      nhan_xet: \"\",\n      id: uuid.v4(),\n      ngay_nhap_lieu: $now,\n    },\n  ],\n  \"de_nghi\": {\n      ten: \"chẩn đoán sơ bộ\",\n      noi_dung: $input.first().json['Đề nghị cận lâm sàng'],\n      nhan_xet: \"\",\n      id: uuid.v4(),\n      ngay_nhap_lieu: $now,\n  },\n  ho_so_id: \"56cefa3e-185d-4dcf-b680-fe5963083203\"\n}]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -500,
+        -840
+      ],
+      "id": "aa829b55-bab5-498a-91e6-47da75c85965",
+      "name": "formal input before insert chan_doan_de_nghi"
+    },
+    {
+      "parameters": {
+        "content": "có thể không cần update ta chỉ cần lưu nhiều phiên bản khi insert là được"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2660,
+        -1260
+      ],
+      "typeVersion": 1,
+      "id": "6873b4e6-1fce-4082-9d93-12d7069c795e",
+      "name": "Sticky Note4"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "mock": [
+      {
+        "json": {
+          "hành chính": {
+            "Họ tên": "Ngô Doãn Hải",
+            "Ngày sinh": "02/04/1988",
+            "Giới tính": "nam",
+            "Địa chỉ": "Thọ xuân-Thanh Hoá",
+            "Ngày giờ vào viện": "05/01/2025 08:00",
+            "Ngày giờ vào khoa": "05/01/2025 12:00"
+          },
+          "lý do vào viện": {
+            "Ngày nhập liệu": "05/01/2025 12:00",
+            "Tiêu chí": [
+              {
+                "Tên": "Nội dung",
+                "Nội dung": "Đau thượng vị, đi cầu phân đen",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "tiền sử": {
+            "Ngày nhập liệu": "",
+            "Tiêu chí": [
+              {
+                "Tên": "Tiền sử bệnh tật",
+                "Nội dung": "Nội khoa: \n Xuất huyết tiêu hoá trên da do loét dạ dày-tá tràng vào tháng 11 năm 2024 đã điều trị (chưa test vi khuẩn Hp)\n Ngoài ra chưa ghi nhận tiền sử nội khoa liên quan khác\n Ngoại khoa: chưa ghi nhận tiền sử ngoại khoa",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Tiền sử dị ứng",
+                "Nội dung": "Chưa phát hiện tiền sử tác nhân dị ứng trước đây",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Thông tin khác",
+                "Nội dung": "Lối sống\n Hút thuốc lá 9.5 gói, năm\n uống rượu thường xuyên: 200ml",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "B. Tiền sử gia đình",
+                "Nội dung": "Gia đình\n Chưa ghi nhận bệnh lý liên quan",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "bệnh sử": {
+            "Ngày nhập liệu": "",
+            "Tiêu chí": [
+              {
+                "Tên": "Nội dung",
+                "Nội dung": "Cách nhập viện 2 ngày bệnh nhân dạng uống rượu thì xuất hiện cơn đau bụng âm vùng thượng vị, đau liên tục, không lan, không có tư thế giảm đau, không nôn ói. Bệnh nhân không ăn tiết canh, lòng heo hoặc thực ổn màu đỏ. Sau đó về nhà bệnh nhân có đi cầu phân đen 4 lần mùi khắm, sệt không thành khuôn, bệnh nhân ăn uống kém. Tiểu tiện bình thường. Trước đó bệnh nhân không sử dụng sắt than hoạt, không táo bón.\n Cách nhập viện 1 ngày tình trạng bệnh nhân không thuyên giảm, tiếp tục đã cầu phân đen nên vào viện\n Trong quá trình bệnh, bệnh nhân không buồn nôn, không chóng một, không sốt, không vã mồ hôi, không đau ngực và không khó thở\n Ghi nhận tại cấp cứu\n Bệnh tỉnh tiếp xúc được\n Da niêm nhợt nhạt\n Đau thượng vị\n Không có đầu xuất huyết dưới da\n Tuyến giáp không to, hạch ngoại vì không sờ chạm\n Mạch:72 lần/phút\n Nhiệt: 37 độ C\n Huyết áp: 119/69\n Nhịp thở: 16 lần/phút\n Spo2: 98%\n Cân nặng: 57 kg\n Chiều cao 1m72\n Bmi: 18.8",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "khám lâm sàng": {
+            "Ngày nhập liệu": "17/01/2018 09:20",
+            "Tiêu chí": [
+              {
+                "Tên": "Khám toàn thân",
+                "Nội dung": "- Tình trạng:\n  - Bệnh tỉnh, tiếp xúc tốt\n  - Da, niêm mạc hồng hào\n  - Huyết áp tư thế: không thay đổi\n  - Không có dấu xuất huyết dưới da\n  - Tuyến giáp không to, hạch ngoại vi không sờ chạm\n  - Mạch: 65 lần/phút\n  - Nhiệt: 37 độ C\n  - Huyết áp: 100/60 mmHg\n  - Nhịp thở: 20 lần/phút\n  - SpO2: 98%\n  - Cân nặng: 57 kg\n  - Chiều cao: 1m72\n  - BMI: 18.8 kg/m2",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám tuần hoàn",
+                "Nội dung": "- Lồng ngực không dị dạng, không sẹo, di động đều theo nhịp thở\n- Tĩnh mạch cổ nổi (-)\n- Không có âm rung miu, dấu Harzer (-)\n- Mỏm tim: liên sườn IV đường trung đòn trái, điện đập bình thường\n- Tiếng T1 T2 rõ, đều, không có âm bất thường.",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám hô hấp",
+                "Nội dung": "- Lồng ngực cân đối, di động theo nhịp thở, không co kéo, không rút lõm\n- Rung thanh đều 2 bên\n- Rì rào phế nang đều, 2 phổi rõ\n- Không rale ẩm, rale nổ\n- Không nghe tiếng tim bệnh lý",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám tiêu hóa",
+                "Nội dung": "- Bụng di động theo nhịp thở, không co cứng, không đề kháng, không có dấu hiệu xuất huyết dưới da\n- Không có dấu hiệu rắn bò\n- Phản ứng thành bụng (-), không có điểm đau, ấn đau Murphy (-), McBurney (-)\n- Bụng mềm, không chướng, không có khối bất thường\n- Nhu động ruột: 2 lần/phút",
+                "Nhận xét": "Thăm trực tràng: (-)"
+              },
+              {
+                "Tên": "Khám thận - tiết niệu",
+                "Nội dung": "- Không chạm thận, đau hông ranh thân âm tính\n- Ấn đau điểm niệu quản (-)\n- Tiểu không ra máu, không tiểu đục",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám thần kinh",
+                "Nội dung": "- Cảm giác, vận động, cơ đều bình thường\n- Dáng vẻ tỉnh táo",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám cơ xương khớp",
+                "Nội dung": "- Không biến dạng xương, vận động tốt\n- Cơ lực: 5/5\n- Cảm giác: bình thường",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám các cơ quan khác",
+                "Nội dung": "- Chưa ghi nhận bất thường",
+                "Nhận xét": ""
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "mock1": [
+      {
+        "json": {
+          "hành chính": {
+            "Họ tên": "Ngô Doãn Hải",
+            "Ngày sinh": "02/04/1988",
+            "Giới tính": "nam",
+            "Địa chỉ": "Thọ xuân-Thanh Hoá",
+            "Ngày giờ vào viện": "05/01/2025 08:00",
+            "Ngày giờ vào khoa": "05/01/2025 12:00"
+          },
+          "lý do vào viện": {
+            "Ngày nhập liệu": "05/01/2025 12:00",
+            "Tiêu chí": [
+              {
+                "Tên": "Nội dung",
+                "Nội dung": "Đau thượng vị, đi cầu phân đen",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "tiền sử": {
+            "Ngày nhập liệu": "",
+            "Tiêu chí": [
+              {
+                "Tên": "Tiền sử bệnh tật",
+                "Nội dung": "Nội khoa: \n Xuất huyết tiêu hoá trên da do loét dạ dày-tá tràng vào tháng 11 năm 2024 đã điều trị (chưa test vi khuẩn Hp)\n Ngoài ra chưa ghi nhận tiền sử nội khoa liên quan khác\n Ngoại khoa: chưa ghi nhận tiền sử ngoại khoa",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Tiền sử dị ứng",
+                "Nội dung": "Chưa phát hiện tiền sử tác nhân dị ứng trước đây",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Thông tin khác",
+                "Nội dung": "Lối sống\n Hút thuốc lá 9.5 gói, năm\n uống rượu thường xuyên: 200ml",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "B. Tiền sử gia đình",
+                "Nội dung": "Gia đình\n Chưa ghi nhận bệnh lý liên quan",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "bệnh sử": {
+            "Ngày nhập liệu": "",
+            "Tiêu chí": [
+              {
+                "Tên": "Nội dung",
+                "Nội dung": "Cách nhập viện 2 ngày bệnh nhân dạng uống rượu thì xuất hiện cơn đau bụng âm vùng thượng vị, đau liên tục, không lan, không có tư thế giảm đau, không nôn ói. Bệnh nhân không ăn tiết canh, lòng heo hoặc thực ổn màu đỏ. Sau đó về nhà bệnh nhân có đi cầu phân đen 4 lần mùi khắm, sệt không thành khuôn, bệnh nhân ăn uống kém. Tiểu tiện bình thường. Trước đó bệnh nhân không sử dụng sắt than hoạt, không táo bón.\n Cách nhập viện 1 ngày tình trạng bệnh nhân không thuyên giảm, tiếp tục đã cầu phân đen nên vào viện\n Trong quá trình bệnh, bệnh nhân không buồn nôn, không chóng một, không sốt, không vã mồ hôi, không đau ngực và không khó thở\n Ghi nhận tại cấp cứu\n Bệnh tỉnh tiếp xúc được\n Da niêm nhợt nhạt\n Đau thượng vị\n Không có đầu xuất huyết dưới da\n Tuyến giáp không to, hạch ngoại vì không sờ chạm\n Mạch:72 lần/phút\n Nhiệt: 37 độ C\n Huyết áp: 119/69\n Nhịp thở: 16 lần/phút\n Spo2: 98%\n Cân nặng: 57 kg\n Chiều cao 1m72\n Bmi: 18.8",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "khám lâm sàng": {
+            "Ngày nhập liệu": "17/01/2018 09:20",
+            "Tiêu chí": [
+              {
+                "Tên": "Khám toàn thân",
+                "Nội dung": "- Tình trạng:\n  - Bệnh tỉnh, tiếp xúc tốt\n  - Da, niêm mạc hồng hào\n  - Huyết áp tư thế: không thay đổi\n  - Không có dấu xuất huyết dưới da\n  - Tuyến giáp không to, hạch ngoại vi không sờ chạm\n  - Mạch: 65 lần/phút\n  - Nhiệt: 37 độ C\n  - Huyết áp: 100/60 mmHg\n  - Nhịp thở: 20 lần/phút\n  - SpO2: 98%\n  - Cân nặng: 57 kg\n  - Chiều cao: 1m72\n  - BMI: 18.8 kg/m2",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám tuần hoàn",
+                "Nội dung": "- Lồng ngực không dị dạng, không sẹo, di động đều theo nhịp thở\n- Tĩnh mạch cổ nổi (-)\n- Không có âm rung miu, dấu Harzer (-)\n- Mỏm tim: liên sườn IV đường trung đòn trái, điện đập bình thường\n- Tiếng T1 T2 rõ, đều, không có âm bất thường.",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám hô hấp",
+                "Nội dung": "- Lồng ngực cân đối, di động theo nhịp thở, không co kéo, không rút lõm\n- Rung thanh đều 2 bên\n- Rì rào phế nang đều, 2 phổi rõ\n- Không rale ẩm, rale nổ\n- Không nghe tiếng tim bệnh lý",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám tiêu hóa",
+                "Nội dung": "- Bụng di động theo nhịp thở, không co cứng, không đề kháng, không có dấu hiệu xuất huyết dưới da\n- Không có dấu hiệu rắn bò\n- Phản ứng thành bụng (-), không có điểm đau, ấn đau Murphy (-), McBurney (-)\n- Bụng mềm, không chướng, không có khối bất thường\n- Nhu động ruột: 2 lần/phút",
+                "Nhận xét": "Thăm trực tràng: (-)"
+              },
+              {
+                "Tên": "Khám thận - tiết niệu",
+                "Nội dung": "- Không chạm thận, đau hông ranh thân âm tính\n- Ấn đau điểm niệu quản (-)\n- Tiểu không ra máu, không tiểu đục",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám thần kinh",
+                "Nội dung": "- Cảm giác, vận động, cơ đều bình thường\n- Dáng vẻ tỉnh táo",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám cơ xương khớp",
+                "Nội dung": "- Không biến dạng xương, vận động tốt\n- Cơ lực: 5/5\n- Cảm giác: bình thường",
+                "Nhận xét": ""
+              },
+              {
+                "Tên": "Khám các cơ quan khác",
+                "Nội dung": "- Chưa ghi nhận bất thường",
+                "Nhận xét": ""
+              }
+            ]
+          },
+          "tóm tắt bệnh án": "Tóm tắt bệnh án\nBệnh nhân nam 37 tuổi vào viện vì lý do đau thượng vị và đi cầu phân đen. Qua hỏi bệnh sử, tiền sử và thăm khám ghi nhận các triệu chứng và hội chứng:\n- Triệu chứng cơ năng:\n  - Đau vùng thượng vị\n  - Đi cầu phân đen\n- Triệu chứng thực thể:\n  - Da niêm nhợt nhạt (ghi nhận tại cấp cứu)\n  - Huyết áp: 100/60 mmHg\n  - Bụng mềm, không chướng, không đề kháng, không có điểm đau.\n  - Nhu động ruột: 2 lần/phút\nTiền căn:\n- Tiền sử xuất huyết tiêu hóa trên do loét dạ dày-tá tràng (tháng 11/2024).\n- Thường xuyên hút thuốc lá và uống rượu."
+        }
+      }
+    ],
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {
+          "user_id": "56cefa3e-185d-4dcf-b680-fe5963083203"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-12T01:52:25.000Z",
-  "versionId": "1dfaa0e7-530a-44cd-b60b-a6afae09da4b"
+  "updatedAt": "2025-07-13T13:41:30.000Z",
+  "versionId": "e1e7f6e7-0d92-44c8-8a53-fcbc3edbe1f4"
 }
