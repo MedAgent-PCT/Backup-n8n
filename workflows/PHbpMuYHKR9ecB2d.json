@@ -258,8 +258,8 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        -1640,
-        -280
+        -1540,
+        -160
       ],
       "id": "fa6fa7f6-2342-49ce-bcd7-be7d815daa5e",
       "name": "fetch_content",
@@ -464,6 +464,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-13T14:53:14.000Z",
-  "versionId": "5118844c-8b6e-4edc-8e93-706122d5cb1d"
+  "updatedAt": "2025-07-14T03:40:20.000Z",
+  "versionId": "3876d4ce-d9c5-48c3-ae5e-b41ddabccb71"
 }
