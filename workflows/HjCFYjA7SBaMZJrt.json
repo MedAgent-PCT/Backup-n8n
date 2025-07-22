@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Google Gemini Chat Model": {
       "ai_languageModel": [
@@ -56,17 +56,6 @@
         ]
       ]
     },
-    "Info Search": {
-      "ai_tool": [
-        [
-          {
-            "node": "Orchestrator Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Info RAG": {
       "ai_tool": [
         [
@@ -81,18 +70,23 @@
         []
       ]
     },
-    "Simple Memory": {
-      "ai_memory": [
+    "When chat message received": {
+      "main": [
+        []
+      ]
+    },
+    "Info Search": {
+      "ai_tool": [
         [
           {
             "node": "Orchestrator Agent",
-            "type": "ai_memory",
+            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "When chat message received": {
+    "Webhook": {
       "main": [
         [
           {
@@ -103,12 +97,34 @@
         ]
       ]
     },
-    "Info Search1": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "schedule_appointment": {
       "ai_tool": [
         [
           {
             "node": "Orchestrator Agent",
             "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_memory",
             "index": 0
           }
         ]
@@ -121,7 +137,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "MedAgent",
+  "name": "MedAgent_1.0",
   "nodes": [
     {
       "parameters": {
@@ -129,7 +145,7 @@
           "assignments": [
             {
               "id": "68e06fc2-b450-4930-988a-721053699ad5",
-              "name": "output",
+              "name": "response",
               "value": "={{ $json.output }}",
               "type": "string"
             }
@@ -140,8 +156,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        900,
-        20
+        1104,
+        48
       ],
       "id": "c704770a-b06f-4c5f-8c00-5d77f5dba012",
       "name": "Edit Fields"
@@ -153,8 +169,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        260,
-        180
+        512,
+        240
       ],
       "id": "74ab3187-4660-47fb-9c9c-c650f76b0211",
       "name": "Google Gemini Chat Model",
@@ -167,16 +183,18 @@
     },
     {
       "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
         "options": {
-          "systemMessage": "=Bạn là một AI Agent y tế của **Bệnh Viện Đại học Y khoa Phan Châu Trinh** chuyên gọi Tool bằng cách phân tích ngữ cảnh của cuộc hội thoại để hỗ trợ người dùng, output khi gọi Tool sẽ có dạng: {Tool: []}\n- Nếu có output từ Tool \"Expert_Agent\" có chứa trường \"expert\": <phản hồi từ tool chuyên gia> thì lấy giá trị của \"expert\" trả cho người dùng và không nói gì thêm.\n- Nếu có output từ Tool call từ \"Info_RAG\"  có context không đúng hoặc không có context thì gọi \"Info_Search1\", nếu cả 2 không có context phù hợp thì trả \"Tôi không có thông tin này\".\n- Nếu không có Tool thì sẽ trả lời bình thường\n",
+          "systemMessage": "=Bạn là một AI Agent y tế của **Bệnh Viện Đại học Y khoa Phan Châu Trinh** chuyên gọi Tool bằng cách phân tích ngữ cảnh của cuộc hội thoại để hỗ trợ người dùng\n\nHướng dẫn sử dụng tool:\n- Khi người dùng muốn đặt lịch, hỏi thời gian đặt trong tuần (thứ 2 đến thứ 6, buổi sáng hoặc chiều, cccd, số điện thoại, họ tên), xác nhận và gọi tool \"schedule_appointment\"\n- Khi \"Info_RAG\" không có thông tin, bắt buộc sử dụng \"search\"\n\nOutput khi gọi Tool sẽ có dạng: {Tool: []}\n- Output từ Tool \"Expert_Agent\" có chứa trường \"expert\": <phản hồi từ tool chuyên gia> thì lấy giá trị của \"expert\" trả cho người dùng và không nói gì thêm.\n- Output từ Tool \"Info_RAG\" và \"search\", nếu cả 2 không có thông tin phù hợp thì trả \"Tôi không có thông tin này\".\n- Output từ Tool \"schedule_appointment\" nếu trả về session_id thì thông báo đặt lịch thành công\n- Nếu không có Tool thì sẽ trả lời bình thường\n\nĐịnh dạng trả về trình bày ngắn gọn, dễ hiểu, xuống dòng và highlight rõ ràng",
           "returnIntermediateSteps": false
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        480,
-        20
+        704,
+        32
       ],
       "id": "bc0d1f13-9847-47e8-b3ea-55e8e4e10ba0",
       "name": "Orchestrator Agent"
@@ -193,8 +211,8 @@
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "sessionId": "={{$json.sessionId}}",
-            "chatInput": "={{$json.chatInput}}"
+            "sessionId": "={{ $json.body.sessionId }}",
+            "chatInput": "={{ $json.body.chatInput }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -226,8 +244,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        1060,
-        300
+        1296,
+        304
       ],
       "id": "d7e27771-5cf1-4cf0-be56-2d040f89c8e9",
       "name": "Expert Agent",
@@ -240,8 +258,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        520,
-        440
+        752,
+        448
       ],
       "id": "edb0c76b-6db4-4caf-b3f3-46f6b188f50d",
       "name": "Embeddings OpenAI",
@@ -257,8 +275,8 @@
       "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
       "typeVersion": 1,
       "position": [
-        660,
-        440
+        912,
+        448
       ],
       "id": "485efefc-b430-4488-83ef-d994bcd80987",
       "name": "Reranker Cohere",
@@ -268,30 +286,6 @@
           "name": "CohereApi account 3"
         }
       }
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "Công cụ chuyên tìm kiếm thông tin Bệnh Viện Đại học Y khoa Phan Châu Trinh khi truy vấn \"Info_RAG\" thất bại\n",
-        "operation": "executeTool",
-        "toolName": "search",
-        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `query có dạng json như sau:\n{\n\"query\": <query được generate từ input của người dùng dưới dạng: keyword tìm kiếm + \"Bệnh Viện Đại học Y khoa Phan Châu Trinh\">\n}`, 'json') }}"
-      },
-      "type": "n8n-nodes-mcp.mcpClientTool",
-      "typeVersion": 1,
-      "position": [
-        960,
-        360
-      ],
-      "id": "29b5391c-9189-4989-b30e-f110412f1d6e",
-      "name": "Info Search",
-      "credentials": {
-        "mcpClientApi": {
-          "id": "iCaXl7QBEZgfSweR",
-          "name": "MCP Client (STDIO) account 2"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -306,8 +300,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
       "typeVersion": 1.3,
       "position": [
-        560,
-        300
+        848,
+        304
       ],
       "id": "016b7ae9-cbd7-42db-9fca-c4cd5c8a8bdc",
       "name": "Info RAG",
@@ -322,39 +316,27 @@
     },
     {
       "parameters": {
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        440,
-        240
-      ],
-      "id": "1a1ecd4f-4640-4c38-8896-130b42c8d0f0",
-      "name": "Simple Memory"
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -360,
-        20
+        -160,
+        32
       ],
       "id": "21e90a4b-301e-4e57-a597-7ec68d9cd058",
       "name": "When chat message received",
-      "webhookId": "dcf42218-fea4-4cf7-b54e-582673b1c51b"
+      "webhookId": "dcf42218-fea4-4cf7-b54e-582673b1c51b",
+      "disabled": true
     },
     {
       "parameters": {
         "description": "Công cụ chuyên tìm kiếm thông tin Bệnh Viện Đại học Y khoa Phan Châu Trinh khi truy vấn \"Info_RAG\" thất bại\n- Input có dạng:\n{\n\"query\": <query được generate từ input của người dùng dưới dạng: keyword tìm kiếm + 'Bệnh Viện Đại học Y khoa Phan Châu Trinh'>\n}\n",
         "workflowId": {
           "__rl": true,
-          "value": "SqiCIpxsFelhfCA9",
+          "value": "gNQHj6esMS8Ce1X0",
           "mode": "list",
-          "cachedResultName": "Info Search"
+          "cachedResultName": "My workflow 16"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -383,11 +365,97 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        840,
-        400
+        1168,
+        304
       ],
       "id": "60204fd4-b13f-42f8-8eb0-7df425743677",
-      "name": "Info Search1"
+      "name": "Info Search"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        320,
+        32
+      ],
+      "id": "b37931c0-a881-4008-940b-26c9f826dec7",
+      "name": "Webhook",
+      "webhookId": "0084050d-b191-4299-9a9a-2a1424bc9888"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1376,
+        48
+      ],
+      "id": "2f9c486d-097d-437c-acad-9147dbae6e32",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Dùng tool này để đặt lịch khám",
+        "url": "http://localhost:8501/webhook/lich-kham",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "ho_ten",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Họ tên người đặt`, 'string') }}"
+            },
+            {
+              "name": "sdt",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Số điện thoại người đặt`, 'string') }}"
+            },
+            {
+              "name": "cccd",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "tg",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `Thời gian đặt (thứ 2 - thứ 6, buổi sáng/chiều)`, 'string') }}"
+            },
+            {
+              "name": "session_id",
+              "value": "={{ $json.body.sessionId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1424,
+        288
+      ],
+      "id": "55b57f42-1cdf-4fac-ba98-b19d867b1209",
+      "name": "schedule_appointment"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        720,
+        240
+      ],
+      "id": "6e6eccb5-3bfe-4c5b-b7b9-87c4fd2e92f0",
+      "name": "Simple Memory"
     }
   ],
   "pinData": {},
@@ -396,7 +464,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-07-13T15:15:33.000Z",
-  "versionId": "1a6332aa-69f3-4a10-a5de-5fb3e9281776"
+  "triggerCount": 1,
+  "updatedAt": "2025-07-21T16:02:33.000Z",
+  "versionId": "4e681822-c819-481e-95cf-d400f3dc7136"
 }
