@@ -1,0 +1,508 @@
+{
+  "active": false,
+  "connections": {
+    "Orchestrator Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Info RAG",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Info RAG",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info RAG": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "schedule_appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "document_rag_temp": {
+      "ai_tool": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T10:37:48.722Z",
+  "id": "2VN5JKyteQFjLeHZ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "user_pipeline_v1.1_webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
+        "options": {
+          "systemMessage": "=Bạn là một AI Agent y tế của **Bệnh Viện Đại học Y khoa Phan Châu Trinh** chuyên gọi Tool bằng cách phân tích ngữ cảnh của cuộc hội thoại để hỗ trợ người dùng\n\nHướng dẫn sử dụng tool:\n- Khi người dùng muốn đặt lịch, hỏi thời gian đặt trong tuần (thứ 2 đến thứ 6, buổi sáng hoặc chiều, cccd, số điện thoại, họ tên), xác nhận và gọi tool \"schedule_appointment\"\n\n\nOutput khi gọi Tool sẽ có dạng: {Tool: []}\n- Output từ Tool \"Expert_Agent\" có chứa trường \"expert\": <phản hồi từ tool chuyên gia> thì lấy giá trị của \"expert\" trả cho người dùng và không nói gì thêm.\n- Output từ Tool \"Info_RAG\" và \"search\", nếu cả 2 không có thông tin phù hợp thì trả \"Tôi không có thông tin này\".\n- Nếu không có Tool thì sẽ trả lời bình thường\n\nĐịnh dạng trả về trình bày ngắn gọn, dễ hiểu, xuống dòng và highlight rõ ràng",
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "f89742a3-d7b5-432a-8a13-9695a24f900b",
+      "name": "Orchestrator Agent"
+    },
+    {
+      "parameters": {
+        "description": "Tool agent bác sĩ tổng quát để thăm khám.",
+        "workflowId": {
+          "__rl": true,
+          "value": "ATqTuE9EvCaz0YnF",
+          "mode": "list",
+          "cachedResultName": "user_pipeline_v1.1_expert_webhook"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{ $json.body.sessionId }}",
+            "chatInput": "={{ $json.body.chatInput }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chatInput",
+              "displayName": "chatInput",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        304
+      ],
+      "id": "d0bcc6bf-99e6-43db-a43c-1db103252059",
+      "name": "Expert Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        496,
+        496
+      ],
+      "id": "679a9a1a-70b0-4bcf-93f4-f3df4e5a2f87",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "PpcktPH83DDrHTki",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        624,
+        496
+      ],
+      "id": "66a8f8b0-60e5-401e-be22-d9830ab6509d",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "l5xKpT7PQrovoB80",
+          "name": "CohereApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "=- Công cụ chuyên truy vấn thông tin bệnh viện y khoa Phan Châu Trinh",
+        "tableName": "documents_pg",
+        "topK": 5,
+        "includeDocumentMetadata": false,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        336
+      ],
+      "id": "ce44edd0-4895-4298-8e9c-a03115daf8cc",
+      "name": "Info RAG",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        336
+      ],
+      "id": "8f954f09-9992-4dbe-a29c-c182ae4e4abc",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        176,
+        336
+      ],
+      "id": "bf93e3a3-0e60-42c4-9b09-b969f6fda2a0",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Dùng khi cần thông tin về bệnh viện Phan Châu Trinh",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `định dạng query có dạng {\"query\": \"\"}`, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        256
+      ],
+      "id": "6d5d21ab-37f8-4bae-80c1-6fabea52503e",
+      "name": "search",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iopexGLoAsx2WRmY",
+          "name": "MCP Client (STDIO) account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Dùng tool này để đặt lịch khám",
+        "url": "http://localhost:8501/webhook-test/lich-kham",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "ho_ten",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Họ tên người đặt`, 'string') }}"
+            },
+            {
+              "name": "sdt",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Số điện thoại người đặt`, 'string') }}"
+            },
+            {
+              "name": "cccd",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters2_Value', ``, 'string') }}"
+            },
+            {
+              "name": "tg",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', `Thời gian đặt (thứ 2 - thứ 6, buổi sáng/chiều)`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1456,
+        304
+      ],
+      "id": "b7f9af3e-b302-4211-a4d5-a3e56c4cc3f3",
+      "name": "schedule_appointment"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Sử dụng tool này để cập nhật thông tin rag mới",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "document_pg_temp",
+          "mode": "list",
+          "cachedResultName": "document_pg_temp"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "cau_hoi": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('cau_hoi', `câu hỏi truy vấn`, 'string') }}",
+            "tra_loi": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('tra_loi', `thông tin`, 'string') }}",
+            "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('url', `đường dẫn thông tin, chỉ duy nhất 1 đường dẫn`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "cau_hoi",
+              "displayName": "cau_hoi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tra_loi",
+              "displayName": "tra_loi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        832,
+        272
+      ],
+      "id": "3e80accc-483a-437e-ad90-63738e061321",
+      "name": "document_rag_temp",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7a9dfc46-f96b-4abe-bfba-c2bb3ed7deda",
+      "name": "Webhook",
+      "webhookId": "6e153904-9bbb-450c-a534-5e4d70305afc"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1024,
+        0
+      ],
+      "id": "f1061a5c-b6ea-41e8-97f8-04ad70ef762b",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "24175b84-ff63-4566-876c-a903bc2a5101",
+              "name": "response",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        0
+      ],
+      "id": "2a22c6c2-91db-4aec-a327-f7618711440a",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-21T14:13:57.000Z",
+  "versionId": "e7a458fc-ed62-4220-8fa7-bce4f7714473"
+}
