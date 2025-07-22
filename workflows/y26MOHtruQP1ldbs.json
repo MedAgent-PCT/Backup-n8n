@@ -1,0 +1,63 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T02:13:16.734Z",
+  "id": "y26MOHtruQP1ldbs",
+  "isArchived": false,
+  "meta": null,
+  "name": "user_pipeline_v1.1_api_tool",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "lich-kham",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "af381723-5985-4454-bc57-51f902b530a5",
+      "name": "Webhook",
+      "webhookId": "885c2eee-93c8-4d2a-a2bf-e4f6de011d33"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Đăt lịch thành công",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "7295373f-6482-451f-aa52-034425735ba5",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-21T15:19:38.000Z",
+  "versionId": "1f10eb04-deff-430c-b81b-5943319f30bf"
+}
