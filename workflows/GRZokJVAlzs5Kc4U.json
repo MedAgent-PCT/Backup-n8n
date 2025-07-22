@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "n8n": {
       "main": [
@@ -242,7 +242,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
         800,
-        180
+        192
       ],
       "typeVersion": 1
     },
@@ -257,7 +257,7 @@
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        360,
+        368,
         560
       ],
       "typeVersion": 1
@@ -271,8 +271,8 @@
       "name": "n8n",
       "type": "n8n-nodes-base.n8n",
       "position": [
-        1060,
-        280
+        1072,
+        288
       ],
       "typeVersion": 1,
       "credentials": {
@@ -301,7 +301,7 @@
       "type": "n8n-nodes-base.set",
       "position": [
         2240,
-        760
+        768
       ],
       "typeVersion": 3.3
     },
@@ -314,7 +314,7 @@
       "name": "Get File",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        1340,
+        1344,
         640
       ],
       "typeVersion": 4.2
@@ -358,8 +358,8 @@
       "name": "If file too large",
       "type": "n8n-nodes-base.if",
       "position": [
-        1140,
-        660
+        1152,
+        672
       ],
       "typeVersion": 2
     },
@@ -369,8 +369,8 @@
       "name": "Merge Items",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1140,
-        920
+        1152,
+        928
       ],
       "typeVersion": 2
     },
@@ -382,8 +382,8 @@
       "name": "isDiffOrNew",
       "type": "n8n-nodes-base.code",
       "position": [
-        1340,
-        920
+        1344,
+        928
       ],
       "typeVersion": 1
     },
@@ -411,8 +411,8 @@
       "name": "Check Status",
       "type": "n8n-nodes-base.switch",
       "position": [
-        1560,
-        920
+        1568,
+        928
       ],
       "typeVersion": 1
     },
@@ -422,8 +422,8 @@
       "name": "Same file - Do nothing",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        1780,
-        760
+        1792,
+        768
       ],
       "typeVersion": 1
     },
@@ -433,8 +433,8 @@
       "name": "File is different",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        1780,
-        920
+        1792,
+        928
       ],
       "typeVersion": 1
     },
@@ -444,8 +444,8 @@
       "name": "File is new",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        1780,
-        1080
+        1792,
+        1088
       ],
       "typeVersion": 1
     },
@@ -471,7 +471,7 @@
       "type": "n8n-nodes-base.github",
       "position": [
         2000,
-        1080
+        1088
       ],
       "webhookId": "e5e4ce8b-74a3-4b94-83ca-351edc280faf",
       "typeVersion": 1,
@@ -505,7 +505,7 @@
       "type": "n8n-nodes-base.github",
       "position": [
         2000,
-        900
+        912
       ],
       "webhookId": "a57e71de-4960-4d25-a59f-1a9e2e96aff5",
       "typeVersion": 1,
@@ -524,8 +524,8 @@
       "name": "Loop Over Items",
       "type": "n8n-nodes-base.splitInBatches",
       "position": [
-        1260,
-        280
+        1264,
+        288
       ],
       "typeVersion": 3
     },
@@ -545,7 +545,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
         800,
-        380
+        384
       ],
       "typeVersion": 1.2
     },
@@ -560,7 +560,7 @@
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        360,
+        368,
         -80
       ],
       "typeVersion": 1
@@ -576,8 +576,8 @@
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        760,
-        100
+        768,
+        112
       ],
       "typeVersion": 1
     },
@@ -603,8 +603,8 @@
       "name": "Get file data",
       "type": "n8n-nodes-base.github",
       "position": [
-        940,
-        660
+        944,
+        672
       ],
       "webhookId": "743111c3-2c21-4658-8097-a9fe966f43d2",
       "typeVersion": 1,
@@ -625,7 +625,7 @@
               "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
               "name": "repo.owner",
               "type": "string",
-              "value": "huyjaky"
+              "value": "MedAgent-PCT"
             },
             {
               "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
@@ -648,7 +648,7 @@
       "type": "n8n-nodes-base.set",
       "position": [
         720,
-        820
+        832
       ],
       "typeVersion": 3.4
     },
@@ -663,7 +663,7 @@
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        680,
+        688,
         720
       ],
       "typeVersion": 1
@@ -676,8 +676,8 @@
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        440,
-        940
+        448,
+        944
       ],
       "typeVersion": 1.1
     },
@@ -703,8 +703,8 @@
       "name": "Execute Workflow",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        1480,
-        280
+        1488,
+        288
       ],
       "typeVersion": 1.2
     },
@@ -718,7 +718,7 @@
       "name": "Sticky Note16",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        760,
+        768,
         -80
       ],
       "typeVersion": 1
@@ -737,6 +737,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-06T01:57:56.000Z",
-  "versionId": "05b67332-beaa-4f5b-8a29-1f3b862b6047"
+  "updatedAt": "2025-07-22T09:05:29.000Z",
+  "versionId": "fc375f64-a228-4607-979c-a71f238ec740"
 }
