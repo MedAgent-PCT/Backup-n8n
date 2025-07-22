@@ -1,0 +1,216 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T02:08:43.050Z",
+  "id": "QnXW3NUFI5VmiQVT",
+  "isArchived": false,
+  "meta": null,
+  "name": "user_pipeline_v1.1_expert",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "chatInput"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        32,
+        16
+      ],
+      "id": "b8f53a8e-523a-465c-9134-246fcb95a01d",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "collectionName": "chat",
+        "databaseName": "pct-memory",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        64,
+        272
+      ],
+      "id": "c7d64c64-839c-4041-a712-33e607c52a62",
+      "name": "MongoDB Chat Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de44889d-49a1-417f-9e0f-b7289cf9b7e1",
+              "name": "expert",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        944,
+        16
+      ],
+      "id": "609444fd-fab2-4852-87e9-d7b06cf4042c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        352,
+        272
+      ],
+      "id": "628fa114-74bc-4545-a84f-412f24d20055",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Bạn là một bác sĩ nội khoa tổng quát có khả năng thực hiện thăm khám và trả lời thắc mắc của bệnh nhân\n\n**Vai trò**:\n- Trả lời trực tiếp những thắc mắc của bệnh nhân về vấn đề y tế và sức khỏe **nếu không phải là bệnh nhân đang thăm khám**\n- Nếu thăm khán bệnh nhân thì hỏi theo **Trình tự thăm khám lâm sàng**:\n\n1. Bệnh sử hiện tại\nlúc nào?, hoàn cảnh?, Các triệu chứng kèm theo?, Đã tự dùng thuốc hoặc điều trị ở đâu chưa?\n\n2. Thói quen: hút thuốc, rượu bia, ăn uống,.....\n\n3. Tiền sử bệnh\nTiền sử  bệnh mãn tính, nếu có bệnh mãn tính thì hỏi về thuốc đang sử dụng\n\n4. Tiền sử gia đình\nBệnh lý di truyền liên quan đến triệu chứng.\nTình trạng sống – môi trường – có ai trong nhà mắc bệnh tương tự?\n\n**Yêu cầu**:\n- Nếu bệnh nhân đã cung cấp triệu chứng trước đó thì có thể bỏ qua một số bước trong **Trình tự khám lâm sàng**.\n- Nếu bệnh nhân **cung cấp đầy đủ thông tin bệnh trong một lần mô tả** thì có thể đi đến kết luận chuẩn đoán sơ bộ.\n- **Hỏi từng câu một, không gộp quá nhiều câu hỏi một lần.**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        352,
+        16
+      ],
+      "id": "810cc8a7-9813-434e-8220-b89517b302a0",
+      "name": "Expert Agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Tool để verify trước khi kết luận từ Expert_Agent",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `query là tổng hợp các triệu chứng hay thông tin từ người dùng `, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        640,
+        272
+      ],
+      "id": "2592d369-35bb-49fa-82e1-e7271903337a",
+      "name": "med search",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        272
+      ],
+      "id": "906030f3-a129-4337-a752-312e4f773eb9",
+      "name": "Postgres Chat Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        288
+      ],
+      "id": "7d4827b9-a2a4-4acb-bbcf-d2e8a68ff21b",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-22T08:36:58.000Z",
+  "versionId": "f73cc350-5f8c-4e26-98a1-c6019dd265c9"
+}
