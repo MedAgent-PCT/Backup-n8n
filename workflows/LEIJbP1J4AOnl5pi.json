@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Parse JSON": {
       "main": [
@@ -1070,6 +1070,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-07-11T13:24:43.000Z",
+  "updatedAt": "2025-07-18T11:24:47.000Z",
   "versionId": "546f6202-4e4f-4ca6-88d1-f9f24b344a9f"
 }
