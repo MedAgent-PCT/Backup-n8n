@@ -1,0 +1,349 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-16T03:58:28.590Z",
+  "id": "2ULgCAa5KSksVEOt",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCR",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1344,
+        -256
+      ],
+      "id": "9512af0e-6690-4677-a0e3-7b429b36c467",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.path }}/*.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -496
+      ],
+      "id": "1c47db5e-e929-4b35-92f9-bb61cfb0af6a",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -704,
+        -496
+      ],
+      "id": "2e1b937b-d35b-493c-9ac6-40f7d4e610e3",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "=File_OCR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        -272
+      ],
+      "id": "3ff7e2f2-1eac-410b-8785-a62eb0bf78aa",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a9ee9767-62de-4ba4-82ae-fdc11fc56c59",
+              "name": "output",
+              "value": "={{$json.output.replace(/```json|```/g, '').parseJson()}}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -64,
+        -256
+      ],
+      "id": "e7cab682-dddd-4e04-8752-292f14e583bb",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "binaryPropertyName": "=data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        -256
+      ],
+      "id": "29b9b4cc-11d3-453c-ae9f-4dd833540e9c",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('Edit Fields1').item.json.path }}/{{ $('Read/Write Files from Disk').item.json.fileName.replace('.pdf', '.json') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -48
+      ],
+      "id": "21f3386d-2def-451d-8fcf-6d81fef27a85",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bcf239a7-7958-41da-9ae4-6d2b5e65a0de",
+              "name": "path",
+              "value": "/home/duckq1u/Downloads/FIL/1",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1024,
+        -496
+      ],
+      "id": "0efbc796-7bd0-43e2-b7da-c925f6b32132",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "path": "e4295dca-b661-4e5a-ab37-fea4fe9d9903",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1328,
+        -528
+      ],
+      "id": "5ff5c8d0-d300-47b4-9e7c-fe2a1bb3389d",
+      "name": "Webhook",
+      "webhookId": "e4295dca-b661-4e5a-ab37-fea4fe9d9903"
+    },
+    {
+      "parameters": {
+        "formTitle": "Test OCR",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "File OCR",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -928,
+        -272
+      ],
+      "id": "e347b729-04f7-4185-87fa-bdaaf3c5952d",
+      "name": "On form submission",
+      "webhookId": "440098d2-ef59-4add-9555-9e4b7e9764f5"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -480,
+        -512
+      ],
+      "id": "43879fab-4dd3-4b23-aa44-01e037df4721",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Dựa trên một file PDF chứa thông tin về việc đăng ký khoản vay, hãy trích xuất các thông tin sau và định dạng thành JSON có cấu trúc như sau:  \n1. **MaHoSo** - Mã hồ sơ. \n2. **SoDon** - Số đơn đăng ký. \n3. **SoDangKyLanDau** - Số đăng ký lần đầu. \n4. **LoaiDonID** - ID loại đơn. \n5. **LoaiDonName** - Tên loại đơn (ví dụ: \"Đăng ký lần đầu\"). \n6. **LoaiDonCode** - Mã loại đơn. \n7. **LoaiHinhGDID** - ID loại hình giao dịch. \n8. **LoaiHinhGDName** - Tên loại hình giao dịch (ví dụ: \"Biện pháp bảo đảm\"). \n9. **LoaBienPhapID** - ID loại biện pháp. \n10. **LoaBienPhapName** - Tên biện pháp (ví dụ: \"Thế chấp\"). \n11. **LoaHopDongID** - ID loại hợp đồng (nếu có). \n12. **LoaHopDongName** - Tên loại hợp đồng (nếu có). \n13. **ThoiDiemDangKy** - Thời điểm đăng ký. \n14. **SoHopDong** - Số hợp đồng. \n15. **NgayCoHieuLucHopDong** - Ngày có hiệu lực hợp đồng. \n16. **GiaTriKhoanVay** - Giá trị khoản vay (nếu có). \n17. **SoPhuLuc** - Số phụ lục (nếu có). \n18. **ThoiDiemKHDangKy** - Thời điểm khách hàng đăng ký (nếu có). \n19. **ThoiDiemDKLanDau** - Thời điểm đăng ký lần đầu. \n20. **NoiDungThayDoi** - Nội dung thay đổi (nếu có). \n21. **MoTaChungTaiSan** - Mô tả chung về tài sản bảo đảm. \n22. **BenGiao** \n- Danh sách các bên giao tài sản bảo đảm. Mỗi mục cần có các thông tin:     \n- LoaiChuTheID: Loại chủ thể (ví dụ: 1 cho \"Công dân Việt Nam\").     \n- LoaiChuTheName: Tên loại chủ thể (ví dụ: \"Công dân Việt Nam\").     \n- HoTen: Họ tên chủ thể.     - CCCD: Số CCCD (nếu có).     \n- QuocGia: Quốc gia.     \n- Tinh: Tỉnh.     \n- DiaChi: Địa chỉ. \n23. **BenNhan** \n- Danh sách các bên nhận tài sản bảo đảm. Mỗi mục cần có các thông tin:     \n- Ten: Tên bên nhận tài sản.     \n- QuocGia: Quốc gia.     \n- Tinh: Tỉnh.     \n- DiaChi: Địa chỉ. \n24. **TaiSan** \n- Danh sách các tài sản bảo đảm. Mỗi mục cần có các thông tin:     \n- LoaiTaiSan: Loại tài sản (ví dụ: \"TaiSan_QuyenTaiSan\").     \n- TenQuyen: Tên quyền tài sản.     \n- CanCuPhatSinhQuyen: Căn cứ phát sinh quyền tài sản.  \nĐầu ra của bạn sẽ là một JSON có cấu trúc như sau:  \n[{   \"output\": {     \"MaHoSo\": \"000.02.18.G15-250505-0025\",     \"SoDon\": \"1587366867\",     \"SoDangKyLanDau\": \"1587366867\",     \"LoaiDonID\": 1,     \"LoaiDonName\": \"Đăng ký lần đầu\",     \"LoaiDonCode\": \"LĐ\",     \"LoaiHinhGDID\": 1,     \"LoaiHinhGDName\": \"Biện pháp bảo đảm\",     \"LoaBienPhapID\": 1,     \"LoaBienPhapName\": \"Thế chấp\",     \"LoaHopDongID\": null,     \"LoaHopDongName\": null,     \"ThoiDiemDangKy\": \"2025-05-05T08:23:00Z\",     \"SoHopDong\": \"49/2025/HĐTD/PVB-DNG\",     \"NgayCoHieuLucHopDong\": \"2025-04-28\",     \"GiaTriKhoanVay\": null,     \"SoPhuLuc\": null,     \"ThoiDiemKHDangKy\": null,     \"ThoiDiemDKLanDau\": \"2025-05-05T08:23:00Z\",     \"NoiDungThayDoi\": null,     \"MoTaChungTaiSan\": \"Tài sản bảo đảm là toàn bộ cổ phần của Bên Bảo Đảm tại Công ty Cổ phần thủy điện Đạt Phương Sơn Trà\",     \"BenGiao\": [{       \"LoaiChuTheID\": 1,       \"LoaiChuTheName\": \"Công dân Việt Nam\",       \"HoTen\": \"BÙI QUANG TUẤN\",       \"CCCD\": \"046070009095\",       \"QuocGia\": \"Việt Nam\",       \"Tinh\": \"Đà Nẵng\",       \"DiaChi\": \"K98/1/2 Châu Thượng Văn, Hải Châu, Đà Nẵng, Việt Nam\"     }],     \"BenNhan\": [{       \"Ten\": \"Ngân Hàng TMCP Đại Chúng Việt Nam Chi Nhánh Đà Nẵng\",       \"QuocGia\": \"Việt Nam\",       \"Tinh\": \"Đà Nẵng\",       \"DiaChi\": \"Số 02 đường 30 tháng 4, Phường Hòa Cường Bắc, Hải Châu, Đà Nẵng, Việt Nam\"     }],     \"TaiSan\": [{       \"LoaiTaiSan\": \"TaiSan_QuyenTaiSan\",       \"TenQuyen\": \"Toàn bộ cổ phần của Bên Bảo Đảm tại Công ty Cổ phần thủy điện Đạt Phương Sơn Trà\",       \"CanCuPhatSinhQuyen\": \"Giấy chứng nhận đăng ký doanh nghiệp số: 4300506732, đăng ký lần đầu ngày 24 tháng 3 năm 2010 và đăng ký thay đổi lần thứ mười ngày 09 tháng 5 năm 2022 do Sở kế hoạch và đầu tư tỉnh Quảng Ngãi cấp\"     }]   } }]"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -496,
+        -272
+      ],
+      "id": "6b5bcdca-5b05-441c-99da-75ce66440d1f",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemma-3-4b-it",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        -80
+      ],
+      "id": "2d7a7174-03a6-40ae-8423-97fef055a0ee",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7fhytiSkpwvm2Ghp",
+          "name": "Google Gemini(PaLM) Api account 4"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-16T12:53:55.000Z",
+  "versionId": "79964970-ba1d-4529-8a6d-029de759cb4b"
+}
