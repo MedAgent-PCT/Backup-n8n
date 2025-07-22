@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Groq Chat Model": {
       "ai_languageModel": [
@@ -625,6 +625,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-06-26T14:45:27.000Z",
+  "updatedAt": "2025-07-15T01:39:00.000Z",
   "versionId": "5f7657f5-a17a-459f-83c1-481d7e2b63ce"
 }
