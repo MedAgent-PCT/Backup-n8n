@@ -1,0 +1,292 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gen_hoso_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert hoso": {
+      "main": [
+        [
+          {
+            "node": "Insert chat_his",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gen_hoso_id": {
+      "main": [
+        [
+          {
+            "node": "Insert hoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert chat_his": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T02:58:00.325Z",
+  "id": "YlJ3PZbrdrxw48JO",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "user_pipeline_v1.1_datlich",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "lich-kham",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        176
+      ],
+      "id": "0f6eeb9f-96e1-4b06-bcb2-964d5757f039",
+      "name": "Webhook",
+      "webhookId": "d0fcbe4a-8dbd-4982-bacc-b89e76d2227c"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=Đặt lịch thành công",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        816,
+        176
+      ],
+      "id": "e9fc9532-401b-47c0-a74c-e51f2a71afa0",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ho_so",
+          "mode": "list",
+          "cachedResultName": "ho_so"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ho_ten": "={{ $('Webhook').item.json.body.ho_ten }}",
+            "CCCD_CMND": "={{ $('Webhook').item.json.body.cccd }}",
+            "id": "={{ $json.new_hoso_id}}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ngay_sinh",
+              "displayName": "ngay_sinh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "gioi_tinh",
+              "displayName": "gioi_tinh",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "dia_chi",
+              "displayName": "dia_chi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ngay_gio_vao_vien",
+              "displayName": "ngay_gio_vao_vien",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ho_ten",
+              "displayName": "ho_ten",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CCCD_CMND",
+              "displayName": "CCCD_CMND",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        352,
+        176
+      ],
+      "id": "360b8c1f-f177-411e-bb34-f9c10b0f1348",
+      "name": "Insert hoso",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const uuid = require('uuid');\n\nreturn [{\"new_hoso_id\":uuid.v4()}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        176
+      ],
+      "id": "c2172985-562a-4187-a768-1bec92426fae",
+      "name": "Gen_hoso_id"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "chat_his",
+          "mode": "list",
+          "cachedResultName": "chat_his"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "session_id": "={{ $('Webhook').item.json.body.session_id }}",
+            "ho_so_id": "={{ $('Gen_hoso_id').item.json.new_hoso_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ho_so_id",
+              "displayName": "ho_so_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        592,
+        176
+      ],
+      "id": "e8ffb879-bdf0-4c06-88f2-9af42b7a85b9",
+      "name": "Insert chat_his",
+      "credentials": {
+        "postgres": {
+          "id": "5i7jShWK4fXySSZZ",
+          "name": "benh-an (phuc)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-21T15:20:03.000Z",
+  "versionId": "4eec77d5-3e4c-4634-820e-4e9c7fdf7a02"
+}
