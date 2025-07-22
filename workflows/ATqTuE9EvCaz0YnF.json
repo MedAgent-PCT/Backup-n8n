@@ -1,0 +1,216 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expert Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "med search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Expert Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T10:49:40.169Z",
+  "id": "ATqTuE9EvCaz0YnF",
+  "isArchived": false,
+  "meta": null,
+  "name": "user_pipeline_v1.1_expert_webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "chatInput"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        32,
+        16
+      ],
+      "id": "29aa77e2-a11f-4c3f-a0d2-b0d4d18336a5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "collectionName": "chat",
+        "databaseName": "pct-memory",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        64,
+        272
+      ],
+      "id": "ea9a119e-1b07-46f0-a927-91d89e647eea",
+      "name": "MongoDB Chat Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de44889d-49a1-417f-9e0f-b7289cf9b7e1",
+              "name": "expert",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        944,
+        16
+      ],
+      "id": "f69dcde6-895d-4fcf-aa61-f24c927b7d61",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        352,
+        272
+      ],
+      "id": "3afdc74b-e92e-43bb-9b5a-965c7782b571",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "W6dxZLFCXIkzEHfX",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Bạn là một bác sĩ nội khoa tổng quát có khả năng thực hiện thăm khám và trả lời thắc mắc của bệnh nhân\n\n**Vai trò**:\n- Trả lời trực tiếp những thắc mắc của bệnh nhân về vấn đề y tế và sức khỏe **nếu không phải là bệnh nhân đang thăm khám**\n- Nếu thăm khán bệnh nhân thì hỏi theo **Trình tự thăm khám lâm sàng**:\n\n1. Bệnh sử hiện tại\nlúc nào?, hoàn cảnh?, Các triệu chứng kèm theo?, Đã tự dùng thuốc hoặc điều trị ở đâu chưa?\n\n2. Thói quen: hút thuốc, rượu bia, ăn uống,.....\n\n3. Tiền sử bệnh\nTiền sử  bệnh mãn tính, nếu có bệnh mãn tính thì hỏi về thuốc đang sử dụng\n\n4. Tiền sử gia đình\nBệnh lý di truyền liên quan đến triệu chứng.\nTình trạng sống – môi trường – có ai trong nhà mắc bệnh tương tự?\n\n**Yêu cầu**:\n- Nếu bệnh nhân đã cung cấp triệu chứng trước đó thì có thể bỏ qua một số bước trong **Trình tự khám lâm sàng**.\n- Nếu bệnh nhân **cung cấp đầy đủ thông tin bệnh trong một lần mô tả** thì có thể đi đến kết luận chuẩn đoán sơ bộ.\n- **Hỏi từng câu một, không gộp quá nhiều câu hỏi một lần.**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        352,
+        16
+      ],
+      "id": "31802352-1cec-4ce0-a71b-c4bbb71b20de",
+      "name": "Expert Agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Tool để verify trước khi kết luận từ Expert_Agent",
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Tool_Parameters', `query là tổng hợp các triệu chứng hay thông tin từ người dùng `, 'json') }}"
+      },
+      "type": "n8n-nodes-mcp.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        640,
+        272
+      ],
+      "id": "c0c1cca2-6b55-48b6-a109-047840327a7c",
+      "name": "med search",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        272
+      ],
+      "id": "60f0180a-ebce-436b-9934-58ca1179e597",
+      "name": "Postgres Chat Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        272
+      ],
+      "id": "48b1b3dc-d9de-4ea8-850d-92c556a1ae2c",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-21T11:20:50.000Z",
+  "versionId": "85b91ade-d51a-4666-b8a0-01d06db76a3f"
+}
