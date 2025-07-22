@@ -1,0 +1,199 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "MCP Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-14T02:00:57.753Z",
+  "id": "gNQHj6esMS8Ce1X0",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 16",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            }
+          ]
+        }
+      },
+      "id": "de80ca24-71c4-4f5c-af50-e1f266d8e3e4",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -1136,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10c0601a-0798-4c26-9058-1b1709bdcbf3",
+              "name": "pageContent",
+              "value": "={{ $json.pageContent }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        48,
+        48
+      ],
+      "id": "a795c3bb-20e1-4ef1-b0bd-285e060dee1a",
+      "name": "Edit Fields",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        -432,
+        64
+      ],
+      "id": "346575b6-1960-450f-b537-8a85244c0f9b",
+      "name": "Simple Vector Store",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        304
+      ],
+      "id": "e728eb74-6627-424d-b4f3-e560ecab19ba",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "oKPYEmR3sGNJdsZT",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        304
+      ],
+      "id": "f79bfdbb-a7dc-4090-832c-a06b92bbb8ba",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={\"query\": \n \"{{ $json.query }}\"\n}"
+      },
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        80
+      ],
+      "id": "fed88d3b-d0f8-4b14-b7ac-15a6a9a3b7a9",
+      "name": "MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iCaXl7QBEZgfSweR",
+          "name": "MCP Client (STDIO) account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "địa chỉ bệnh viện Phan Châu Trinh"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-18T15:32:29.000Z",
+  "versionId": "7855f489-165f-478c-b250-b6f4c8536e0a"
+}
