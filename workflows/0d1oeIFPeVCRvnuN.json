@@ -12,11 +12,6 @@
         ]
       ]
     },
-    "MongoDB Chat Memory": {
-      "ai_memory": [
-        []
-      ]
-    },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
@@ -52,11 +47,6 @@
     },
     "Postgres Chat Memory": {
       "ai_memory": [
-        []
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
         [
           {
             "node": "Expert Agent",
@@ -91,33 +81,11 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -140,
-        0
+        -128,
+        -16
       ],
       "id": "ab232b04-a47a-4858-b1b0-48523211047d",
       "name": "When Executed by Another Workflow"
-    },
-    {
-      "parameters": {
-        "collectionName": "chat",
-        "databaseName": "pct-memory",
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1,
-      "position": [
-        200,
-        160
-      ],
-      "id": "d4e0a679-e4f8-4622-aaab-b1ee3e1906e1",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "zEthGVqCIY6budkG",
-          "name": "MongoDB account"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -137,21 +105,20 @@
       "typeVersion": 3.4,
       "position": [
         560,
-        -20
+        16
       ],
       "id": "88d683da-324a-4fa0-a4a5-a7a4b4fa8ddf",
       "name": "Edit Fields"
     },
     {
       "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
         80,
-        180
+        192
       ],
       "id": "19a2b69d-8acf-461a-a618-9c9c1e036b5e",
       "name": "Google Gemini Chat Model",
@@ -173,8 +140,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        200,
-        -20
+        160,
+        0
       ],
       "id": "868fb09f-d3da-409d-b95c-55f6c29becd5",
       "name": "Expert Agent"
@@ -190,8 +157,8 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        440,
-        200
+        448,
+        176
       ],
       "id": "4cceb5d0-7367-465b-8703-579caafd6f33",
       "name": "med search",
@@ -204,35 +171,26 @@
       "disabled": true
     },
     {
-      "parameters": {},
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "tableName": "expert_chat_his",
+        "contextWindowLength": 20
+      },
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        300,
-        200
+        288,
+        192
       ],
-      "id": "6c9ac330-4127-41e4-a259-6fa7410fdbe9",
+      "id": "22a2d84a-de4e-445a-add2-56882fce1151",
       "name": "Postgres Chat Memory",
       "credentials": {
         "postgres": {
           "id": "9sFxVN20egMoKcpX",
           "name": "Postgres account 3"
         }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        580,
-        200
-      ],
-      "id": "4538c44d-f355-459b-be48-d74ab28a87a6",
-      "name": "Simple Memory"
+      }
     }
   ],
   "pinData": {},
@@ -242,6 +200,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-08T02:24:25.000Z",
-  "versionId": "22e15dec-32ca-4708-99a5-1b6d21ce5f45"
+  "updatedAt": "2025-07-21T15:55:54.000Z",
+  "versionId": "e3cb257b-bbac-4379-a1d0-b411648aecbc"
 }
