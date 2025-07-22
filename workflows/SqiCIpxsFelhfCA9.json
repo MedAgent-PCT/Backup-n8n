@@ -3,19 +3,9 @@
   "connections": {
     "When Executed by Another Workflow": {
       "main": [
-        []
-      ]
-    },
-    "MCP Client": {
-      "main": [
         [
           {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Simple Vector Store",
+            "node": "MCP Client",
             "type": "main",
             "index": 0
           }
@@ -44,22 +34,27 @@
         ]
       ]
     },
-    "Code": {
+    "Simple Vector Store": {
       "main": [
         [
           {
-            "node": "MCP Client",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "MCP Client": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Simple Vector Store",
             "type": "main",
             "index": 0
           }
@@ -69,7 +64,7 @@
   },
   "createdAt": "2025-07-13T14:57:47.823Z",
   "id": "SqiCIpxsFelhfCA9",
-  "isArchived": false,
+  "isArchived": true,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -92,44 +87,32 @@
       "position": [
         480,
         320
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
-        "operation": "executeTool",
-        "toolName": "search",
-        "toolParameters": "{\n\"query\": \"<query được generate từ input của người dùng dưới dạng: keyword tìm kiếm + 'Bệnh Viện Đại học Y khoa Phan Châu Trinh'>\"\n}"
-      },
-      "type": "n8n-nodes-mcp.mcpClient",
-      "typeVersion": 1,
-      "position": [
-        1120,
-        320
-      ],
-      "id": "8cdb0721-0c5f-4110-be8d-524ef5444660",
-      "name": "MCP Client",
-      "credentials": {
-        "mcpClientApi": {
-          "id": "iCaXl7QBEZgfSweR",
-          "name": "MCP Client (STDIO) account 2"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10c0601a-0798-4c26-9058-1b1709bdcbf3",
+              "name": "pageContent",
+              "value": "={{ $json.pageContent }}",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1380,
-        200
+        1640,
+        180
       ],
       "id": "78cf095a-5037-49b3-ad87-24bd8fb5c069",
       "name": "Edit Fields",
-      "alwaysOutputData": true
+      "alwaysOutputData": true,
+      "disabled": true
     },
     {
       "parameters": {
@@ -143,12 +126,13 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.3,
       "position": [
-        1380,
-        480
+        1180,
+        220
       ],
       "id": "6776fe8e-0821-4dbf-8a43-ec338349a576",
       "name": "Simple Vector Store",
-      "alwaysOutputData": true
+      "alwaysOutputData": true,
+      "disabled": true
     },
     {
       "parameters": {
@@ -157,8 +141,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1340,
-        680
+        1100,
+        440
       ],
       "id": "c97565b2-f842-48e4-85cd-04a84b6db8ac",
       "name": "Embeddings OpenAI",
@@ -167,7 +151,8 @@
           "id": "oKPYEmR3sGNJdsZT",
           "name": "OpenAi account 4"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -176,44 +161,51 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        1500,
-        680
+        1380,
+        420
       ],
       "id": "0e6b9f33-d376-4867-9ed3-f0af85cc687e",
-      "name": "Default Data Loader"
+      "name": "Default Data Loader",
+      "disabled": true
     },
     {
       "parameters": {
-        "jsCode": "return [{\n  \"query\": \"123\"\n}]"
+        "operation": "executeTool",
+        "toolName": "search",
+        "toolParameters": "={\"query\": \n \"{{ $json.query }}\"\n}"
       },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        920,
-        320
-      ],
-      "id": "790e7dda-b7a3-4c39-aace-c72afbbe5f53",
-      "name": "Code"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "type": "n8n-nodes-mcp.mcpClient",
       "typeVersion": 1,
       "position": [
-        700,
-        320
+        800,
+        300
       ],
-      "id": "902dadbe-d84f-4fcb-b688-a828cf1b23da",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "cce68a7e-de56-49e4-9ccf-60fb30c8fd70",
+      "name": "MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "iCaXl7QBEZgfSweR",
+          "name": "MCP Client (STDIO) account 2"
+        }
+      },
+      "disabled": true
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "giám đốc bệnh viện Đại học Y Khoa Phan Châu Trinh"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-13T15:19:57.000Z",
-  "versionId": "2562cda9-9056-4d11-be55-d1ef49cc3954"
+  "updatedAt": "2025-07-14T01:59:37.000Z",
+  "versionId": "473a558b-6637-4119-a241-5fef431aab2d"
 }
